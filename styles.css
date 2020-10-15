@@ -1,12 +1,53 @@
 
-.table{
+.circle-container {
   width: 60%;
       height: 30vw; /* as the half of the width */
   background-color: lightgreen;
   border-bottom-left-radius: 30vw;  /* 100px of height + 10px of border */
   border-bottom-right-radius: 30vw; /* 100px of height + 10px of border */
-  border: 20px solid gray;
+  border: 1vw solid gray;
   border-top: 0;
   margin: auto;
+  max width: 1200px;
+}
+.circle-container span {
+    display: block;
+    position: absolute;
+    top: -8%; left: 50%;
+    width: 12vw; height: 12vw;
+    margin: -2vw;
+}
+.ring{
+  border: 0.5vw solid grey;
+	border-radius: 50%;
+	width: 3vw;
+	height: 3vw;
+	}
+.deg30 { transform: rotate(45deg) translate(29vw) rotate(-40deg); }
+.deg50 { transform: rotate(60deg) translate(30vw) rotate(-55deg); }
+.deg70 { transform: rotate(75deg) translate(31vw) rotate(-70deg); }
+.deg90 { transform: rotate(90deg) translate(31vw) rotate(-90deg); }
+.deg110 { transform: rotate(105deg) translate(31vw) rotate(-105deg); }
+.deg130 { transform: rotate(120deg) translate(30vw) rotate(-120deg); }
+.deg150 { transform: rotate(135deg) translate(29vw) rotate(-135deg); }
+
+.inner-circle {
+
+    position: absolute;
+    border: 4vw solid black;
+  	border-radius: 50%;
+  	width: 30vw;
+  	height: 30vw;
+    /*
+     Put top edge and left edge in the center
+    */
+
+    left: 31%;
+    top: -30%;
+
+    /*
+     Offset the position correctly with
+     minus half of the width and minus half of the height
+    */
 
 }
