@@ -46,7 +46,7 @@ body {
 .text p {
   color: #111;
   font-family: 'Helvetica Neue', sans-serif;
-  font-size: 15px;
+  font-size: 1.18vw;
   font-weight: bold;
   letter-spacing: -1px;
   line-height: 1;
@@ -57,12 +57,12 @@ body {
   border: 0.3vw solid grey;
   width: 3.5vw;
   height: 5.5vw;
-  margin: 0vw 1vw 0vw 35.6vw;
+  margin: 0vw 1vw 0vw 35.8vw;
 }
 
 .dealersPole {
   border: 0.2vw solid grey;
-  width: 18.8vw;
+  width: 20vw;
   height: 5.5vw;
   margin: auto;
   margin-top: 1vw;
@@ -76,31 +76,31 @@ body {
   height: 3vw;
 }
 
-.deg30 {
+.p6 {
   transform: rotate(45deg) translate(29vw) rotate(-40deg);
 }
 
-.deg50 {
+.p4 {
   transform: rotate(60deg) translate(30vw) rotate(-55deg);
 }
 
-.deg70 {
+.p2 {
   transform: rotate(75deg) translate(31vw) rotate(-70deg);
 }
 
-.deg90 {
+.p1 {
   transform: rotate(90deg) translate(31vw) rotate(-90deg);
 }
 
-.deg110 {
+.p3 {
   transform: rotate(105deg) translate(31vw) rotate(-105deg);
 }
 
-.deg130 {
+.p5 {
   transform: rotate(120deg) translate(30vw) rotate(-120deg);
 }
 
-.deg150 {
+.p7 {
   transform: rotate(135deg) translate(29vw) rotate(-135deg);
 }
 

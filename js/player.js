@@ -2,7 +2,12 @@
 class Hand{
   constructor(){
 this.cards = deck.deal();
+this.count = 2;
   }
+draw(){
+  this.cards.push(deck.draw());
+  this.count++;
+}
 }
 class Player{
   constructor(id, balance){
@@ -14,36 +19,32 @@ addHand(){
 this.hands.push(new Hand());
 return this.hands;
 }
+draw(id){
+this.hands[id].draw();
+return this.hands;
+}
 removeHands(){
-  for (var hand of this.hands) {
-discardDeck.push(hand.cards[0]);
-discardDeck.push(hand.cards[1]);
+  for (let hand of this.hands) {
+    let i = 0;
+    while (hand.count > i) {
+discardDeck.push(hand.cards[i]);
+i++;
+}
   }
-var x = this.hands.length;
-  for (var i = 0; i <x ; i++) {
+let x = this.hands.length;
+  for (let i = 0; i <x ; i++) {
     this.hands.pop();
   }
 return this.hands;
 }
 showHands(){
-  for (var hand of this.hands) {
-    table.innerHTML +=
-    "<img src="+hand.cards[0].imgurl+">";
-    table.innerHTML +=
-    "<img src="+hand.cards[1].imgurl+">";
+  for (let hand of this.hands) {
+    let i = 0;
+    while (hand.count > i) {
+      table.innerHTML +=
+      "<img src="+hand.cards[i].imgurl+">";
+      i++;
+    }
   }
 }
 }
-const suits = ["H", "D", "C", "S"];
-const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
-let deck = new Deck(6);
-let discardDeck = [];
-var i = 0;
-deck.createDeck(suits, values);
-deck.shuffle();
-deck.shuffle();
-var table = document.getElementById("table");
-let player = new Player(1,500);
-player.addHand();
-//player.showHands();
-//deck.showDeck();

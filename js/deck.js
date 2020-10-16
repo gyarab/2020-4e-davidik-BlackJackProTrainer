@@ -39,6 +39,10 @@ class Deck {
     }
     return hand;
   }
+  draw(){
+    let draw = this.deck.pop();
+    return draw;
+  }
   showDeck(){
     for (var card of this.deck) {
       table.innerHTML +=
