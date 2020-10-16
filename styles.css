@@ -1,4 +1,6 @@
+#table{
 
+}
 .circle-container {
   width: 60%;
       height: 30vw; /* as the half of the width */
@@ -16,6 +18,10 @@
     top: -8%; left: 50%;
     width: 12vw; height: 12vw;
     margin: -2vw;
+}
+.circle-container img {
+
+    width: 4.6666vw; height: 7.3333vw;
 }
 .ring{
   border: 0.5vw solid grey;

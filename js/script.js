@@ -1,8 +1,17 @@
-import Deck from './js/deck.js';
-const suits = ["H", "D", "C", "S"];
-const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
 let deck = new Deck(2);
 deck.createDeck(suits, values);
 deck.shuffle();
-deck.shuffle();
-console.log(deck.deck);
+deck.shuffle()
+class Hand{
+  constructor(){
+this.cards = deck.deal();
+  }
+}
+class Player{
+  constructor(id){
+    this.id = id;
+  }
+}
+var table = document.getElementById("table");
+table.innerHTML +=
+"<img src="+deck.deck[0].imgurl+">";
