@@ -7,13 +7,10 @@ deck.createDeck(suits, values);
 deck.shuffle();
 deck.shuffle();
 var table = document.getElementById("table");
-let player = new Player(1,500);
+let player = new Player(1, 500);
 let game = new Table();
-player.addHand();
-player.addHand();
-player.draw(0);
-for (var i = 0; i < 10; i++) {
-  game.addPlayer();
-}
-//player.showHands();
-//deck.showDeck();
+game.addPlayers(7);
+game.dealHands();
+game.dealer.draw();
+//game.showPlayersCards();
+//game.showDealerCards();

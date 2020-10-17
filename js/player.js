@@ -48,3 +48,27 @@ showHands(){
   }
 }
 }
+class Dealer {
+  constructor() {
+    this.cards = [];
+  }
+  draw() {
+    this.cards.push(deck.draw());
+    return this.cards;
+  }
+  removeDraw() {
+    let x = this.cards.length;
+    for (var i = 0; i < x; i++) {
+      discardDeck.push(this.cards[this.cards.length - 1])
+      this.cards.pop();
+    }
+    return this.cards;
+  }
+  showCards(){
+    for (var i = 0; i < this.cards.length; i++) {
+      table.innerHTML +=
+      "<img src="+this.cards[i].imgurl+">";
+    }
+    return this.cards;
+  }
+}

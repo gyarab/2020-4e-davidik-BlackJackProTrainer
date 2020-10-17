@@ -36,11 +36,14 @@ body {
 
 .text {
   float: left;
-  border: 0.3vw solid rgb(51,51,0);
+  border: 0.3vw solid rgb(51, 51, 0);
   margin: 0.5vw 1vw 0vw 2vw;
-  background-color: rgba(153,153,0, 1);
+  background-color: rgba(153, 153, 0, 1);
   padding: 0.2vw;
-  border-radius: 95%;
+  border-bottom-left-radius: 30vw;
+  border-top-left-radius: 30vw;
+  border-bottom-right-radius: 30vw;
+  border-top-right-radius: 30vw;
 }
 
 .text p {
