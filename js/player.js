@@ -51,9 +51,11 @@ showHands(){
 class Dealer {
   constructor() {
     this.cards = [];
+    this.count = 0;
   }
   draw() {
     this.cards.push(deck.draw());
+    this.count ++;
     return this.cards;
   }
   removeDraw() {
@@ -62,13 +64,21 @@ class Dealer {
       discardDeck.push(this.cards[this.cards.length - 1])
       this.cards.pop();
     }
+    this.count = 0;
     return this.cards;
   }
   showCards(){
     for (var i = 0; i < this.cards.length; i++) {
       table.innerHTML +=
-      "<img src="+this.cards[i].imgurl+">";
+      "<img id='dealerCard' class ='cards' src="+this.cards[i].imgurl+">";
     }
+    return this.cards;
+  }
+  showCard(id){
+      var deck = document.getElementById("deck");
+      deck.innerHTML +=
+      "<img id='dealerCard' class ='cards' src="+this.cards[id].imgurl+">";
+    //  var elem = document.getElementById("dealerCard");
     return this.cards;
   }
 }

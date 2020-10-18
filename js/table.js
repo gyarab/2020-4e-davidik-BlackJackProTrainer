@@ -71,4 +71,8 @@ player.showHands();
     this.dealer.showCards();
     return this.dealer;
   }
+  showDealerCard(id){
+    this.dealer.showCard(id);
+    return this.dealer;
+  }
 }

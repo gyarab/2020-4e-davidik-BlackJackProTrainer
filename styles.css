@@ -30,6 +30,7 @@ body {
 }
 
 .circle-container img {
+  position: absolute;
   width: 3.5vw;
   height: 5.5vw;
 }
