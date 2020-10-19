@@ -27,7 +27,7 @@ class Table {
     }
   }
   addPlayers(count) {
-    if (this.playersCount > 6) {
+    if (this.playersCount > 4) {
     }
     else {
     for (var i = 0; i < count; i++) {

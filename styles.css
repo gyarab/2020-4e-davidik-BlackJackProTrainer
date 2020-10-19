@@ -1,5 +1,5 @@
 #table {}
-
+html, body {margin: 0; height: 100%; overflow: hidden}
 body {
   background: rgba(51, 0, 0, 1);
 }
@@ -17,6 +17,7 @@ body {
   border-top: 0;
   margin: auto;
   max width: 1200px;
+  z-index: 1;
 }
 
 .circle-container span {
@@ -27,6 +28,7 @@ body {
   width: 12vw;
   height: 12vw;
   margin: -2vw;
+  z-index: 1;
 }
 
 .circle-container img {
@@ -46,6 +48,7 @@ body {
   border-top-left-radius: 30vw;
   border-bottom-right-radius: 30vw;
   border-top-right-radius: 30vw;
+  z-index: 5;
 }
 
 .text p {
@@ -56,6 +59,7 @@ body {
   letter-spacing: -1px;
   line-height: 1;
   text-align: center;
+  z-index: 1;
 }
 
 .deck {
@@ -63,6 +67,7 @@ body {
   width: 3.5vw;
   height: 5.5vw;
   margin: 0vw 0vw 3vw 34vw;
+  z-index: 1;
 }
 
 .dealersPole {
@@ -71,8 +76,9 @@ body {
   height: 5.5vw;
   margin: auto;
   margin-top: 1vw;
-  padding: 0.3vw;
+  padding: 0.5vw;
   float: left;
+  z-index: 1;
 }
 
 .ring {
@@ -80,18 +86,16 @@ body {
   border-radius: 50%;
   width: 3vw;
   height: 3vw;
-}
-
-#p6 {
-  transform: rotate(45deg) translate(40vw) rotate(-40deg);
+  z-index: 1;
 }
 
 #p4 {
-  transform: rotate(60deg) translate(39.5vw) rotate(-55deg);
+  transform: rotate(45deg) translate(40vw) rotate(-40deg);
 }
 
+
 #p2 {
-  transform: rotate(75deg) translate(39vw) rotate(-70deg);
+  transform: rotate(67.5deg) translate(39vw) rotate(-67.5deg);
 }
 
 #p1 {
@@ -99,21 +103,14 @@ body {
 }
 
 #p3 {
-  transform: rotate(105deg) translate(39vw) rotate(-105deg);
+  transform: rotate(112.5deg) translate(39vw) rotate(-112.5deg);
 }
 
 #p5 {
-  transform: rotate(120deg) translate(39.5vw) rotate(-120deg);
-}
-
-#p7 {
   transform: rotate(135deg) translate(40vw) rotate(-135deg);
 }
-.r6 {
-  transform: rotate(-45deg); }
-
 .r4 {
-  transform: rotate(-30deg) ;}
+  transform: rotate(-45deg); }
 
 .r2 {
   transform: rotate(-15deg) ;}
@@ -124,12 +121,7 @@ body {
 .r3 {
   transform: rotate(15deg);
 }
-
 .r5 {
-  transform: rotate(30deg);
-}
-
-.r7 {
   transform: rotate(45deg);
 }
 
@@ -152,13 +144,14 @@ body {
 .button {
   background-color: #555555;
   border: none;
-  padding: 15px 32px;
+  padding: 1vw 3vw ;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  margin: 70px 4px;
+  font-size: 1.5vw;
+  margin: 6vw 1vw;
   cursor: pointer;
   float: left;
   z-index: 11;
+  width: 10vw;
 }

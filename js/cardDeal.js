@@ -42,7 +42,6 @@ function dealerDeal() {
 
 function playerDraw(id, num) {
 let count = game.players[id].hands[0].count - 1;
-  var next = (count-2) * 1.8
   game.players[id].draw(0);
   game.showPlayerCard(id, count, num);
   let elem = document.getElementById("dealerCard");
@@ -51,12 +50,35 @@ let count = game.players[id].hands[0].count - 1;
   let pos2 = cor.top;
   let cor2 = document.getElementById("r" + num);
   let clientRect = cor2.getBoundingClientRect();
-  let end = clientRect.left + toPx * next;
-  let end2 = clientRect.top;
-  var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2)*3;
-  var id = setInterval(frame, 0.5);
   elem.id = "placed";
-
+if (num == 1) {
+  var next = (count-2) * 2;
+   end = clientRect.left + toPx * next-toPx*2.5;
+   end2 = clientRect.top + toPx -toPx*2.5;
+}
+else if (num ==3) {
+  var next = (count-2) * 1.847;
+  var next2 = (count-2) * 0.625;
+   end = clientRect.left + toPx * next-toPx*2.5;
+   end2 = clientRect.top + toPx * next2-toPx*2.5;
+}else if(num==5){
+var next = (count-2) * 1.414;
+ end = clientRect.left + toPx * next-toPx*2.8;
+ end2 = clientRect.top + toPx * next-toPx*2.8;
+}else if(num==2){
+var next = -(count-2) * 1.847;
+var next2 = -(count-2) * 0.625;
+ end = clientRect.left - toPx * next-toPx*1;
+ end2 = clientRect.top + toPx * next2-toPx*1;
+}else if(num==4){
+var next = -(count-2) * 1.414;
+ end = clientRect.left - toPx * next-toPx*0.65;
+ end2 = clientRect.top + toPx * next-toPx*0.65;
+}
+console.log(end2);
+console.log(end);
+var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2)*3;
+var id = setInterval(frame, 0.5);
   function frame() {
     if (pos <= end) {
       if (pos2 >= Math.floor(end2)) {

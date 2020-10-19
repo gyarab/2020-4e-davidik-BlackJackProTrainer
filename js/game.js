@@ -9,6 +9,6 @@ deck.shuffle();
 var table = document.getElementById("table");
 let player = new Player(1, 500);
 let game = new Table();
-game.addPlayers(7);
+game.addPlayers(5);
 game.dealHands();
 //game.showPlayersCards();
