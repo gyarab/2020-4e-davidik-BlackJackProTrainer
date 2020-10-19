@@ -67,8 +67,8 @@ player.showHands();
     }
     return this.players;
   }
-  showPlayerCard(idp, idc){
-    this.players[idp].showCard(idc);
+  showPlayerCard(idP, idC, idR){
+    this.players[idP].showCard(idC, idR);
 return this.player;
   }
   showDealerCards(){

@@ -47,12 +47,10 @@ showHands(){
     }
   }
 }
-showCard(id){
+showCard(id,idR){
     var deck = document.getElementById("deck");
-    console.log(this.hands);
     deck.innerHTML +=
-    "<img id='dealerCard' class ='cards' src="+this.hands[0].cards[id].imgurl+">";
-  //  var elem = document.getElementById("dealerCard");
+    "<img id='dealerCard' class ='cards r"+idR+"' src="+this.hands[0].cards[id].imgurl+">";
   return this.cards;
 }
 }
