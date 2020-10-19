@@ -157,7 +157,8 @@ body {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 70px 4px;
   cursor: pointer;
   float: left;
+  z-index: 11;
 }

@@ -13,7 +13,7 @@ function dealerDeal() {
   var cor2 = getElementTopLeft("pole");
   var end = cor2.left + toPx * next + toPx / 2;
   var end2 = cor2.top + toPx / 2;
-  var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2);
+  var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2)*2;
   var id = setInterval(frame, 3);
   elem.id = "placed";
 
@@ -22,7 +22,7 @@ function dealerDeal() {
       if (pos2 >= Math.floor(end2)) {
         clearInterval(id);
       } else {
-        pos2++;
+        pos2+=2;
         pos = pos + ratio;
         elem.style.top = (pos2 * toVw) + "vw";
         elem.style.left = (pos * toVw) + "vw";
@@ -31,7 +31,7 @@ function dealerDeal() {
       if (pos2 >= Math.floor(end2)) {
         clearInterval(id);
       } else {
-        pos2++;
+        pos2+=2;
         pos = pos - ratio;
         elem.style.top = (pos2 * toVw) + "vw";
         elem.style.left = (pos * toVw) + "vw";
