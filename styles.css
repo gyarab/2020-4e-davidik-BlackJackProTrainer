@@ -33,6 +33,7 @@ body {
   position: absolute;
   width: 3.5vw;
   height: 5.5vw;
+  z-index: 10;
 }
 
 .text {
@@ -80,31 +81,31 @@ body {
   height: 3vw;
 }
 
-.p6 {
+#p6 {
   transform: rotate(45deg) translate(29vw) rotate(-40deg);
 }
 
-.p4 {
+#p4 {
   transform: rotate(60deg) translate(30vw) rotate(-55deg);
 }
 
-.p2 {
+#p2 {
   transform: rotate(75deg) translate(31vw) rotate(-70deg);
 }
 
-.p1 {
+#p1 {
   transform: rotate(90deg) translate(31vw) rotate(-90deg);
 }
 
-.p3 {
+#p3 {
   transform: rotate(105deg) translate(31vw) rotate(-105deg);
 }
 
-.p5 {
+#p5 {
   transform: rotate(120deg) translate(30vw) rotate(-120deg);
 }
 
-.p7 {
+#p7 {
   transform: rotate(135deg) translate(29vw) rotate(-135deg);
 }
 
@@ -123,4 +124,15 @@ body {
      Offset the position correctly with
      minus half of the width and minus half of the height
     */
+}
+.button {
+  background-color: #555555;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }

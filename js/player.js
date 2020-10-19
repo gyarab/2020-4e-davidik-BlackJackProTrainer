@@ -47,6 +47,14 @@ showHands(){
     }
   }
 }
+showCard(id){
+    var deck = document.getElementById("deck");
+    console.log(this.hands);
+    deck.innerHTML +=
+    "<img id='dealerCard' class ='cards' src="+this.hands[0].cards[id].imgurl+">";
+  //  var elem = document.getElementById("dealerCard");
+  return this.cards;
+}
 }
 class Dealer {
   constructor() {
