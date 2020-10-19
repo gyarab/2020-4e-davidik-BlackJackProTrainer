@@ -14,6 +14,11 @@ class Player{
     this.id = id;
     this.hands= [];
     this.balance = balance;
+    this.position = -1;
+  }
+  setPosition(id){
+    this.position = id;
+    return this.position;
   }
 addHand(){
 this.hands.push(new Hand());

@@ -49,4 +49,5 @@ class Deck {
       "<img src="+card.imgurl+">";
     }
   }
+
 }

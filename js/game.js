@@ -10,5 +10,10 @@ var table = document.getElementById("table");
 let player = new Player(1, 500);
 let game = new Table();
 game.addPlayers(5);
+let pp = 0;
+for (var p of game.players) {
+  p.setPosition(pp+1)
+  pp++;
+}
 game.dealHands();
 //game.showPlayersCards();

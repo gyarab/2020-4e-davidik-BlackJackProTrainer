@@ -13,7 +13,7 @@ function dealerDeal() {
   var cor2 = getElementTopLeft("pole");
   var end = cor2.left + toPx * next + toPx / 2;
   var end2 = cor2.top + toPx / 2;
-  var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2)*2;
+  var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2) * 2;
   var id = setInterval(frame, 3);
   elem.id = "placed";
 
@@ -22,7 +22,7 @@ function dealerDeal() {
       if (pos2 >= Math.floor(end2)) {
         clearInterval(id);
       } else {
-        pos2+=2;
+        pos2 += 2;
         pos = pos + ratio;
         elem.style.top = (pos2 * toVw) + "vw";
         elem.style.left = (pos * toVw) + "vw";
@@ -31,7 +31,7 @@ function dealerDeal() {
       if (pos2 >= Math.floor(end2)) {
         clearInterval(id);
       } else {
-        pos2+=2;
+        pos2 += 2;
         pos = pos - ratio;
         elem.style.top = (pos2 * toVw) + "vw";
         elem.style.left = (pos * toVw) + "vw";
@@ -41,7 +41,7 @@ function dealerDeal() {
 }
 
 function playerDraw(id, num) {
-let count = game.players[id].hands[0].count - 1;
+  let count = game.players[id].hands[0].count - 1;
   game.players[id].draw(0);
   game.showPlayerCard(id, count, num);
   let elem = document.getElementById("dealerCard");
@@ -51,40 +51,38 @@ let count = game.players[id].hands[0].count - 1;
   let cor2 = document.getElementById("r" + num);
   let clientRect = cor2.getBoundingClientRect();
   elem.id = "placed";
-if (num == 1) {
-  var next = (count-2) * 2;
-   end = clientRect.left + toPx * next-toPx*2.5;
-   end2 = clientRect.top + toPx -toPx*2.5;
-}
-else if (num ==3) {
-  var next = (count-2) * 1.847;
-  var next2 = (count-2) * 0.625;
-   end = clientRect.left + toPx * next-toPx*2.5;
-   end2 = clientRect.top + toPx * next2-toPx*2.5;
-}else if(num==5){
-var next = (count-2) * 1.414;
- end = clientRect.left + toPx * next-toPx*2.8;
- end2 = clientRect.top + toPx * next-toPx*2.8;
-}else if(num==2){
-var next = -(count-2) * 1.847;
-var next2 = -(count-2) * 0.625;
- end = clientRect.left - toPx * next-toPx*1;
- end2 = clientRect.top + toPx * next2-toPx*1;
-}else if(num==4){
-var next = -(count-2) * 1.414;
- end = clientRect.left - toPx * next-toPx*0.65;
- end2 = clientRect.top + toPx * next-toPx*0.65;
-}
-console.log(end2);
-console.log(end);
-var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2)*3;
-var id = setInterval(frame, 0.5);
+  if (num == 1) {
+    var next = (count - 2) * 2;
+    end = clientRect.left + toPx * next - toPx * 2.5;
+    end2 = clientRect.top + toPx - toPx * 2.5;
+  } else if (num == 3) {
+    var next = (count - 2) * 1.847;
+    var next2 = (count - 2) * 0.625;
+    end = clientRect.left + toPx * next - toPx * 2.5;
+    end2 = clientRect.top + toPx * next2 - toPx * 2.5;
+  } else if (num == 5) {
+    var next = (count - 2) * 1.414;
+    end = clientRect.left + toPx * next - toPx * 2.8;
+    end2 = clientRect.top + toPx * next - toPx * 2.8;
+  } else if (num == 2) {
+    var next = -(count - 2) * 1.847;
+    var next2 = -(count - 2) * 0.625;
+    end = clientRect.left - toPx * next - toPx * 1;
+    end2 = clientRect.top + toPx * next2 - toPx * 1;
+  } else if (num == 4) {
+    var next = -(count - 2) * 1.414;
+    end = clientRect.left - toPx * next - toPx * 0.65;
+    end2 = clientRect.top + toPx * next - toPx * 0.65;
+  }
+  var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2) * 3;
+  var id = setInterval(frame, 0.5);
+
   function frame() {
     if (pos <= end) {
       if (pos2 >= Math.floor(end2)) {
         clearInterval(id);
       } else {
-        pos2+=3;
+        pos2 += 3;
         pos = pos + ratio;
         elem.style.top = (pos2 * toVw) + "vw";
         elem.style.left = (pos * toVw) + "vw";
@@ -93,7 +91,7 @@ var id = setInterval(frame, 0.5);
       if (pos2 >= Math.floor(end2)) {
         clearInterval(id);
       } else {
-        pos2+=3;
+        pos2 += 3;
         pos = pos - ratio;
         elem.style.top = (pos2 * toVw) + "vw";
         elem.style.left = (pos * toVw) + "vw";
@@ -119,4 +117,68 @@ function getElementTopLeft(id) {
     left: left
   };
 
+}
+function StartGame() {
+  dealerDeal();
+  for (var player of game.players) {
+    for (var i = 0; i < 2; i++) {
+      let count = 0;
+      player.showCard(i, player.position)
+      let elem = document.getElementById("dealerCard");
+      let cor = getElementTopLeft("deck");
+      let pos = cor.left;
+      let pos2 = cor.top;
+      let cor2 = document.getElementById("r" + player.position);
+      let clientRect = cor2.getBoundingClientRect();
+      elem.id = "placed";
+      if (player.position == 1) {
+        var next = (count) * 2;
+        end = clientRect.left + toPx * next - toPx * 2.5;
+        end2 = clientRect.top + toPx - toPx * 2.5;
+      } else if (player.position == 3) {
+        var next = (count) * 1.847;
+        var next2 = (count) * 0.625;
+        end = clientRect.left + toPx * next - toPx * 2.5;
+        end2 = clientRect.top + toPx * next2 - toPx * 2.5;
+      } else if (player.position == 5) {
+        var next = (count) * 1.414;
+        end = clientRect.left + toPx * next - toPx * 2.8;
+        end2 = clientRect.top + toPx * next - toPx * 2.8;
+      } else if (player.position == 2) {
+        var next = -(count) * 1.847;
+        var next2 = -(count) * 0.625;
+        end = clientRect.left - toPx * next - toPx * 1;
+        end2 = clientRect.top + toPx * next2 - toPx * 1;
+      } else if (player.position == 4) {
+        var next = -(count) * 1.414;
+        end = clientRect.left - toPx * next - toPx * 0.65;
+        end2 = clientRect.top + toPx * next - toPx * 0.65;
+      }
+      var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2) * 3;
+      var id = setInterval(frame, 0.5);
+      count++;
+
+    }
+    function frame() {
+      if (pos <= end) {
+        if (pos2 >= Math.floor(end2)) {
+          clearInterval(id);
+        } else {
+          pos2 += 3;
+          pos = pos + ratio;
+          elem.style.top = (pos2 * toVw) + "vw";
+          elem.style.left = (pos * toVw) + "vw";
+        }
+      } else {
+        if (pos2 >= Math.floor(end2)) {
+          clearInterval(id);
+        } else {
+          pos2 += 3;
+          pos = pos - ratio;
+          elem.style.top = (pos2 * toVw) + "vw";
+          elem.style.left = (pos * toVw) + "vw";
+        }
+      }
+    }
+  }
 }
