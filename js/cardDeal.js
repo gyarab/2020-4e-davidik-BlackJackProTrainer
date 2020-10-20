@@ -63,7 +63,7 @@ function playerDraw(id, num) {
     end2 = clientRect.top + toPx * next2 - toPx * 2.5;
   } else if (num == 5) {
     var next = (count - 2) * 1.414;
-    end = clientRect.left + toPx * next - toPx * 2.8;
+    end = clientRect.left + toPx * next - toPx * 2;
     end2 = clientRect.top + toPx * next - toPx * 2.8;
   } else if (num == 2) {
     var next = -(count - 2) * 1.847;
@@ -152,7 +152,7 @@ function StartGame() {
       end2 = clientRect.top + toPx * next2 - toPx * 2.5;
     } else if (player.position == 5) {
       var next = (countcycle) * 1.414;
-      end = clientRect.left + toPx * next - toPx * 2.8;
+      end = clientRect.left + toPx * next - toPx * 2;
       end2 = clientRect.top + toPx * next - toPx * 2.8;
     } else if (player.position == 2) {
       var next = -(countcycle) * 1.847;
