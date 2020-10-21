@@ -5,8 +5,8 @@ body {
 }
 
 .circle-container {
-  width: 75%;
-  height: 37.5vw;
+  width: 70%;
+  height: 35vw;
   /* as the half of the width */
   background-color: rgba(0, 153, 31, 0.8);
   border-bottom-left-radius: 23vw;
@@ -90,24 +90,24 @@ body {
 }
 
 #p4 {
-  transform: rotate(45deg) translate(40vw) rotate(-40deg);
+  transform: rotate(45deg) translate(37vw) rotate(-40deg);
 }
 
 
 #p2 {
-  transform: rotate(67.5deg) translate(39vw) rotate(-67.5deg);
+  transform: rotate(67.5deg) translate(36vw) rotate(-67.5deg);
 }
 
 #p1 {
-  transform: rotate(90deg) translate(38vw) rotate(-90deg);
+  transform: rotate(90deg) translate(35vw) rotate(-90deg);
 }
 
 #p3 {
-  transform: rotate(112.5deg) translate(39vw) rotate(-112.5deg);
+  transform: rotate(112.5deg) translate(36vw) rotate(-112.5deg);
 }
 
 #p5 {
-  transform: rotate(135deg) translate(40vw) rotate(-135deg);
+  transform: rotate(135deg) translate(37vw) rotate(-135deg);
 }
 .r4 {
   transform: rotate(-45deg); }
@@ -145,13 +145,13 @@ body {
   background-color: #555555;
   border: none;
   padding: 1vw 3vw ;
-  text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 1.5vw;
+  font-size: 1vw;
   margin: 6vw 1vw;
   cursor: pointer;
   float: left;
   z-index: 11;
-  width: 10vw;
+  width: 12vw;
+  height: 4vw;
 }

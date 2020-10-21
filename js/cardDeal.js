@@ -39,9 +39,37 @@ function dealerDeal() {
     }
   }
 }
+function stay(num){
+  if (num == 1) {
+    if (game.playersCount == 1) {
+       num=1
+    }else if (game.playersCount == 2) {
+      num=2
+    }else {
+      num = 3;
+    }}else if (num == 3) {
+      if (game.playersCount == 4) {
+         num=4
+      }else if (game.playersCount == 3) {
+        num=2
+      }
+      else {
+        num = 5;
+      }
+    }
+      else if (num == 5) {
+    num = 4;
+  }
+  else if (num == 2) {
+  num = 1;
+}
+  else if (num == 4) {
+num = 2;
+}
+nextPlayer(num,0);
+}
 function playerDraw(id, num) {
   let n  = num;
-  console.log(n);
   let count = game.players[id].hands[0].count - 1;
   game.players[id].draw(0);
   game.showPlayerCard(id, count, num);
@@ -54,42 +82,27 @@ function playerDraw(id, num) {
   let clientRect = cor2.getBoundingClientRect();
   elem.id = "placed";
   if (num == 1) {
-    if (game.playersCount == 1) {
-       n=1
-    }else if (game.playersCount == 2) {
-      n=2
-    }else {
-      n = 3;
-    }
     var next = (count - 2) * 2;
     end = clientRect.left + toPx * next - toPx * 2.5;
     end2 = clientRect.top + toPx - toPx * 2.5;
   } else if (num == 3) {
-    if (game.playersCount == 4) {
-       n=4
-    }else if (game.playersCount == 3) {
-      n=2
-    }
-    else {
-      n = 5;
-    }
     var next = (count - 2) * 1.847;
     var next2 = (count - 2) * 0.58;
     end = clientRect.left + toPx * next - toPx * 2.5;
     end2 = clientRect.top + toPx * next2 - toPx * 2.5;
   } else if (num == 5) {
-n = 4;
+
     var next = (count - 2) * 1.414;
     end = clientRect.left + toPx * next - toPx * 2;
     end2 = clientRect.top + toPx * next - toPx * 2.8;
   } else if (num == 2) {
-n = 1;
+
     var next = -(count - 2) * 1.847;
     var next2 = -(count - 2) * 0.6;
     end = clientRect.left - toPx * next - toPx * 1;
     end2 = clientRect.top + toPx * next2 - toPx * 1;
   } else if (num == 4) {
-n = 2;
+
     var next = -(count - 2) * 1.414;
     end = clientRect.left - toPx * next - toPx * 0.65;
     end2 = clientRect.top + toPx * next - toPx * 0.65;
