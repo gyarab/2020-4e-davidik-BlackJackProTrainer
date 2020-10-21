@@ -1,12 +1,20 @@
-function nextPlayer() {
+let buttons;
+buttons = document.getElementById("buttons");
+function nextPlayer(i,pre) {
+  i--;
+  if (pre == 1 ) {
 
+  }else {
+    var hit = document.getElementById("hit");
+  hit.remove();
+  }
+  buttons.innerHTML +=
+    '<p id="hit"><button class="button" onclick="playerDraw(' + i + ',' + (i + 1) +')">HIT</button></p>';
 }
 function nextTurn() {
 
 }
 function players(x) {
-  var buttons;
-  buttons = document.getElementById("buttons");
   if (isNaN(x) || x < 1 || x > 5) {} else {
     game.addPlayers(x);
     let pp = 0;
@@ -20,9 +28,5 @@ function players(x) {
       '<p><button class="button" onclick="dealerDeal()">Dealer Deal</button></p>';
     buttons.innerHTML +=
       '<p><button class="button" onclick="StartGame()">Start Game</button></p>';
-    for (var i = 0; i < x; i++) {
-      buttons.innerHTML +=
-        '<p><button class="button" onclick="playerDraw(' + i + ',' + (i + 1) + ')">Player' + (i + 1) + ' Draw</button></p>';
-    }
   }
 }
