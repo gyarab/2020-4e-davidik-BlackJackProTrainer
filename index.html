@@ -39,14 +39,13 @@
     </span>
 
   </div>
-  <p><button class="button" onclick="dealerDeal()">Dealer Deal</button></p>
-  <p><button class="button" onclick="StartGame()">Start Game</button></p>
-  <p><button class="button" onclick="playerDraw(0,1)">Player1 Draw</button></p>
-  <p><button class="button" onclick="playerDraw(1,2)">Player2 Draw</button></p>
-  <p><button class="button" onclick="playerDraw(2,3)">Player3 Draw</button></p>
-  <p><button class="button" onclick="playerDraw(3,4)">Player4 Draw</button></p>
-  <p><button class="button" onclick="playerDraw(4,5)">Player5 Draw</button></p>
-  <input id="numb"> <button type="button" onclick="myFunction()">Submit</button>
+  <div id="buttons">
+    <button class="button" onclick="players(1)">1 Player</button>
+    <button class="button" onclick="players(2)">2 Players</button>
+    <button class="button" onclick="players(3)">3 Players</button>
+    <button class="button" onclick="players(4)">4 Players</button>
+    <button class="button" onclick="players(5)">5 Players</button>
+  </div>
 </body>
 <script type="text/javascript" src="js/deck.js"></script>
 <script type="text/javascript" src="js/player.js"></script>

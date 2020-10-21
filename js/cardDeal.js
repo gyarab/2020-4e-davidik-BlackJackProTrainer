@@ -124,7 +124,7 @@ let cardcycle = 0;
 let countcycle = 0;
 
 function StartGame() {
-  if (cycle == 5) {
+  if (cycle == game.playersCount) {
     cycle = 0;
     cardcycle++;
   }
