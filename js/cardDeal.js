@@ -20,6 +20,13 @@ function dealerDeal() {
   function frame() {
     if (pos <= end) {
       if (pos2 >= Math.floor(end2)) {
+        if (game.playersCount == 5) {
+          nextPlayer(4,1);
+        } else if (game.playersCount == 3) {
+    nextPlayer(3,1);
+    }else {
+      nextPlayer(game.playersCount,1);
+    }
         clearInterval(id);
       } else {
         pos2 += 2;
@@ -29,6 +36,13 @@ function dealerDeal() {
       }
     } else {
       if (pos2 >= Math.floor(end2)) {
+        if (game.playersCount == 5) {
+          nextPlayer(4,1);
+        } else if (game.playersCount == 3) {
+    nextPlayer(3,1);
+    }else {
+      nextPlayer(game.playersCount,1);
+    }
         clearInterval(id);
       } else {
         pos2 += 2;
@@ -158,6 +172,7 @@ let cardcycle = 0;
 let countcycle = 0;
 
 function StartGame() {
+  buttons.innerHTML = "";
   if (cycle == game.playersCount) {
     cycle = 0;
     cardcycle++;
@@ -165,13 +180,7 @@ function StartGame() {
   countcycle = cardcycle-1;
   if (cardcycle == 2) {
     dealerDeal();
-    if (game.playersCount == 5) {
-      nextPlayer(4,1);
-    } else if (game.playersCount == 3) {
-nextPlayer(3,1);
-}else {
-  nextPlayer(game.playersCount,1);
-}
+
 
   } else {
     player = game.players[cycle]

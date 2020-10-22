@@ -47,8 +47,6 @@ function players(x) {
     game.dealHands();
     buttons.innerHTML = "";
     buttons.innerHTML +=
-      '<p><button class="button" onclick="dealerDeal()">Dealer Deal</button></p>';
-    buttons.innerHTML +=
-      '<p><button class="button" onclick="StartGame()">Start Game</button></p>';
+      '<p><button id="start" class="button" onclick="StartGame()">Start Game</button></p>';
   }
 }
