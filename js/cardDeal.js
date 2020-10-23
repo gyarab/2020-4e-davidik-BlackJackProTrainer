@@ -96,29 +96,28 @@ function playerDraw(id, num) {
   elem.id = "placed";
   if (num == 1) {
     var next = (count - 2) * 2;
-    end = clientRect.left + toPx * next - toPx * 2.5;
-    end2 = clientRect.top + toPx - toPx * 2.5;
+    end = clientRect.left - toPx * 3;
+    end2 = clientRect.top + next * toPx - toPx * 6;
   } else if (num == 3) {
-    var next = (count - 2) * 1.847;
-    var next2 = (count - 2) * 0.58;
-    end = clientRect.left + toPx * next - toPx * 2.5;
-    end2 = clientRect.top + toPx * next2 - toPx * 2.5;
+    var next = -(count - 2) * 0.55;
+    var next2 = (count - 2) * 2;
+    end = clientRect.left + toPx * next - toPx * 0.5;
+    end2 = clientRect.top + toPx * next2 - toPx * 6;
   } else if (num == 5) {
-
-    var next = (count - 2) * 1.414;
-    end = clientRect.left + toPx * next - toPx * 2;
-    end2 = clientRect.top + toPx * next - toPx * 2.8;
+    var next = -(count - 2) * 1.5;
+    var next2 = (count - 2) * 1.5;
+    end = clientRect.left + toPx * next - toPx * -2;
+    end2 = clientRect.top + toPx * next2 - toPx * 6;
   } else if (num == 2) {
-
-    var next = -(count - 2) * 1.847;
-    var next2 = -(count - 2) * 0.6;
-    end = clientRect.left - toPx * next - toPx * 1;
-    end2 = clientRect.top + toPx * next2 - toPx * 1;
+    var next = (count - 2) * 0.57;
+    var next2 = (count - 2) * 2;
+    end = clientRect.left + toPx * next - toPx * 4;
+    end2 = clientRect.top + toPx * next2 - toPx * 6;
   } else if (num == 4) {
-
-    var next = -(count - 2) * 1.414;
-    end = clientRect.left - toPx * next - toPx * 0.65;
-    end2 = clientRect.top + toPx * next - toPx * 0.65;
+    var next = (count - 2) * 1.5;
+    var next2 = (count - 2) * 1.5;
+    end = clientRect.left + toPx * next - toPx * 6;
+    end2 = clientRect.top + toPx * next2 - toPx * 3;
   }
   var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2) * 3;
   var id = setInterval(frame, 0.5);
@@ -183,7 +182,7 @@ function StartGame() {
     player = game.players[cycle]
     player.showCard(cardcycle, player.position)
     let balance = document.getElementById("b" + player.position);
-    balance.innerHTML = player.balance-25;
+    balance.innerHTML = player.balance - 25;
     let elem = document.getElementById("dealerCard");
     let cor = getElementTopLeft("deck");
     let pos = cor.left;
@@ -193,31 +192,29 @@ function StartGame() {
     elem.id = "placed";
     if (player.position == 1) {
       var next = (countcycle) * 2;
-    //end = clientRect.left + toPx * next - toPx * 2.5;
-      end = clientRect.left
-      end2 = clientRect.top + next *toPx - toPx*3;
-    } else if (player.position == 3) {
-      var next = (countcycle) * 1.847;
-      var next2 = (countcycle) * 0.58;
       //end = clientRect.left + toPx * next - toPx * 2.5;
-      end = clientRect.left
-      end2 = clientRect.top + toPx * next2 - toPx * 2.5;
+      end = clientRect.left - toPx * 3;
+      end2 = clientRect.top + next * toPx - toPx * 6;
+    } else if (player.position == 3) {
+      var next = -(countcycle) * 0.55;
+      var next2 = (countcycle) * 2;
+      end = clientRect.left + toPx * next - toPx * 0.5;
+      end2 = clientRect.top + toPx * next2 - toPx * 6;
     } else if (player.position == 5) {
-      var next = (countcycle) * 1.414;
-    //  end = clientRect.left + toPx * next - toPx * 2;
-    end = clientRect.left
-      end2 = clientRect.top - toPx * next - toPx * 2.8;
+      var next = -(countcycle) * 1.5;
+      var next2 = (countcycle) * 1.5;
+      end = clientRect.left + toPx * next - toPx * -2;
+      end2 = clientRect.top + toPx * next2 - toPx * 6;
     } else if (player.position == 2) {
-      var next = -(countcycle) * 1.847;
-      var next2 = -(countcycle) * 0.60;
-    //  end = clientRect.left - toPx * next - toPx * 1;
-      end = clientRect.left
-      end2 = clientRect.top - toPx * next2 - toPx * 1;
+      var next = (countcycle) * 0.55;
+      var next2 = (countcycle) * 2;
+      end = clientRect.left + toPx * next - toPx * 4;
+      end2 = clientRect.top + toPx * next2 - toPx * 6;
     } else if (player.position == 4) {
-      var next = -(countcycle) * 1.414;
-    //  end = clientRect.left - toPx * next - toPx * 0.65;
-      end = clientRect.left
-      end2 = clientRect.top - toPx * next - toPx * 0.65;
+      var next = (countcycle) * 1.5;
+      var next2 = (countcycle) * 1.5;
+      end = clientRect.left + toPx * next - toPx * 6;
+      end2 = clientRect.top + toPx * next2 - toPx * 3;
     }
     var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2) * 3;
     var id = setInterval(frame, 0.5);
