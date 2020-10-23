@@ -1,5 +1,11 @@
 #table {}
-html, body {margin: 0; height: 100%; overflow: hidden}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden
+}
+
 body {
   background: rgba(51, 0, 0, 1);
 }
@@ -88,14 +94,14 @@ body {
   height: 3vw;
   z-index: 1;
 }
+
 .balance {
   border: 0.5vw solid black;
-  background-color: rgba(153, 153, 0, 1);
+  background-color: black;
   width: 6vw;
-  height: 1.5vw;
-  margin: 1vw -1.3vw;
+  height: 1.3vw;
   z-index: 1;
-  color: #111;
+  color: yellow;
   font-family: 'Helvetica Neue', sans-serif;
   font-size: 1.18vw;
   font-weight: bold;
@@ -103,11 +109,13 @@ body {
   line-height: 1;
   text-align: center;
   z-index: 1;
+  border-bottom-left-radius: 1vw;
+  border-bottom-right-radius: 1vw;
 }
+
 #p4 {
   transform: rotate(45deg) translate(37vw) rotate(-45deg);
 }
-
 
 #p2 {
   transform: rotate(67.5deg) translate(36vw) rotate(-67.5deg);
@@ -124,20 +132,50 @@ body {
 #p5 {
   transform: rotate(135deg) translate(37vw) rotate(-135deg);
 }
+
 .r4 {
-  transform: rotate(-45deg); }
+  transform: rotate(-45deg);
+}
 
 .r2 {
-  transform: rotate(-15deg) ;}
+  transform: rotate(-15deg);
+}
 
 .r1 {
-  transform: rotate(0deg) ;}
+  transform: rotate(0deg);
+}
 
 .r3 {
   transform: rotate(15deg);
 }
+
 .r5 {
   transform: rotate(45deg);
+}
+
+#b4 {
+  transform: rotate(-60deg);
+  margin: 0.5vw 5.2vw;
+}
+
+#b2 {
+  transform: rotate(0deg);
+  margin: 3.6vw -1.1vw;
+}
+
+#b1 {
+  transform: rotate(0deg);
+  margin: 2vw -1.5vw;
+}
+
+#b3 {
+  transform: rotate(0deg);
+  margin: 3.6vw -1.5vw;
+}
+
+#b5 {
+  transform: rotate(60deg);
+  margin: 0.5vw -8.1vw;
 }
 
 .inner-circle {
@@ -156,10 +194,11 @@ body {
      minus half of the width and minus half of the height
     */
 }
+
 .button {
   background-color: #555555;
   border: none;
-  padding: 1vw 3vw ;
+  padding: 1vw 3vw;
   text-decoration: none;
   display: inline-block;
   font-size: 1vw;

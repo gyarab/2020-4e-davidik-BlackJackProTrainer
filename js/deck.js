@@ -39,14 +39,14 @@ class Deck {
     }
     return hand;
   }
-  draw(){
+  draw() {
     let draw = this.deck.pop();
     return draw;
   }
-  showDeck(){
+  showDeck() {
     for (var card of this.deck) {
       table.innerHTML +=
-      "<img src="+card.imgurl+">";
+        "<img src=" + card.imgurl + ">";
     }
   }
 

@@ -1,4 +1,3 @@
-
 class Table {
   constructor() {
     this.players = [];
@@ -6,48 +5,45 @@ class Table {
     this.playersCount = 0;
   }
   addPlayer(id) {
-    if (id<7) {
-      if (this.playersCount > 6) {
-      }
-      else {
+    if (id < 7) {
+      if (this.playersCount > 6) {} else {
         var uniq = true;
-      for (var player of this.players) {
-      if (player.id == i) {
-      uniq = false;
+        for (var player of this.players) {
+          if (player.id == i) {
+            uniq = false;
+          }
+        }
+        if (uniq) {
+          this.players.push(new Player(id, 1000));
+          this.playersCount++;
+        }
       }
-      }
-      if (uniq) {
-        this.players.push(new Player(id, 1000));
-        this.playersCount++;
-      }}
       return this.players;
-    }
-    else {
+    } else {
       return "Choose id between 0 to 6";
     }
   }
   addPlayers(count) {
-    if (this.playersCount > 4) {
-    }
-    else {
-    for (var i = 0; i < count; i++) {
-      var uniq = true;
-for (var player of this.players) {
-if (player.id == i) {
-uniq = false;
-}
-}
-if (uniq) {
-  this.players.push(new Player(i, 1000));
-  this.playersCount++;
+    if (this.playersCount > 4) {} else {
+      for (var i = 0; i < count; i++) {
+        var uniq = true;
+        for (var player of this.players) {
+          if (player.id == i) {
+            uniq = false;
+          }
+        }
+        if (uniq) {
+          this.players.push(new Player(i, 1000));
+          this.playersCount++;
 
-}
-    }}
+        }
+      }
+    }
     return this.players;
   }
   removePlayer(id) {
     this.players.splice(id, 1);
-    this.playersCount --;
+    this.playersCount--;
     return this.players;
   }
   removePlayers() {
@@ -55,27 +51,27 @@ if (uniq) {
     this.playersCount = 0;
     return this.players;
   }
-  dealHands(){
+  dealHands() {
     for (var player of this.players) {
       player.addHand();
     }
     return this.players;
   }
-  showPlayersCards(){
+  showPlayersCards() {
     for (var player of this.players) {
-player.showHands();
+      player.showHands();
     }
     return this.players;
   }
-  showPlayerCard(idP, idC, idR){
+  showPlayerCard(idP, idC, idR) {
     this.players[idP].showCard(idC, idR);
-return this.player;
+    return this.player;
   }
-  showDealerCards(){
+  showDealerCards() {
     this.dealer.showCards();
     return this.dealer;
   }
-  showDealerCard(id){
+  showDealerCard(id) {
     this.dealer.showCard(id);
     return this.dealer;
   }
