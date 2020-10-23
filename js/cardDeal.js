@@ -193,26 +193,31 @@ function StartGame() {
     elem.id = "placed";
     if (player.position == 1) {
       var next = (countcycle) * 2;
-      end = clientRect.left + toPx * next - toPx * 2.5;
-      end2 = clientRect.top + toPx - toPx * 2.5;
+    //end = clientRect.left + toPx * next - toPx * 2.5;
+      end = clientRect.left
+      end2 = clientRect.top + next *toPx - toPx*3;
     } else if (player.position == 3) {
       var next = (countcycle) * 1.847;
       var next2 = (countcycle) * 0.58;
-      end = clientRect.left + toPx * next - toPx * 2.5;
+      //end = clientRect.left + toPx * next - toPx * 2.5;
+      end = clientRect.left
       end2 = clientRect.top + toPx * next2 - toPx * 2.5;
     } else if (player.position == 5) {
       var next = (countcycle) * 1.414;
-      end = clientRect.left + toPx * next - toPx * 2;
-      end2 = clientRect.top + toPx * next - toPx * 2.8;
+    //  end = clientRect.left + toPx * next - toPx * 2;
+    end = clientRect.left
+      end2 = clientRect.top - toPx * next - toPx * 2.8;
     } else if (player.position == 2) {
       var next = -(countcycle) * 1.847;
       var next2 = -(countcycle) * 0.60;
-      end = clientRect.left - toPx * next - toPx * 1;
-      end2 = clientRect.top + toPx * next2 - toPx * 1;
+    //  end = clientRect.left - toPx * next - toPx * 1;
+      end = clientRect.left
+      end2 = clientRect.top - toPx * next2 - toPx * 1;
     } else if (player.position == 4) {
       var next = -(countcycle) * 1.414;
-      end = clientRect.left - toPx * next - toPx * 0.65;
-      end2 = clientRect.top + toPx * next - toPx * 0.65;
+    //  end = clientRect.left - toPx * next - toPx * 0.65;
+      end = clientRect.left
+      end2 = clientRect.top - toPx * next - toPx * 0.65;
     }
     var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2) * 3;
     var id = setInterval(frame, 0.5);
