@@ -27,7 +27,8 @@ function nextPlayer(i, pre) {
   buttons.innerHTML +=
     '<p id="stay"><button class="button" onclick="stay(' + (i + 1) + ')">STAY</button></p>';
   buttons.innerHTML +=
-    '<p id="split"><button class="button" onclick="">SPLIT</button></p>';
+    '<p id="split"><button class="button" onclick="split(' + i + ',' +
+    (i + 1) + ')">SPLIT</button></p>';
   buttons.innerHTML +=
     '<p id="double"><button class="button" onclick="">DOUBLE</button></p>';
   buttons.innerHTML +=
@@ -40,7 +41,6 @@ function nextTurn() {
 }
 
 function players(x) {
-  if (isNaN(x) || x < 1 || x > 5) {} else {
     game.addPlayers(x);
     let pp = 0;
     for (var p of game.players) {
@@ -49,10 +49,9 @@ function players(x) {
       let balance = document.getElementById("b" + p.position);
       balance.innerHTML = p.balance;
     }
-    game.dealHands();
-
+    game.dealHands(2);
     buttons.innerHTML = "";
     buttons.innerHTML +=
       '<p><button id="start" class="button" onclick="StartGame()">Start Game</button></p>';
-  }
+
 }

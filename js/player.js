@@ -1,6 +1,6 @@
 class Hand {
-  constructor() {
-    this.cards = deck.deal();
+  constructor(x) {
+    this.cards = deck.deal(x);
     this.count = 2;
   }
   draw() {
@@ -19,8 +19,8 @@ class Player {
     this.position = id;
     return this.position;
   }
-  addHand() {
-    this.hands.push(new Hand());
+  addHand(x) {
+    this.hands.push(new Hand(x));
     return this.hands;
   }
   draw(id) {
@@ -51,10 +51,18 @@ class Player {
       }
     }
   }
-  showCard(id, idR) {
+  showCard(id, idR,first) {
     var deck = document.getElementById("deck");
-    deck.innerHTML +=
-      "<img id='dealerCard' class ='cards r" + idR + "' src=" + this.hands[0].cards[id].imgurl + ">";
+    if (first) {
+      var cardId = this.hands[0].cards[id].suit + this.hands[0].cards[id].value ;
+      console.log(cardId);
+      deck.innerHTML +=
+        "<img id='"+cardId+"' class ='cards r" + idR + "' src=" + this.hands[0].cards[id].imgurl + ">";
+    }else {
+      deck.innerHTML +=
+        "<img id='dealerCard' class ='cards r" + idR + "' src=" + this.hands[0].cards[id].imgurl + ">";
+    }
+
     return this.cards;
   }
 }

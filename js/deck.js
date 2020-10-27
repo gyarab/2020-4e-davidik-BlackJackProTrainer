@@ -32,9 +32,9 @@ class Deck {
     }
     return this.deck;
   }
-  deal() {
+  deal(x) {
     let hand = [];
-    while (hand.length < 2) {
+    while (hand.length < x) {
       hand.push(this.deck.pop());
     }
     return hand;

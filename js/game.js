@@ -6,7 +6,6 @@ deck.createDeck(suits, values);
 deck.shuffle();
 deck.shuffle();
 var table = document.getElementById("table");
-let player = new Player(1, 500);
 let game = new Table();
 
 //game.showPlayersCards();

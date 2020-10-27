@@ -51,9 +51,9 @@ class Table {
     this.playersCount = 0;
     return this.players;
   }
-  dealHands() {
+  dealHands(x) {
     for (var player of this.players) {
-      player.addHand();
+      player.addHand(x);
     }
     return this.players;
   }
@@ -64,7 +64,7 @@ class Table {
     return this.players;
   }
   showPlayerCard(idP, idC, idR) {
-    this.players[idP].showCard(idC, idR);
+    this.players[idP].showCard(idC, idR,false);
     return this.player;
   }
   showDealerCards() {

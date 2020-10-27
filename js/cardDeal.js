@@ -15,7 +15,7 @@ function dealerDeal() {
   var end2 = cor2.top + toPx / 2;
   var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2) * 2;
   var id = setInterval(frame, 3);
-  elem.id = "placed";
+  elem.id =  "placed";
 
   function frame() {
     if (pos <= end) {
@@ -83,10 +83,10 @@ function stay(num) {
 
 function playerDraw(id, num) {
   let n = num;
-  let count = game.players[id].hands[0].count - 1;
+  let count = game.players[id].hands[0].count ;
   game.players[id].draw(0);
   game.showPlayerCard(id, count, num);
-  count += 2;
+  count += 1;
   let elem = document.getElementById("dealerCard");
   let cor = getElementTopLeft("deck");
   let pos = cor.left;
@@ -180,16 +180,19 @@ function StartGame() {
     dealerDeal();
   } else {
     player = game.players[cycle]
-    player.showCard(cardcycle, player.position)
+    player.showCard(cardcycle, player.position,true)
+
     let balance = document.getElementById("b" + player.position);
     balance.innerHTML = player.balance - 25;
-    let elem = document.getElementById("dealerCard");
+    var cardId=player.hands[0].cards[cardcycle].suit + player.hands[0].cards[cardcycle].value;
+    console.log(cardId);
+    let elem = document.getElementById(cardId);
     let cor = getElementTopLeft("deck");
     let pos = cor.left;
     let pos2 = cor.top;
     let cor2 = document.getElementById("r" + player.position);
     let clientRect = cor2.getBoundingClientRect();
-    elem.id = "placed";
+    elem.id = cardId+"placed";
     if (player.position == 1) {
       var next = (countcycle) * 2;
       //end = clientRect.left + toPx * next - toPx * 2.5;
@@ -246,4 +249,11 @@ function StartGame() {
       }
     }
   }
+}
+function split(id, num){
+  player = game.players[id];
+player.addHand(0);
+player.hands[1].cards[0] = player.hands[0].cards[1];
+player.hands[0].cards.pop();
+
 }
