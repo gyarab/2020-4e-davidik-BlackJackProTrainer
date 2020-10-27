@@ -55,7 +55,6 @@ class Player {
     var deck = document.getElementById("deck");
     if (first) {
       var cardId = this.hands[0].cards[id].suit + this.hands[0].cards[id].value ;
-      console.log(cardId);
       deck.innerHTML +=
         "<img id='"+cardId+"' class ='cards r" + idR + "' src=" + this.hands[0].cards[id].imgurl + ">";
     }else {

@@ -185,7 +185,6 @@ function StartGame() {
     let balance = document.getElementById("b" + player.position);
     balance.innerHTML = player.balance - 25;
     var cardId=player.hands[0].cards[cardcycle].suit + player.hands[0].cards[cardcycle].value;
-    console.log(cardId);
     let elem = document.getElementById(cardId);
     let cor = getElementTopLeft("deck");
     let pos = cor.left;
@@ -255,5 +254,61 @@ function split(id, num){
 player.addHand(0);
 player.hands[1].cards[0] = player.hands[0].cards[1];
 player.hands[0].cards.pop();
+var cardId=player.hands[1].cards[0].suit + player.hands[1].cards[0].value;
+let elem = document.getElementById(cardId+"placed");
+console.log(id+":"+num);
+let cor = elem.getBoundingClientRect();
+let pos = cor.left;
+let pos2 = cor.top;
+let cor2 = document.getElementById("r" + player.position);
+let clientRect = cor2.getBoundingClientRect();
+elem.id = cardId+"placed";
+if (player.position == 1) {
+  var next = 2;
+  end = clientRect.left +toPx * 10;
+  end2 = clientRect.top + next * toPx - toPx * 10;
+  console.log(end);
+  console.log(end2);
+  console.log(pos);
 
+} else if (player.position == 3) {
+  var next = -(countcycle) * 0.55;
+  var next2 = (countcycle) * 2;
+  end = clientRect.left + toPx * next - toPx * 0.5;
+  end2 = clientRect.top + toPx * next2 - toPx * 6;
+} else if (player.position == 5) {
+  var next = -(countcycle) * 1.5;
+  var next2 = (countcycle) * 1.5;
+  end = clientRect.left + toPx * next - toPx * -2;
+  end2 = clientRect.top + toPx * next2 - toPx * 6;
+} else if (player.position == 2) {
+  var next = (countcycle) * 0.55;
+  var next2 = (countcycle) * 2;
+  end = clientRect.left + toPx * next - toPx * 4;
+  end2 = clientRect.top + toPx * next2 - toPx * 6;
+} else if (player.position == 4) {
+  var next = (countcycle) * 1.5;
+  var next2 = (countcycle) * 1.5;
+  end = clientRect.left + toPx * next - toPx * 6;
+  end2 = clientRect.top + toPx * next2 - toPx * 3;
+}
+var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2) * 3;
+var id = setInterval(frame, 0.5);
+countcycle++;
+
+function frame() {
+
+    if (pos2 <= Math.floor(end2)) {
+      console.log("stop");
+      cycle++;
+      clearInterval(id);
+    } else {
+      console.log(pos);
+      pos2 -= 3;
+      pos = pos + ratio;
+      elem.style.top = (pos2 * toVw) + "vw";
+      elem.style.left = (pos * toVw) + "vw";
+
+  }
+}
 }
