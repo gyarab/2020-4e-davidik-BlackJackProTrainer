@@ -15,7 +15,7 @@ function dealerDeal() {
   var end2 = cor2.top + toPx / 2;
   var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2) * 2;
   var id = setInterval(frame, 3);
-  elem.id =  "placed";
+  elem.id = "placed";
 
   function frame() {
     if (pos <= end) {
@@ -83,7 +83,7 @@ function stay(num) {
 
 function playerDraw(id, num) {
   let n = num;
-  let count = game.players[id].hands[0].count ;
+  let count = game.players[id].hands[0].count;
   game.players[id].draw(0);
   game.showPlayerCard(id, count, num);
   count += 1;
@@ -180,18 +180,18 @@ function StartGame() {
     dealerDeal();
   } else {
     player = game.players[cycle]
-    player.showCard(cardcycle, player.position,true)
+    player.showCard(cardcycle, player.position, true)
 
     let balance = document.getElementById("b" + player.position);
     balance.innerHTML = player.balance - 25;
-    var cardId=player.hands[0].cards[cardcycle].suit + player.hands[0].cards[cardcycle].value;
+    var cardId = player.hands[0].cards[cardcycle].suit + player.hands[0].cards[cardcycle].value;
     let elem = document.getElementById(cardId);
     let cor = getElementTopLeft("deck");
     let pos = cor.left;
     let pos2 = cor.top;
     let cor2 = document.getElementById("r" + player.position);
     let clientRect = cor2.getBoundingClientRect();
-    elem.id = cardId+"placed";
+    elem.id = cardId + "placed";
     if (player.position == 1) {
       var next = (countcycle) * 2;
       //end = clientRect.left + toPx * next - toPx * 2.5;
@@ -249,66 +249,64 @@ function StartGame() {
     }
   }
 }
-function split(id, num){
+
+function split(id, num) {
   player = game.players[id];
-player.addHand(0);
-player.hands[1].cards[0] = player.hands[0].cards[1];
-player.hands[0].cards.pop();
-var cardId=player.hands[1].cards[0].suit + player.hands[1].cards[0].value;
-let elem = document.getElementById(cardId+"placed");
-console.log(id+":"+num);
-let cor = elem.getBoundingClientRect();
-let pos = cor.left;
-let pos2 = cor.top;
-let cor2 = document.getElementById("r" + player.position);
-let clientRect = cor2.getBoundingClientRect();
-elem.id = cardId+"placed";
-if (player.position == 1) {
-  var next = 2;
-  end = clientRect.left +toPx * 10;
-  end2 = clientRect.top + next * toPx - toPx * 10;
-  console.log(end);
-  console.log(end2);
-  console.log(pos);
+  player.addHand(0);
+  player.hands[1].cards[0] = player.hands[0].cards[1];
+  player.hands[0].cards.pop();
+  var cardId = player.hands[1].cards[0].suit + player.hands[1].cards[0].value;
+  var cardId2 = player.hands[0].cards[0].suit + player.hands[0].cards[0].value;
+  let elem = document.getElementById(cardId + "placed");
+  let cor = elem.getBoundingClientRect();
+  let pos = cor.left;
+  let pos2 = cor.top;
+  let cor2 = document.getElementById(cardId2 + "placed");
+  let clientRect = cor2.getBoundingClientRect();
+  if (player.position == 1) {
+    end = clientRect.left + toPx * 5;
+    end2 = clientRect.top;
+  } else if (player.position == 3) {
+    end = clientRect.left + toPx * 4.5;
+    end2 = clientRect.top + toPx * 1.4;
+  } else if (player.position == 5) {
+    end = clientRect.left + toPx * 5;
+    end2 = clientRect.top + toPx * 4 ;
+  } else if (player.position == 2) {
+    end = clientRect.left + toPx * 5;
+    end2 = clientRect.top - toPx * 0.8;
+  } else if (player.position == 4) {
+    end = clientRect.left + toPx * 5;
+    end2 = clientRect.top - toPx * 3;
+  }
+  var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2);
+  var id = setInterval(frame, 0.5);
+  countcycle++;
 
-} else if (player.position == 3) {
-  var next = -(countcycle) * 0.55;
-  var next2 = (countcycle) * 2;
-  end = clientRect.left + toPx * next - toPx * 0.5;
-  end2 = clientRect.top + toPx * next2 - toPx * 6;
-} else if (player.position == 5) {
-  var next = -(countcycle) * 1.5;
-  var next2 = (countcycle) * 1.5;
-  end = clientRect.left + toPx * next - toPx * -2;
-  end2 = clientRect.top + toPx * next2 - toPx * 6;
-} else if (player.position == 2) {
-  var next = (countcycle) * 0.55;
-  var next2 = (countcycle) * 2;
-  end = clientRect.left + toPx * next - toPx * 4;
-  end2 = clientRect.top + toPx * next2 - toPx * 6;
-} else if (player.position == 4) {
-  var next = (countcycle) * 1.5;
-  var next2 = (countcycle) * 1.5;
-  end = clientRect.left + toPx * next - toPx * 6;
-  end2 = clientRect.top + toPx * next2 - toPx * 3;
-}
-var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2) * 3;
-var id = setInterval(frame, 0.5);
-countcycle++;
+  function frame() {
+    if (player.position==5 ) {
+      if (pos2 >= Math.floor(end2)) {
+        cycle++;
+        clearInterval(id);
+      } else {
+        pos2 += 1;
+        pos = pos + ratio;
+        elem.style.top = (pos2 * toVw) + "vw";
+        elem.style.left = (pos * toVw) + "vw";
 
-function frame() {
+      }
+    }else {
+      if (pos2 <= Math.floor(end2)) {
+        cycle++;
+        clearInterval(id);
+      } else {
+        pos2 -= 1;
+        pos = pos + ratio;
+        elem.style.top = (pos2 * toVw) + "vw";
+        elem.style.left = (pos * toVw) + "vw";
 
-    if (pos2 <= Math.floor(end2)) {
-      console.log("stop");
-      cycle++;
-      clearInterval(id);
-    } else {
-      console.log(pos);
-      pos2 -= 3;
-      pos = pos + ratio;
-      elem.style.top = (pos2 * toVw) + "vw";
-      elem.style.left = (pos * toVw) + "vw";
+      }
+    }
 
   }
-}
 }
