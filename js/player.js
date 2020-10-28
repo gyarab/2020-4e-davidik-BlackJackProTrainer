@@ -51,15 +51,15 @@ class Player {
       }
     }
   }
-  showCard(id, idR,first) {
+  showCard(id, idR,idH,first) {
     var deck = document.getElementById("deck");
     if (first) {
-      var cardId = this.hands[0].cards[id].suit + this.hands[0].cards[id].value ;
+      var cardId = this.hands[idH].cards[id].suit + this.hands[idH].cards[id].value ;
       deck.innerHTML +=
-        "<img id='"+cardId+"' class ='cards r" + idR + "' src=" + this.hands[0].cards[id].imgurl + ">";
+        "<img id='"+cardId+"' class ='cards r" + idR + "' src=" + this.hands[idH].cards[id].imgurl + ">";
     }else {
       deck.innerHTML +=
-        "<img id='dealerCard' class ='cards r" + idR + "' src=" + this.hands[0].cards[id].imgurl + ">";
+        "<img id='dealerCard' class ='cards r" + idR + "' src=" + this.hands[idH].cards[id].imgurl + ">";
     }
 
     return this.cards;

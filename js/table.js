@@ -63,8 +63,8 @@ class Table {
     }
     return this.players;
   }
-  showPlayerCard(idP, idC, idR) {
-    this.players[idP].showCard(idC, idR,false);
+  showPlayerCard(idP, idC,idH, idR) {
+    this.players[idP].showCard(idC, idR,idH,false);
     return this.player;
   }
   showDealerCards() {

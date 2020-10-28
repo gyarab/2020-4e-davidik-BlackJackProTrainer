@@ -59,7 +59,7 @@ function playerDraw(id, num) {
   let n = num;
   let count = game.players[id].hands[0].count;
   game.players[id].draw(0);
-  game.showPlayerCard(id, count, num);
+  game.showPlayerCard(id, count,0, num);
   count += 1;
   let elem = document.getElementById("dealerCard");
   let cor = getElementTopLeft("deck");
@@ -154,7 +154,7 @@ function StartGame() {
     dealerDeal();
   } else {
     player = game.players[cycle]
-    player.showCard(cardcycle, player.position, true)
+    player.showCard(cardcycle, player.position,0, true)
 
     let balance = document.getElementById("b" + player.position);
     balance.innerHTML = player.balance - 25;
@@ -254,7 +254,7 @@ function split(id, num) {
     end2 = clientRect.top - toPx * 3;
   }
   var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2);
-  var id = setInterval(frame, 0.5);
+  var int = setInterval(frame, 0.5);
   countcycle++;
 
   function frame() {
@@ -272,13 +272,13 @@ function split(id, num) {
         var insurance = document.getElementById("insurance");
         insurance.remove();
         buttons.innerHTML +=
-          '<p id="hit"><button class="button" onclick="playerDraw(' + i + ',' +
-          (i + 1) + ')">HIT</button></p>';
+          '<p id="hit"><button class="button" onclick="playerDrawSplit(' + id + ',' +
+          (num) + ',' + 1 + ')">HIT</button></p>';
         buttons.innerHTML +=
-          '<p id="stay"><button class="button" onclick="stay(' + (i + 1) + ')">STAY</button></p>';
+          '<p id="stay"><button class="button" onclick="stay(' + (num) + ')">STAY</button></p>';
           buttons.innerHTML +=
             '<p id="double"><button class="button" onclick="">DOUBLE</button></p>';
-        clearInterval(id);
+        clearInterval(int);
       } else {
         pos2 += 1;
         pos = pos + ratio;
@@ -301,12 +301,12 @@ function split(id, num) {
         insurance.remove();
         buttons.innerHTML +=
           '<p id="hit"><button class="button" onclick="playerDrawSplit(' + id + ',' +
-          num + ')">HIT</button></p>';
+          (num) + ',' + 1 + ')">HIT</button></p>';
         buttons.innerHTML +=
           '<p id="stay"><button class="button" onclick="staySplit(' + num + ')">STAY</button></p>';
           buttons.innerHTML +=
             '<p id="double"><button class="button" onclick="">DOUBLE</button></p>';
-        clearInterval(id);
+        clearInterval(int);
       } else {
         pos2 -= 1;
         pos = pos + ratio;
@@ -318,15 +318,15 @@ function split(id, num) {
 
   }
 }
-
-let handCount = 0;
-
-function playerDrawSplit(id, num) {
+function playerDrawSplit(id, num, handCount) {
+  console.log(handCount);
   let n = num;
-  let count = game.players[id].hands[handCount].count;
-  game.players[id].draw(0);
-  game.showPlayerCard(id, count, num);
-  count += 1;
+  console.log(id);
+  console.log(game.players[id].hands[1]);
+  let count = game.players[id].hands[1].count-1;
+  game.players[id].draw(1);
+  game.showPlayerCard(id, count,1, num);
+  count += 1+handCount;
   let elem = document.getElementById("dealerCard");
   let cor = getElementTopLeft("deck");
   let pos = cor.left;
@@ -334,13 +334,41 @@ function playerDrawSplit(id, num) {
   let cor2 = document.getElementById("r" + num);
   let clientRect = cor2.getBoundingClientRect();
   elem.id = "placed";
+  if (handCount == 1) {
+    if (num == 1) {
+      var next = (count -1) * 2;
+      end = clientRect.left - toPx * 3;
+      end2 = clientRect.top + next * toPx - toPx * 6;
+    } else if (num == 3) {
+      var next = -(count - 2) * 0.55;
+      var next2 = (count - 1) * 2;
+      end = clientRect.left + toPx * next - toPx * 0.5;
+      end2 = clientRect.top + toPx * next2 - toPx * 6;
+    } else if (num == 5) {
+      var next = -(count - 2) * 1.5;
+      var next2 = (count - 2) * 1.5;
+      end = clientRect.left + toPx * next - toPx * -2;
+      end2 = clientRect.top + toPx * next2 - toPx * 6;
+    } else if (num == 2) {
+      var next = (count - 3) * 0.57;
+      var next2 = (count - 3) * 2;
+      end = clientRect.left + toPx * next - toPx * 4  + toPx * 5;
+      end2 = clientRect.top + toPx * next2 - toPx * 6 - toPx*0.8;
+    } else if (num == 4) {
+      var next = (count - 2) * 1.5;
+      var next2 = (count - 2) * 1.5;
+      end = clientRect.left + toPx * next - toPx * 6;
+      end2 = clientRect.top + toPx * next2 - toPx * 3;
+    }
+  }
+  else {
   if (num == 1) {
-    var next = (count - 2) * 2;
+    var next = (count -1) * 2;
     end = clientRect.left - toPx * 3;
     end2 = clientRect.top + next * toPx - toPx * 6;
   } else if (num == 3) {
     var next = -(count - 2) * 0.55;
-    var next2 = (count - 2) * 2;
+    var next2 = (count - 1) * 2;
     end = clientRect.left + toPx * next - toPx * 0.5;
     end2 = clientRect.top + toPx * next2 - toPx * 6;
   } else if (num == 5) {
@@ -349,8 +377,8 @@ function playerDrawSplit(id, num) {
     end = clientRect.left + toPx * next - toPx * -2;
     end2 = clientRect.top + toPx * next2 - toPx * 6;
   } else if (num == 2) {
-    var next = (count - 2) * 0.57;
-    var next2 = (count - 2) * 2;
+    var next = (count - 3) * 0.57;
+    var next2 = (count - 3) * 2;
     end = clientRect.left + toPx * next - toPx * 4;
     end2 = clientRect.top + toPx * next2 - toPx * 6;
   } else if (num == 4) {
@@ -358,15 +386,15 @@ function playerDrawSplit(id, num) {
     var next2 = (count - 2) * 1.5;
     end = clientRect.left + toPx * next - toPx * 6;
     end2 = clientRect.top + toPx * next2 - toPx * 3;
-  }
+  }}
   var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2) * 3;
-  var id = setInterval(frame, 0.5);
+  var int = setInterval(frame, 0.5);
 
   function frame() {
     if (pos <= end) {
       if (pos2 >= Math.floor(end2)) {
-        nextPlayer(n, 0);
-        clearInterval(id);
+        nextSplit(id, 0);
+        clearInterval(int);
       } else {
         pos2 += 3;
         pos = pos + ratio;
@@ -375,8 +403,8 @@ function playerDrawSplit(id, num) {
       }
     } else {
       if (pos2 >= Math.floor(end2)) {
-        nextPlayer(n, 0);
-        clearInterval(id);
+        nextSplit(id, 0);
+        clearInterval(int);
       } else {
         pos2 += 3;
         pos = pos - ratio;
@@ -386,8 +414,6 @@ function playerDrawSplit(id, num) {
     }
   }
 }
-
-
 function stay(num) {
   if (num == 1) {
     if (game.playersCount == 1) {
@@ -414,7 +440,7 @@ function stay(num) {
   }
   nextPlayer(num, 0);
 }
-function splitStay(num){
+function staySplit(num){
   if (num == 1) {
     if (game.playersCount == 1) {
       num = 1

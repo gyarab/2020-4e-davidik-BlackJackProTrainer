@@ -35,6 +35,18 @@ function nextPlayer(i, pre) {
     '<p id="insurance"><button class="button" onclick="">INSURANCE</button></p>';
 
 }
+function nextSplit(i, pre) {
+  console.log(i);
+  buttons.innerHTML = "";
+  buttons.innerHTML +=
+    '<p id="hit"><button class="button" onclick="playerDrawSplit(' + i + ',' +
+    (i + 1) + ',' + 1 + ')">HIT</button></p>';
+  buttons.innerHTML +=
+    '<p id="stay"><button class="button" onclick="staySplit(' + (i+1) + ')">STAY</button></p>';
+    buttons.innerHTML +=
+      '<p id="double"><button class="button" onclick="">DOUBLE</button></p>';
+
+}
 
 function nextTurn() {
 
