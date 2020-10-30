@@ -59,7 +59,10 @@ function nextSplit(i, pre,count) {
 }
 
 function nextTurn() {
-
+  game.dealer.removeDraw();
+  game.removeHands();
+  game.dealHands(2);
+  StartGame();
 }
 
 function players(x) {

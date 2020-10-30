@@ -152,6 +152,9 @@ function StartGame() {
   countcycle = cardcycle - 1;
   if (cardcycle == 2) {
     dealerDeal();
+     cycle = 0;
+     cardcycle = 0;
+     countcycle = 0;
   } else {
     player = game.players[cycle]
     player.showCard(cardcycle, player.position, 0, true)
@@ -420,34 +423,40 @@ function stay(num,pre) {
   if (num == 1) {
     if (game.playersCount == 1) {
       num = 1
+      return nextTurn(num);
     } else if (game.playersCount == 2) {
       num = 2
+      return nextTurn(num);
     } else {
       num = 3;
     }
   } else if (num == 3) {
     if (game.playersCount == 4) {
       num = 4
+      return nextTurn(num);
     } else if (game.playersCount == 3) {
       num = 2
+      return nextTurn(num);
     } else {
       num = 5;
     }
   } else if (num == 5) {
     num = 4;
+    return nextTurn(num);
   } else if (num == 2) {
     num = 1;
   } else if (num == 4) {
     num = 2;
   }
   nextPlayer(num, pre);
+
 }
 
 function staySplit(id, num, count) {
   count--;
   if (count == -1) {
-    stay(num,2);
+  console.log(stay(num,2));
   } else {
-    playerDrawSplit(id, num, count)
+    nextSplit(id, 0, count)
   }
 }

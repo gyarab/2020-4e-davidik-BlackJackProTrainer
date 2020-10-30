@@ -57,6 +57,12 @@ class Table {
     }
     return this.players;
   }
+  removeHands(){
+    for (var player of this.players) {
+player.removeHands();
+    }
+    return this.players;
+  }
   showPlayersCards() {
     for (var player of this.players) {
       player.showHands();
