@@ -12,12 +12,13 @@ body {
 
 .circle-container {
   width: 70%;
-  height: 35vw;
+  height: 70%;
+  position: relative;
   /* as the half of the width */
   background-color: rgba(0, 153, 31, 0.8);
-  border-bottom-left-radius: 23vw;
+  border-bottom-left-radius: 4vw;
   /* 100px of height + 10px of border */
-  border-bottom-right-radius: 23vw;
+  border-bottom-right-radius: 4vw;
   /* 100px of height + 10px of border */
   border: 1vw solid black;
   border-top: 0;
@@ -25,17 +26,23 @@ body {
   max width: 1200px;
   z-index: 1;
 }
-
-.circle-container span {
-  display: block;
+.players{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: absolute;
-  top: -8%;
-  left: 50%;
-  width: 1vw;
-  height: 1vw;
-  margin: -2vw;
-  z-index: 1;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  flex-wrap: wrap;
 }
+.circle-container span {
+  display: inline-block;
+      height: 100%;
+      width: 17%;
+      margin: auto;
+  }
+
 
 .circle-container img {
   position: absolute;
@@ -93,13 +100,15 @@ body {
   width: 3vw;
   height: 3vw;
   z-index: 1;
+  margin: auto;
 }
 
 .balance {
   border: 0.5vw solid black;
   background-color: black;
   width: 6vw;
-  height: 1.3vw;
+  height: 2vh;
+  max-height: 30px;
   z-index: 1;
   color: yellow;
   font-family: 'Helvetica Neue', sans-serif;
@@ -111,71 +120,9 @@ body {
   z-index: 1;
   border-bottom-left-radius: 1vw;
   border-bottom-right-radius: 1vw;
-}
+  margin: auto;
+  transform: translateY(110%);
 
-#p4 {
-  transform: rotate(45deg) translate(37vw) rotate(-45deg);
-}
-
-#p2 {
-  transform: rotate(67.5deg) translate(36vw) rotate(-67.5deg);
-}
-
-#p1 {
-  transform: rotate(90deg) translate(35vw) rotate(-90deg);
-}
-
-#p3 {
-  transform: rotate(112.5deg) translate(36vw) rotate(-112.5deg);
-}
-
-#p5 {
-  transform: rotate(135deg) translate(37vw) rotate(-135deg);
-}
-
-.r4 {
-  transform: rotate(-45deg);
-}
-
-.r2 {
-  transform: rotate(-15deg);
-}
-
-.r1 {
-  transform: rotate(0deg);
-}
-
-.r3 {
-  transform: rotate(15deg);
-}
-
-.r5 {
-  transform: rotate(45deg);
-}
-
-#b4 {
-  transform: rotate(-60deg);
-  margin: 0.5vw 5.2vw;
-}
-
-#b2 {
-  transform: rotate(0deg);
-  margin: 3.6vw -1.1vw;
-}
-
-#b1 {
-  transform: rotate(0deg);
-  margin: 2vw -1.5vw;
-}
-
-#b3 {
-  transform: rotate(0deg);
-  margin: 3.6vw -1.5vw;
-}
-
-#b5 {
-  transform: rotate(60deg);
-  margin: 0.5vw -8.1vw;
 }
 
 .inner-circle {
@@ -194,7 +141,10 @@ body {
      minus half of the width and minus half of the height
     */
 }
-
+#buttons{
+  margin: auto;
+  width: 100%;
+}
 .button {
   background-color: #555555;
   border: none;
