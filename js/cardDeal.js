@@ -356,6 +356,7 @@ function stay(num,pre) {
     }
   } else if (num == 5) {
     num = 4;
+    console.log(5);
     return nextTurn(0);
   } else if (num == 2) {
     num = 1;

@@ -2,10 +2,24 @@ class Hand {
   constructor(x) {
     this.cards = deck.deal(x);
     this.count = 2;
+    this.score = 0;
+    this.ace = 0;
   }
   draw() {
     this.cards.push(deck.draw());
     this.count++;
+  }
+  getScore() {
+    let len = this.cards.length;
+    let toScore = this.cards[len - 1].value;
+    if (toScore == "A") {
+      toScore = 11;
+      this.ace ++;
+    } else if (toScore == "K" || toScore == "Q" || toScore == "J") {
+      toScore = 10;
+    }
+    this.score += toScore;
+return this.score;
   }
 }
 class Player {
