@@ -3,7 +3,7 @@ let toVh = document.documentElement.clientHeight / 100;
 let toPx = document.documentElement.clientWidth / 100;
 let toPx2 = document.documentElement.clientHeight / 100;
 
-function dealerDeal() {
+function dealerDeal(c) {
   var next = game.dealer.count * 3.7
   game.dealer.draw();
   var count = game.dealer.count - 1;
@@ -21,15 +21,36 @@ function dealerDeal() {
 
   function frame() {
     if (pos <= end) {
-      if (pos2 >= Math.floor(end2)) {
-        if (game.playersCount == 5) {
-          nextPlayer(4, 1);
-        } else if (game.playersCount == 3) {
-          nextPlayer(3, 1);
-        } else {
-          nextPlayer(game.playersCount, 1);
+      if (pos2 >= end2) {
+        if (c == 1) {
+            game.dealer.getScore();
+          if (game.dealer.score < 17) {
+dealerDeal(1);
+clearInterval(id);
+}else if (game.dealer.score > 21 && game.dealer.ace >0) {
+game.dealer.ace --;
+game.dealer.score -= 10;
+dealerDeal(1);
+clearInterval(id);
+} else {
+  game.dealer.score = 0;
+  game.dealer.ace =0;
+  nextTurn(1);
+  clearInterval(id);
+}
+
+        }else {
+          if (game.playersCount == 5) {
+            nextPlayer(4, 1);
+          } else if (game.playersCount == 3) {
+            nextPlayer(3, 1);
+          } else {
+            nextPlayer(game.playersCount, 1);
+          }
+          game.dealer.getScore();
+          clearInterval(id);
         }
-        clearInterval(id);
+
       } else {
         pos2 += 2;
         pos = pos + ratio;
@@ -37,7 +58,24 @@ function dealerDeal() {
         elem.style.left = (pos * toVw) + "vw";
       }
     } else {
-      if (pos2 >= Math.floor(end2)) {
+      if (pos2 >= end2) {
+        if (c == 1) {
+            game.dealer.getScore();
+          if (game.dealer.score < 17) {
+dealerDeal(1);
+clearInterval(id);
+}else if (game.dealer.score > 21 && game.dealer.ace >0) {
+game.dealer.ace --;
+game.dealer.score -= 10;
+dealerDeal(1);
+clearInterval(id);
+} else {
+  game.dealer.score = 0;
+  game.dealer.ace =0;
+  clearInterval(id);
+}
+
+        }else {
         if (game.playersCount == 5) {
           nextPlayer(4, 1);
         } else if (game.playersCount == 3) {
@@ -45,8 +83,9 @@ function dealerDeal() {
         } else {
           nextPlayer(game.playersCount, 1);
         }
+        game.dealer.getScore();
         clearInterval(id);
-      } else {
+      }} else {
         pos2 += 2;
         pos = pos - ratio;
         elem.style.top = (pos2 * toVw) + "vw";
@@ -78,7 +117,7 @@ function playerDraw(id, num) {
 
   function frame() {
     if (pos <= end) {
-      if (pos2 >= Math.floor(end2)) {
+      if (pos2 >= end2) {
         nextPlayer(n, 0);
         clearInterval(id);
       } else {
@@ -88,7 +127,7 @@ function playerDraw(id, num) {
         elem.style.left = (pos * toVw) + "vw";
       }
     } else {
-      if (pos2 >= Math.floor(end2)) {
+      if (pos2 >= end2) {
         nextPlayer(n, 0);
         clearInterval(id);
       } else {
@@ -123,7 +162,10 @@ let cycle = 0;
 let cardcycle = 0;
 let countcycle = 0;
 
-function StartGame() {
+function StartGame(nt) {
+  if (nt==1) {
+    document.getElementById("deck").innerHTML='<img src="PNG/gray_back.png" alt="">';
+  }
   buttons.innerHTML = "";
   if (cycle == game.playersCount) {
     cycle = 0;
@@ -138,9 +180,11 @@ function StartGame() {
   } else {
     player = game.players[cycle]
     player.showCard(cardcycle, player.position, 0, true)
-
-    let balance = document.getElementById("b" + player.position);
-    balance.innerHTML = player.balance - 25;
+if (cardcycle==1) {
+  let balance = document.getElementById("b" + player.position);
+  player.balance -=25;
+  balance.innerHTML = player.balance;
+}
     var cardId = player.hands[0].cards[cardcycle].suit + player.hands[0].cards[cardcycle].value;
     let elem = document.getElementById(cardId);
     let cor = getElementTopLeft("deck");
@@ -158,9 +202,9 @@ function StartGame() {
 
     function frame() {
       if (pos <= end) {
-        if (pos2 >= Math.floor(end2)) {
+        if (pos2 >= end2) {
           cycle++;
-          StartGame()
+          StartGame(0)
           clearInterval(id);
         } else {
           pos2 += 3;
@@ -169,9 +213,9 @@ function StartGame() {
           elem.style.left = (pos * toVw) + "vw";
         }
       } else {
-        if (pos2 >= Math.floor(end2)) {
+        if (pos2 >= end2) {
           cycle++;
-          StartGame()
+          StartGame(0)
           clearInterval(id);
         } else {
           pos2 += 3;
@@ -189,6 +233,9 @@ function split(id, num) {
   player.addHand(0);
   player.hands[1].cards[0] = player.hands[0].cards[1];
   player.hands[0].cards.pop();
+  let balance = document.getElementById("b" + player.position);
+  player.balance -=25;
+  balance.innerHTML = player.balance;
   var cardId = player.hands[1].cards[0].suit + player.hands[1].cards[0].value;
   var cardId2 = player.hands[0].cards[0].suit + player.hands[0].cards[0].value;
   let elem = document.getElementById(cardId + "placed");
@@ -204,7 +251,7 @@ function split(id, num) {
   countcycle++;
 
   function frame() {
-      if (pos >= Math.floor(end)) {
+      if (pos >= end) {
         cycle++;
         var hit = document.getElementById("hit");
         hit.remove();
@@ -223,7 +270,7 @@ function split(id, num) {
           '<p id="stay"><button class="button" onclick="staySplit(' + id + ',' +
           (num) + ',' + 1 + ')">STAY</button></p>';
         buttons.innerHTML +=
-          '<p id="double"><button class="button" onclick="">DOUBLE</button></p>';
+          '<p id="double"><button class="button" onclick="double(' + id + ')">DOUBLE</button></p>';
         clearInterval(int);
       } else {
         pos2 -= 1;
@@ -263,7 +310,7 @@ cor2 = document.getElementById(cardId + "placed");
 
   function frame() {
     if (pos <= end) {
-      if (pos2 >= Math.floor(end2)) {
+      if (pos2 >= end2) {
         nextSplit(id, 0,handCount);
         clearInterval(int);
       } else {
@@ -290,26 +337,26 @@ function stay(num,pre) {
   if (num == 1) {
     if (game.playersCount == 1) {
       num = 1
-      return nextTurn(num);
+      return nextTurn(0);
     } else if (game.playersCount == 2) {
       num = 2
-      return nextTurn(num);
+      return nextTurn(0);
     } else {
       num = 3;
     }
   } else if (num == 3) {
     if (game.playersCount == 4) {
       num = 4
-      return nextTurn(num);
+      return nextTurn(0);
     } else if (game.playersCount == 3) {
       num = 2
-      return nextTurn(num);
+      return nextTurn(0);
     } else {
       num = 5;
     }
   } else if (num == 5) {
     num = 4;
-    return nextTurn(num);
+    return nextTurn(0);
   } else if (num == 2) {
     num = 1;
   } else if (num == 4) {

@@ -39,7 +39,7 @@ function nextPlayer(i, pre) {
     '<p id="split"><button class="button" onclick="split(' + i + ',' +
     (i + 1) + ')">SPLIT</button></p>';
   buttons.innerHTML +=
-    '<p id="double"><button class="button" onclick="">DOUBLE</button></p>';
+    '<p id="double"><button class="button" onclick="double(' + i + ')">DOUBLE</button></p>';
   buttons.innerHTML +=
     '<p id="insurance"><button class="button" onclick="">INSURANCE</button></p>';
 
@@ -54,15 +54,22 @@ function nextSplit(i, pre,count) {
     '<p id="stay"><button class="button" onclick="staySplit(' + (i)+ ',' + (i + 1)+ ','
     +(count) +')">STAY</button></p>';
   buttons.innerHTML +=
-    '<p id="double"><button class="button" onclick="">DOUBLE</button></p>';
+    '<p id="double"><button class="button" onclick="double(' + i + ')">DOUBLE</button></p>';
 
 }
 
-function nextTurn() {
-  game.dealer.removeDraw();
-  game.removeHands();
-  game.dealHands(2);
-  StartGame();
+function nextTurn(x) {
+  if (x==0) {
+    dealerDeal(1);
+  }else {
+      game.dealer.removeDraw();
+      game.removeHands();
+      game.dealHands(2);
+      buttons.innerHTML = "";
+      buttons.innerHTML +=
+        '<p><button id="start" class="button" onclick="StartGame(1)">Start Game</button></p>';
+  }
+
 }
 
 function players(x) {
@@ -77,6 +84,15 @@ function players(x) {
   game.dealHands(2);
   buttons.innerHTML = "";
   buttons.innerHTML +=
-    '<p><button id="start" class="button" onclick="StartGame()">Start Game</button></p>';
+    '<p><button id="start" class="button" onclick="StartGame(0)">Start Game</button></p>';
+
+}
+function double(id) {
+  player = game.players[id];
+  let balance = document.getElementById("b" + player.position);
+  let balanceButt = document.getElementById("double").querySelector(".button");
+  player.balance -=25;
+  balance.innerHTML = player.balance;
+  balanceButt.disabled = true;
 
 }

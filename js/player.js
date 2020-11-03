@@ -51,13 +51,13 @@ class Player {
       }
     }
   }
-  showCard(id, idR,idH,first) {
+  showCard(id, idR, idH, first) {
     var deck = document.getElementById("deck");
     if (first) {
-      var cardId = this.hands[idH].cards[id].suit + this.hands[idH].cards[id].value ;
+      var cardId = this.hands[idH].cards[id].suit + this.hands[idH].cards[id].value;
       deck.innerHTML +=
-        "<img id='"+cardId+"' class ='cards r" + idR + "' src=" + this.hands[idH].cards[id].imgurl + ">";
-    }else {
+        "<img id='" + cardId + "' class ='cards r" + idR + "' src=" + this.hands[idH].cards[id].imgurl + ">";
+    } else {
       deck.innerHTML +=
         "<img id='dealerCard' class ='cards r" + idR + "' src=" + this.hands[idH].cards[id].imgurl + ">";
     }
@@ -69,10 +69,25 @@ class Dealer {
   constructor() {
     this.cards = [];
     this.count = 0;
+    this.score = 0;
+    this.ace = 0;
+  }
+  getScore() {
+    let len = this.cards.length;
+    let toScore = this.cards[len - 1].value;
+    if (toScore == "A") {
+      toScore = 11;
+      this.ace ++;
+    } else if (toScore == "K" || toScore == "Q" || toScore == "J") {
+      toScore = 10;
+    }
+    this.score += toScore;
+return this.score;
   }
   draw() {
     this.cards.push(deck.draw());
     this.count++;
+
     return this.cards;
   }
   removeDraw() {
