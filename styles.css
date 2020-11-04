@@ -101,6 +101,13 @@ body {
   height: 3vw;
   z-index: 1;
   margin: auto;
+  color: lightgreen;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 1.68vw;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 2;
+  text-align: center;
 }
 
 .balance {

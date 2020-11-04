@@ -32,6 +32,7 @@ class Player {
     this.id = id;
     this.hands = [];
     this.balance = balance;
+    this.bet = 0;
     this.position = -1;
   }
   setPosition(id) {

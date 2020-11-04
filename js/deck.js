@@ -4,6 +4,18 @@ class Card {
     this.value = value;
     this.imgurl = imgurl;
   }
+  getValue(){
+    let cardValue;
+    if ( this.value == "A") {
+      cardValue = 11;
+    }
+    else if (this.value == "K" || this.value == "Q" || this.value == "J") {
+      cardValue = 10;
+    }else {
+      cardValue = this.value
+    }
+    return cardValue;
+  }
 }
 class Deck {
   constructor(size) {
