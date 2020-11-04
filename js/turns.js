@@ -1,6 +1,10 @@
 let buttons;
 buttons = document.getElementById("buttons");
-
+let hitButt ;
+let stayButt ;
+let splitButt ;
+let insuranceButt ;
+let doubleButt ;
 function nextPlayer(i, pre) {
   i--;
   if (pre == 1) {
@@ -42,7 +46,16 @@ function nextPlayer(i, pre) {
     '<p id="double"><button class="button" onclick="double(' + i + ')">DOUBLE</button></p>';
   buttons.innerHTML +=
     '<p id="insurance"><button class="button" onclick="">INSURANCE</button></p>';
-
+    hitButt = document.getElementById("hit").querySelector(".button");
+    stayButt = document.getElementById("stay").querySelector(".button");
+    splitButt = document.getElementById("split").querySelector(".button");
+    insuranceButt = document.getElementById("insurance").querySelector(".button");
+    doubleButt = document.getElementById("double").querySelector(".button");
+    if (pre==-1) {
+      splitButt.disabled = true;
+      insuranceButt.disabled = true;
+      doubleButt.disabled = true;
+    }
 }
 
 function nextSplit(i, pre,count) {
@@ -90,9 +103,9 @@ function players(x) {
 function double(id) {
   player = game.players[id];
   let balance = document.getElementById("b" + player.position);
-  let balanceButt = document.getElementById("double").querySelector(".button");
   player.balance -=25;
   balance.innerHTML = player.balance;
-  balanceButt.disabled = true;
-
+  doubleButt.disabled = true;
+splitButt.disabled = true;
+insuranceButt.disabled = true;
 }

@@ -9,9 +9,9 @@ class Hand {
     this.cards.push(deck.draw());
     this.count++;
   }
-  getScore() {
+  getScore(idP,idH,idC) {
     let len = this.cards.length;
-    let toScore = this.cards[len - 1].value;
+    let toScore = this.cards[idC].value;
     if (toScore == "A") {
       toScore = 11;
       this.ace ++;
@@ -19,6 +19,11 @@ class Hand {
       toScore = 10;
     }
     this.score += toScore;
+    if (this.score > 21 && this.ace >0) {
+    this.ace --;
+    this.score -= 10;
+    }
+document.getElementById('s'+idP).innerHTML = this.score;
 return this.score;
   }
 }
@@ -96,6 +101,11 @@ class Dealer {
       toScore = 10;
     }
     this.score += toScore;
+    if (this.score > 21 && this.ace >0) {
+    this.ace --;
+    this.score -= 10;
+    }
+    document.getElementById("s6").innerHTML = this.score;
 return this.score;
   }
   draw() {

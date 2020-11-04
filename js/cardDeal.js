@@ -27,11 +27,6 @@ function dealerDeal(c) {
           if (game.dealer.score < 17) {
 dealerDeal(1);
 clearInterval(id);
-}else if (game.dealer.score > 21 && game.dealer.ace >0) {
-game.dealer.ace --;
-game.dealer.score -= 10;
-dealerDeal(1);
-clearInterval(id);
 } else {
   game.dealer.score = 0;
   game.dealer.ace =0;
@@ -64,14 +59,10 @@ clearInterval(id);
           if (game.dealer.score < 17) {
 dealerDeal(1);
 clearInterval(id);
-}else if (game.dealer.score > 21 && game.dealer.ace >0) {
-game.dealer.ace --;
-game.dealer.score -= 10;
-dealerDeal(1);
-clearInterval(id);
 } else {
   game.dealer.score = 0;
   game.dealer.ace =0;
+  nextTurn(1);
   clearInterval(id);
 }
 
@@ -97,6 +88,11 @@ clearInterval(id);
 
 
 function playerDraw(id, num) {
+  hitButt.disabled = true;
+  stayButt.disabled = true;
+  splitButt.disabled = true;
+  insuranceButt.disabled = true;
+  doubleButt.disabled = true;
   let n = num;
   let count = game.players[id].hands[0].count;
   game.players[id].draw(0);
@@ -118,7 +114,7 @@ function playerDraw(id, num) {
   function frame() {
     if (pos <= end) {
       if (pos2 >= end2) {
-        nextPlayer(n, 0);
+        nextPlayer(n,-1);
         clearInterval(id);
       } else {
         pos2 += 3;
@@ -128,7 +124,7 @@ function playerDraw(id, num) {
       }
     } else {
       if (pos2 >= end2) {
-        nextPlayer(n, 0);
+        nextPlayer(n, -1);
         clearInterval(id);
       } else {
         pos2 += 3;
@@ -204,6 +200,7 @@ if (cardcycle==1) {
       if (pos <= end) {
         if (pos2 >= end2) {
           cycle++;
+          player.hands[0].getScore(cycle,0,cardcycle);
           StartGame(0)
           clearInterval(id);
         } else {
@@ -215,6 +212,7 @@ if (cardcycle==1) {
       } else {
         if (pos2 >= end2) {
           cycle++;
+          player.hands[0].getScore(cycle,0,cardcycle);
           StartGame(0)
           clearInterval(id);
         } else {
