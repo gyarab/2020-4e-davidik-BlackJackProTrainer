@@ -109,13 +109,19 @@ function playerDraw(id, num) {
     end = clientRect.left - toPx * 18;
     end2 = clientRect.top + next * toPx - toPx * 6;
   var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2) * 3;
-  var id = setInterval(frame, 0.5);
+  var int = setInterval(frame, 0.5);
 
   function frame() {
     if (pos <= end) {
       if (pos2 >= end2) {
-        nextPlayer(n,-1);
-        clearInterval(id);
+        game.players[id].hands[0].getScore((id+1),0,(game.players[id].hands[0].count-1));
+        if (game.players[id].hands[0].score>20) {
+          stay((id + 1),(0))
+          clearInterval(int);
+        }else {
+          nextPlayer(n,-1);
+          clearInterval(int);
+        }
       } else {
         pos2 += 3;
         pos = pos + ratio;
@@ -124,8 +130,16 @@ function playerDraw(id, num) {
       }
     } else {
       if (pos2 >= end2) {
-        nextPlayer(n, -1);
-        clearInterval(id);
+        game.players[id].hands[0].getScore((id+1),0,(game.players[id].hands[0].count-1));
+        console.log(game.players[id].hands[0].score);
+        if (game.players[id].hands[0].score>20) {
+          console.log("??");
+          stay((id + 1),(0))
+          clearInterval(int);
+        }else {
+          nextPlayer(n,-1);
+          clearInterval(int);
+        }
       } else {
         pos2 += 3;
         pos = pos - ratio;
@@ -161,6 +175,9 @@ let countcycle = 0;
 function StartGame(nt) {
   if (nt==1) {
     document.getElementById("deck").innerHTML='<img src="PNG/gray_back.png" alt="">';
+    for (var i = 1; i < 7; i++) {
+    document.getElementById('s'+i).innerHTML = "";
+    }
   }
   buttons.innerHTML = "";
   if (cycle == game.playersCount) {
