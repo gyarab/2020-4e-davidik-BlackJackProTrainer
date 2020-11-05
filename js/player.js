@@ -26,6 +26,23 @@ class Hand {
 document.getElementById('s'+idP).innerHTML = this.score;
 return this.score;
   }
+  getSplitScore(idP,idH,idC) {
+    let len = this.cards.length;
+    let toScore = this.cards[idC].value;
+    if (toScore == "A") {
+      toScore = 11;
+      this.ace ++;
+    } else if (toScore == "K" || toScore == "Q" || toScore == "J") {
+      toScore = 10;
+    }
+    this.score += toScore;
+    if (this.score > 21 && this.ace >0) {
+    this.ace --;
+    this.score -= 10;
+    }
+document.getElementById('ss'+idP).innerHTML = this.score;
+return this.score;
+  }
 }
 class Player {
   constructor(id, balance) {

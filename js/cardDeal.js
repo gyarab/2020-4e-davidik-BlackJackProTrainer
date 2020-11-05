@@ -321,6 +321,10 @@ function split(id, num) {
         (num) + ',' + 1 + ')">STAY</button></p>';
       buttons.innerHTML +=
         '<p id="double"><button class="button" onclick="double(' + id + ')">DOUBLE</button></p>';
+        player.hands[0].score = 0;
+        player.hands[1].score = 0;
+        player.hands[0].getScore(num, 0, 0);
+        player.hands[1].getSplitScore(num, 0, 0);
       clearInterval(int);
     } else {
       pos2 -= 1;
@@ -333,10 +337,11 @@ function split(id, num) {
 
 function playerDrawSplit(id, num, handCount) {
   let n = num;
-  let count = game.players[id].hands[handCount].count - 1;
-  var cardId2 = game.players[id].hands[1].cards[0].suit + player.hands[1].cards[0].value;
-  var cardId = game.players[id].hands[0].cards[0].suit + player.hands[0].cards[0].value;
-  game.players[id].draw(handCount);
+  let player = game.players[id];
+  let count = player.hands[handCount].count - 1;
+  var cardId2 = player.hands[1].cards[0].suit + player.hands[1].cards[0].value;
+  var cardId = player.hands[0].cards[0].suit + player.hands[0].cards[0].value;
+  player.draw(handCount);
   game.showPlayerCard(id, count, handCount, num);
   let elem = document.getElementById("dealerCard");
   let cor = getElementTopLeft("deck");
@@ -350,7 +355,6 @@ function playerDrawSplit(id, num, handCount) {
   }
   let clientRect = cor2.getBoundingClientRect();
   elem.id = "placed";
-  console.log(count);
   var next = 6 + count * 2;
   end = clientRect.left - 15 * toPx;
   end2 = clientRect.top + next * toPx - toPx * 6;
@@ -361,8 +365,28 @@ function playerDrawSplit(id, num, handCount) {
   function frame() {
     if (pos <= end) {
       if (pos2 >= end2) {
-        nextSplit(id, 0, handCount);
-        clearInterval(int);
+        if (handCount==1) {
+          player.hands[1].getSplitScore((id + 1), 0, (player.hands[1].count - 2));
+          console.log(player.hands[1].score);
+          if (game.players[id].hands[1].score > 20) {
+            console.log("a");
+            nextSplit(id, 1, handCount);
+            clearInterval(int);
+          }else {
+            nextSplit(id, 0, handCount);
+            clearInterval(int);
+          }
+        }else {
+          player.hands[0].getScore((id + 1), 0, (player.hands[0].count - 2));
+          if (player.hands[0].score > 20) {
+            nextSplit(id, 2, handCount);
+            clearInterval(int);
+          }else {
+            nextSplit(id, 0, handCount);
+            clearInterval(int);
+          }
+        }
+
       } else {
         pos2 += 3;
         pos = pos + ratio;
@@ -371,6 +395,27 @@ function playerDrawSplit(id, num, handCount) {
       }
     } else {
       if (pos2 >= Math.floor(end2)) {
+        if (handCount==1) {
+          player.hands[1].getSplitScore((id + 1), 0, (player.hands[1].count - 2));
+          console.log(player.hands[1].score);
+          if (game.players[id].hands[1].score > 20) {
+            console.log("a");
+            nextSplit(id, 1, handCount);
+            clearInterval(int);
+          }else {
+            nextSplit(id, 0, handCount);
+            clearInterval(int);
+          }
+        }else {
+          player.hands[0].getScore((id + 1), 0, (player.hands[0].count - 2));
+          if (player.hands[0].score > 20) {
+            nextSplit(id, 2, handCount);
+            clearInterval(int);
+          }else {
+            nextSplit(id, 0, handCount);
+            clearInterval(int);
+          }
+        }
         nextSplit(id, 0, handCount);
         clearInterval(int);
       } else {
@@ -418,10 +463,13 @@ function stay(num, pre) {
 }
 
 function staySplit(id, num, count) {
+  console.log("b"+count);
   count--;
   if (count == -1) {
+    console.log("c"+count);
     stay(num, 2);
   } else {
+    console.log("d"+count);
     nextSplit(id, 0, count)
   }
 }
