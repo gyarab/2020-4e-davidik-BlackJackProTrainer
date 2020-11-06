@@ -379,7 +379,7 @@ function playerDrawSplit(id, num, handCount) {
         }else {
           player.hands[0].getScore((id + 1), 0, (player.hands[0].count - 2));
           if (player.hands[0].score > 20) {
-            nextSplit(id, 2, handCount);
+            nextSplit(id, 1, handCount);
             clearInterval(int);
           }else {
             nextSplit(id, 0, handCount);
@@ -409,7 +409,7 @@ function playerDrawSplit(id, num, handCount) {
         }else {
           player.hands[0].getScore((id + 1), 0, (player.hands[0].count - 2));
           if (player.hands[0].score > 20) {
-            nextSplit(id, 2, handCount);
+            nextSplit(id, 1, handCount);
             clearInterval(int);
           }else {
             nextSplit(id, 0, handCount);

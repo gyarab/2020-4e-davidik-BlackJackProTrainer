@@ -73,31 +73,17 @@ function nextPlayer(i, pre) {
 
 function nextSplit(i, pre, count) {
   buttons.innerHTML = "";
-  if (pre==2) {
-console.log("???");
-stay((i+1), 2); 
-  }
-else  if (pre==1) {
-    buttons.innerHTML +=
-      '<p id="hit"><button class="button" onclick="playerDrawSplit(' + i + ',' +
-      (i + 1) + ',' + (0) + ')">HIT</button></p>';
-      buttons.innerHTML +=
-        '<p id="stay"><button class="button" onclick="staySplit(' + (i) + ',' + (i + 1) + ',' +
-        (count) + ')">STAY</button></p>';
-      buttons.innerHTML +=
-        '<p id="double"><button class="button" onclick="double(' + i + ')">DOUBLE</button></p>';
-  }else {
-    buttons.innerHTML +=
-      '<p id="hit"><button class="button" onclick="playerDrawSplit(' + i + ',' +
-      (i + 1) + ',' + 1 + ')">HIT</button></p>';
-  }
-
+  buttons.innerHTML +=
+    '<p id="hit"><button class="button" onclick="playerDrawSplit(' + i + ',' +
+    (i + 1) + ',' + count + ')">HIT</button></p>';
   buttons.innerHTML +=
     '<p id="stay"><button class="button" onclick="staySplit(' + (i) + ',' + (i + 1) + ',' +
     (count) + ')">STAY</button></p>';
   buttons.innerHTML +=
     '<p id="double"><button class="button" onclick="double(' + i + ')">DOUBLE</button></p>';
-
+if (pre==1) {
+staySplit(i,(i+1),count);
+}
 }
 
 function nextTurn(x) {
