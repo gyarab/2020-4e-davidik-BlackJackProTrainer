@@ -1,9 +1,16 @@
-let toVw = 1 / document.documentElement.clientWidth * 100;
-let toVh = document.documentElement.clientHeight / 100;
-let toPx = document.documentElement.clientWidth / 100;
-let toPx2 = document.documentElement.clientHeight / 100;
+let toVw;
+let toVh;
+let toPx;
+let toPx2;
 
+function getSizes() {
+  toVw = 1 / document.documentElement.clientWidth * 100;
+  toVh = document.documentElement.clientHeight / 100;
+  toPx = document.documentElement.clientWidth / 100;
+  toPx2 = document.documentElement.clientHeight / 100;
+}
 function dealerDeal(c) {
+  getSizes();
   var next = game.dealer.count * 3.7
   game.dealer.draw();
   var count = game.dealer.count - 1;
@@ -114,7 +121,8 @@ function dealerDeal(c) {
 }
 
 
-function playerDraw(id, num) {
+function playerDraw(id, num,double) {
+  getSizes();
   if (game.players[id].hands[0].score == 21&& game.players[id].hands[0].count == 2) {
     stay((id + 1), (0));
   }else {
@@ -146,11 +154,17 @@ function playerDraw(id, num) {
       if (pos2 >= end2) {
         game.players[id].hands[0].getScore((id + 1), 0, (game.players[id].hands[0].count - 1));
         if (game.players[id].hands[0].score > 20) {
-          stay((id + 1), (0))
+          stay((id + 1), (0));
           clearInterval(int);
         } else {
-          nextPlayer(n, -1);
-          clearInterval(int);
+          if (double == 1) {
+            stay((id + 1), (0));
+            clearInterval(int);
+          }else {
+            nextPlayer(n, -1);
+            clearInterval(int);
+          }
+
         }
       } else {
         pos2 += 3;
@@ -166,8 +180,13 @@ function playerDraw(id, num) {
           stay((id + 1), (0))
           clearInterval(int);
         } else {
-          nextPlayer(n, -1);
-          clearInterval(int);
+          if (double == 1) {
+            stay((id + 1), (0));
+            clearInterval(int);
+          }else {
+            nextPlayer(n, -1);
+            clearInterval(int);
+          }
         }
       } else {
         pos2 += 3;
@@ -202,11 +221,13 @@ let cardcycle = 0;
 let countcycle = 0;
 
 function StartGame(nt) {
+  getSizes();
   if (nt == 1) {
     document.getElementById("deck").innerHTML = '<img src="PNG/gray_back.png" alt="">';
     for (var i = 1; i < 7; i++) {
       document.getElementById('s' + i).innerHTML = "";
       if (i < 6) {
+        document.getElementById('ss' + i).innerHTML = "";
         document.getElementById('r' + i).innerHTML = "";
       }
 
@@ -294,11 +315,13 @@ if(typeof(element) != 'undefined' && element != null){
 }
 
 function split(id, num) {
+  getSizes();
   player = game.players[id];
   player.addHand(0);
   player.hands[1].cards[0] = player.hands[0].cards[1];
   player.hands[0].cards.pop();
   let balance = document.getElementById("b" + player.position);
+  //player.bet = 0;
   player.balance -= 20;
   player.betSplit += 20;
   balance.innerHTML = player.balance;
@@ -336,7 +359,7 @@ function split(id, num) {
         '<p id="stay"><button class="button" onclick="staySplit(' + id + ',' +
         (num) + ',' + 1 + ')">STAY</button></p>';
       buttons.innerHTML +=
-        '<p id="double"><button class="button" onclick="double(' + id + ',' + 1 + ')">DOUBLE</button></p>';
+        '<p id="double"><button class="button" onclick="double(' + id + ',' + 1 + ',' + 1 + ')">DOUBLE</button></p>';
         player.hands[0].score = 0;
         player.hands[1].score = 0;
         player.hands[0].getScore(num, 0, 0);
@@ -351,7 +374,8 @@ function split(id, num) {
   }
 }
 
-function playerDrawSplit(id, num, handCount) {
+function playerDrawSplit(id, num, handCount,double) {
+  getSizes();
   let n = num;
   let player = game.players[id];
   let count = player.hands[handCount].count - 1;
@@ -385,13 +409,16 @@ function playerDrawSplit(id, num, handCount) {
           player.hands[1].getSplitScore((id + 1), 0, (player.hands[1].count - 2));
           console.log(player.hands[1].score);
           if (game.players[id].hands[1].score > 20) {
-            console.log("a");
             nextSplit(id, 1, handCount);
             clearInterval(int);
           }else {
-            console.log("b");
-            nextSplit(id, 0, handCount);
-            clearInterval(int);
+            if (double == 1) {
+              nextSplit(id, 1, handCount);
+              clearInterval(int);
+            }else {
+              nextSplit(id, 0, handCount);
+              clearInterval(int);
+            }
           }
         }else {
           player.hands[0].getScore((id + 1), 0, (player.hands[0].count - 2));
@@ -399,8 +426,13 @@ function playerDrawSplit(id, num, handCount) {
             nextSplit(id, 1, handCount);
             clearInterval(int);
           }else {
-            nextSplit(id, 0, handCount);
-            clearInterval(int);
+            if (double == 1) {
+              nextSplit(id, 1, handCount);
+              clearInterval(int);
+            }else {
+              nextSplit(id, 0, handCount);
+              clearInterval(int);
+            }
           }
         }
 
@@ -416,13 +448,16 @@ function playerDrawSplit(id, num, handCount) {
           player.hands[1].getSplitScore((id + 1), 0, (player.hands[1].count - 2));
           console.log(player.hands[1].score);
           if (game.players[id].hands[1].score > 20) {
-            console.log("a");
             nextSplit(id, 1, handCount);
             clearInterval(int);
           }else {
-            console.log("b");
-            nextSplit(id, 0, handCount);
-            clearInterval(int);
+            if (double == 1) {
+              nextSplit(id, 1, handCount);
+              clearInterval(int);
+            }else {
+              nextSplit(id, 0, handCount);
+              clearInterval(int);
+            }
           }
         }else {
           player.hands[0].getScore((id + 1), 0, (player.hands[0].count - 2));
@@ -430,8 +465,13 @@ function playerDrawSplit(id, num, handCount) {
             nextSplit(id, 1, handCount);
             clearInterval(int);
           }else {
-            nextSplit(id, 0, handCount);
-            clearInterval(int);
+            if (double == 1) {
+              nextSplit(id, 1, handCount);
+              clearInterval(int);
+            }else {
+              nextSplit(id, 0, handCount);
+              clearInterval(int);
+            }
           }
         }
       } else {

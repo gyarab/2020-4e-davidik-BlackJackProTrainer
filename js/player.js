@@ -68,6 +68,7 @@ class Player {
     return this.hands;
   }
   removeHands() {
+    this.handCount = 0;
     for (let hand of this.hands) {
       let i = 0;
       while (hand.count > i) {
