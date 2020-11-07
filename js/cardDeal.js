@@ -219,10 +219,25 @@ function StartGame(nt) {
   }
   countcycle = cardcycle - 1;
   if (cardcycle == 2) {
-    dealerDeal();
-    cycle = 0;
-    cardcycle = 0;
-    countcycle = 0;
+    var cardIdTest = game.players[0].hands[0].cards[0].suit + game.players[0].hands[0].cards[0].value;
+    console.log(cardIdTest);
+var element = document.getElementById( cardIdTest + "placed");
+
+if(typeof(element) != 'undefined' && element != null){
+  dealerDeal();
+  cycle = 0;
+  cardcycle = 0;
+  countcycle = 0;
+} else{
+  cycle = 0;
+  cardcycle = 0;
+  countcycle = 0;
+  game.removeHands();
+  game.dealHands(2);
+ buttons.innerHTML = "";
+ StartGame(1);
+}
+
   } else {
     player = game.players[cycle]
     player.showCard(cardcycle, player.position, 0, true)
@@ -244,6 +259,7 @@ function StartGame(nt) {
     end = clientRect.left - toPx * 18;
     end2 = clientRect.top + next * toPx - toPx * 6;
     var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2) * 3;
+    console.log(player);
     var id = setInterval(frame, 0.5);
     countcycle++;
 
@@ -284,7 +300,7 @@ function split(id, num) {
   player.hands[0].cards.pop();
   let balance = document.getElementById("b" + player.position);
   player.balance -= 20;
-  player.bet += 20;
+  player.betSplit += 20;
   balance.innerHTML = player.balance;
   var cardId = player.hands[1].cards[0].suit + player.hands[1].cards[0].value;
   var cardId2 = player.hands[0].cards[0].suit + player.hands[0].cards[0].value;
@@ -302,7 +318,7 @@ function split(id, num) {
 
   function frame() {
     if (pos >= end) {
-      cycle++;
+      //cycle++;
       var hit = document.getElementById("hit");
       hit.remove();
       var stay = document.getElementById("stay");
@@ -320,7 +336,7 @@ function split(id, num) {
         '<p id="stay"><button class="button" onclick="staySplit(' + id + ',' +
         (num) + ',' + 1 + ')">STAY</button></p>';
       buttons.innerHTML +=
-        '<p id="double"><button class="button" onclick="double(' + id + ')">DOUBLE</button></p>';
+        '<p id="double"><button class="button" onclick="double(' + id + ',' + 1 + ')">DOUBLE</button></p>';
         player.hands[0].score = 0;
         player.hands[1].score = 0;
         player.hands[0].getScore(num, 0, 0);
@@ -373,6 +389,7 @@ function playerDrawSplit(id, num, handCount) {
             nextSplit(id, 1, handCount);
             clearInterval(int);
           }else {
+            console.log("b");
             nextSplit(id, 0, handCount);
             clearInterval(int);
           }
@@ -394,7 +411,7 @@ function playerDrawSplit(id, num, handCount) {
         elem.style.left = (pos * toVw) + "vw";
       }
     } else {
-      if (pos2 >= Math.floor(end2)) {
+      if (pos2 >= end2) {
         if (handCount==1) {
           player.hands[1].getSplitScore((id + 1), 0, (player.hands[1].count - 2));
           console.log(player.hands[1].score);
@@ -403,6 +420,7 @@ function playerDrawSplit(id, num, handCount) {
             nextSplit(id, 1, handCount);
             clearInterval(int);
           }else {
+            console.log("b");
             nextSplit(id, 0, handCount);
             clearInterval(int);
           }
@@ -416,8 +434,6 @@ function playerDrawSplit(id, num, handCount) {
             clearInterval(int);
           }
         }
-        nextSplit(id, 0, handCount);
-        clearInterval(int);
       } else {
         pos2 += 3;
         pos = pos - ratio;
@@ -463,13 +479,10 @@ function stay(num, pre) {
 }
 
 function staySplit(id, num, count) {
-  console.log("b"+count);
   count--;
   if (count == -1) {
-    console.log("c"+count);
     stay(num, 2);
   } else {
-    console.log("d"+count);
     nextSplit(id, 0, count)
   }
 }

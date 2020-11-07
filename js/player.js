@@ -48,8 +48,10 @@ class Player {
   constructor(id, balance) {
     this.id = id;
     this.hands = [];
+    this.handCount = 0;
     this.balance = balance;
     this.bet = 0;
+    this.betSplit = 0;
     this.position = -1;
   }
   setPosition(id) {
@@ -58,6 +60,7 @@ class Player {
   }
   addHand(x) {
     this.hands.push(new Hand(x));
+    this.handCount++ ;
     return this.hands;
   }
   draw(id) {
