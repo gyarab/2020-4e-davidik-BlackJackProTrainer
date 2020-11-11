@@ -74,6 +74,8 @@ function dealerDeal(c) {
               nextPlayer(1, 1);
             }
           }
+          console.log(game.playersCount);
+          console.log(game.players[game.playersCount-1]);
           game.dealer.getScore();
           clearInterval(id);
         }
@@ -175,7 +177,6 @@ function playerDraw(id, num,double) {
     } else {
       if (pos2 >= end2) {
         game.players[id].hands[0].getScore((id + 1), 0, (game.players[id].hands[0].count - 1));
-        console.log(game.players[id].hands[0].score);
         if (game.players[id].hands[0].score > 20) {
           stay((id + 1), (0))
           clearInterval(int);
@@ -228,6 +229,7 @@ function StartGame(nt) {
       document.getElementById('s' + i).innerHTML = "";
       if (i < 6) {
         document.getElementById('ss' + i).innerHTML = "";
+        document.getElementById('ss' + i).style.visibility = "hidden";
         document.getElementById('r' + i).innerHTML = "";
       }
 
@@ -241,7 +243,6 @@ function StartGame(nt) {
   countcycle = cardcycle - 1;
   if (cardcycle == 2) {
     var cardIdTest = game.players[0].hands[0].cards[0].suit + game.players[0].hands[0].cards[0].value;
-    console.log(cardIdTest);
 var element = document.getElementById( cardIdTest + "placed");
 
 if(typeof(element) != 'undefined' && element != null){
@@ -280,7 +281,6 @@ if(typeof(element) != 'undefined' && element != null){
     end = clientRect.left - toPx * 18;
     end2 = clientRect.top + next * toPx - toPx * 6;
     var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2) * 3;
-    console.log(player);
     var id = setInterval(frame, 0.5);
     countcycle++;
 
@@ -315,6 +315,9 @@ if(typeof(element) != 'undefined' && element != null){
 }
 
 function split(id, num) {
+  hideBorderScore();
+  document.getElementById("ss"+num).style.visibility = 'visible';
+  document.getElementById("ss"+num).style.border = "0.5vw solid grey";
   hitButt = document.getElementById("hit").querySelector(".button");
   stayButt = document.getElementById("stay").querySelector(".button");
   doubleButt = document.getElementById("double").querySelector(".button");
@@ -347,7 +350,8 @@ function split(id, num) {
 
   function frame() {
     if (pos >= end) {
-      //cycle++;
+      console.log("end: pos= "+pos+ "; end= "+end);
+      console.log("end: pos2= "+pos2+ "; end2= "+end2);
       var hit = document.getElementById("hit");
       hit.remove();
       var stay = document.getElementById("stay");
@@ -372,6 +376,9 @@ function split(id, num) {
         player.hands[1].getSplitScore(num, 0, 0);
       clearInterval(int);
     } else {
+
+        console.log("fr: pos= "+pos+ "; end= "+end);
+        console.log("fr: pos2= "+pos2+ "; end2= "+end2);
       pos2 -= 1;
       pos = pos + ratio;
       elem.style.top = (pos2 * toVw) + "vw";
@@ -419,7 +426,6 @@ function playerDrawSplit(id, num, handCount,double) {
       if (pos2 >= end2) {
         if (handCount==1) {
           player.hands[1].getSplitScore((id + 1), 0, (player.hands[1].count - 2));
-          console.log(player.hands[1].score);
           if (game.players[id].hands[1].score > 20) {
             nextSplit(id, 1, handCount);
             clearInterval(int);
@@ -458,7 +464,6 @@ function playerDrawSplit(id, num, handCount,double) {
       if (pos2 >= end2) {
         if (handCount==1) {
           player.hands[1].getSplitScore((id + 1), 0, (player.hands[1].count - 2));
-          console.log(player.hands[1].score);
           if (game.players[id].hands[1].score > 20) {
             nextSplit(id, 1, handCount);
             clearInterval(int);
@@ -519,7 +524,6 @@ function stay(num, pre) {
     }
   } else if (num == 5) {
     num = 4;
-    console.log(5);
     return nextTurn(0);
   } else if (num == 2) {
     num = 1;

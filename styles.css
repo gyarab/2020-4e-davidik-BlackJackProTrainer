@@ -103,7 +103,7 @@ body {
   margin: auto;
   color: lightgreen;
   font-family: 'Helvetica Neue', sans-serif;
-  font-size: 1.68vw;
+  font-size: 1.2vw;
   font-weight: bold;
   letter-spacing: -1px;
   line-height: 2;
@@ -168,6 +168,7 @@ body {
   margin: 0vw 1.7vw;
   float: right;
   transform: translateY(-480%);
+  visibility: hidden;
 }
 .scoredealer {
   border: 0.5vw solid black;

@@ -6,7 +6,22 @@ let splitButt;
 let insuranceButt;
 let doubleButt;
 
+function hideBorderScore() {
+  document.getElementById("s1").style.border = "";
+  document.getElementById("s2").style.border = "";
+  document.getElementById("s3").style.border = "";
+  document.getElementById("s4").style.border = "";
+  document.getElementById("s5").style.border = "";
+  document.getElementById("ss1").style.border = "";
+  document.getElementById("ss2").style.border = "";
+  document.getElementById("ss3").style.border = "";
+  document.getElementById("ss4").style.border = "";
+  document.getElementById("ss5").style.border = "";
+}
 function nextPlayer(i, pre) {
+  console.log("i of player: "+i);
+  hideBorderScore();
+  document.getElementById("s"+(i)).style.border = "0.5vw solid grey";
   i--;
   if (pre == 1) {
     if (i == 2) {
@@ -88,17 +103,16 @@ if (pre==1) {
 staySplit(i,(i+1),count);
 }
 if(pre == 2){
-  console.log("pre je 2" + count);
+  hideBorderScore();
+  document.getElementById("s"+(i+1)).style.border = "0.5vw solid grey";
 doubleButt.disabled = false;
 }else if(pre == 0){
-console.log("??");
 doubleButt.disabled = true;
-  console.log(doubleButt);
 }
-
-console.log(pre);}
+}
 function nextTurn(x) {
   if (x == 0) {
+    hideBorderScore();
     dealerDeal(1);
   } else {
      game.dealer.removeDraw();
