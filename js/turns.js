@@ -81,11 +81,22 @@ function nextSplit(i, pre, count) {
     (count) + ')">STAY</button></p>';
   buttons.innerHTML +=
     '<p id="double"><button class="button" onclick="double(' + i+ ',' + 1+ ',' + count + ')">DOUBLE</button></p>';
+    hitButt = document.getElementById("hit").querySelector(".button");
+    stayButt = document.getElementById("stay").querySelector(".button");
+    doubleButt = document.getElementById("double").querySelector(".button");
 if (pre==1) {
 staySplit(i,(i+1),count);
 }
+if(pre == 2){
+  console.log("pre je 2" + count);
+doubleButt.disabled = false;
+}else if(pre == 0){
+console.log("??");
+doubleButt.disabled = true;
+  console.log(doubleButt);
 }
 
+console.log(pre);}
 function nextTurn(x) {
   if (x == 0) {
     dealerDeal(1);

@@ -315,6 +315,12 @@ if(typeof(element) != 'undefined' && element != null){
 }
 
 function split(id, num) {
+  hitButt = document.getElementById("hit").querySelector(".button");
+  stayButt = document.getElementById("stay").querySelector(".button");
+  doubleButt = document.getElementById("double").querySelector(".button");
+  hitButt.disabled = true;
+  stayButt.disabled = true;
+  doubleButt.disabled = true;
   getSizes();
   player = game.players[id];
   player.addHand(0);
@@ -375,6 +381,12 @@ function split(id, num) {
 }
 
 function playerDrawSplit(id, num, handCount,double) {
+  hitButt = document.getElementById("hit").querySelector(".button");
+  stayButt = document.getElementById("stay").querySelector(".button");
+  doubleButt = document.getElementById("double").querySelector(".button");
+  hitButt.disabled = true;
+  stayButt.disabled = true;
+  doubleButt.disabled = true;
   getSizes();
   let n = num;
   let player = game.players[id];
@@ -523,6 +535,6 @@ function staySplit(id, num, count) {
   if (count == -1) {
     stay(num, 2);
   } else {
-    nextSplit(id, 0, count)
+    nextSplit(id, 2, count)
   }
 }
