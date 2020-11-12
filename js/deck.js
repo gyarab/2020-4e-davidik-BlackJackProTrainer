@@ -21,6 +21,7 @@ class Deck {
   constructor(size) {
     this.size = size
     this.deck = [];
+    this.length = 0;
   }
   createDeck(suits, values) {
     for (var i = 0; i < this.size; i++) {
@@ -31,6 +32,8 @@ class Deck {
         }
       }
     }
+    this.length = this.deck.length;
+    console.log(this.length);
     return this.deck;
   }
   shuffle() {
@@ -48,11 +51,13 @@ class Deck {
     let hand = [];
     while (hand.length < x) {
       hand.push(this.deck.pop());
+      this.length--;
     }
     return hand;
   }
   draw() {
     let draw = this.deck.pop();
+    this.length --;
     return draw;
   }
   showDeck() {

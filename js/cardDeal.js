@@ -15,6 +15,10 @@ function dealerDeal(c) {
   game.dealer.draw();
   var count = game.dealer.count - 1;
   game.showDealerCard(count);
+  //
+  cardCount(game.dealer.cards[count].value);
+  cardLeft();
+  //
   var elem = document.getElementById("dealerCard");
   var cor = getElementTopLeft("deck");
   var pos = cor.left - toPx * 16;
@@ -137,6 +141,10 @@ function playerDraw(id, num,double) {
   let count = game.players[id].hands[0].count;
   game.players[id].draw(0);
   game.showPlayerCard(id, count, 0, num);
+  //
+  cardCount(game.players[id].hands[0].cards[count].value);
+  cardLeft();
+  //
   count += 1;
   let elem = document.getElementById("dealerCard");
   let cor = getElementTopLeft("deck");
@@ -199,24 +207,7 @@ function playerDraw(id, num,double) {
   }
 }  }
 
-function getElementTopLeft(id) {
 
-  var ele = document.getElementById(id);
-  var top = 0;
-  var left = 0;
-
-  while (ele.tagName != "BODY") {
-    top += ele.offsetTop;
-    left += ele.offsetLeft;
-    ele = ele.offsetParent;
-  }
-
-  return {
-    top: top,
-    left: left
-  };
-
-}
 let cycle = 0;
 let cardcycle = 0;
 let countcycle = 0;
@@ -270,6 +261,10 @@ if(typeof(element) != 'undefined' && element != null){
       balance.innerHTML = player.balance;
     }
     var cardId = player.hands[0].cards[cardcycle].suit + player.hands[0].cards[cardcycle].value;
+    //
+    document.getElementById("cl").innerHTML="Waiting...";
+    cardCount(player.hands[0].cards[cardcycle].value);
+    //
     let elem = document.getElementById(cardId);
     let cor = getElementTopLeft("deck");
     let pos = cor.left - toPx * 16;
