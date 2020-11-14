@@ -186,7 +186,7 @@ function pairSplitting(playerValue, dealerValue) {
     }
   }
   if (playerValue == 6) {
-    if (dealerValue < 3 || dealerValue > 6 {
+    if (dealerValue < 3 || dealerValue > 6 ){
       decision ="SPLIT";
     }
     else {
@@ -194,7 +194,7 @@ function pairSplitting(playerValue, dealerValue) {
     }
   }
   if (playerValue == 7) {
-    if (dealerValue > 7 {
+    if (dealerValue > 7) {
       decision ="SPLIT";
     }
     else {
@@ -206,7 +206,7 @@ function pairSplitting(playerValue, dealerValue) {
       decision ="SPLIT";
   }
   if (playerValue == 9) {
-    if (dealerValue == 7 || dealerValue > 9 {
+    if (dealerValue == 7 || dealerValue > 9) {
       decision ="STAY";
     }
     else {
