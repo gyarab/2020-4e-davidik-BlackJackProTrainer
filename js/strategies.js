@@ -20,7 +20,232 @@ document.getElementById("cl").innerHTML="Cards left: "+deck.length;
 return deck.length;
 }
 function perfectBasicStrategy() {
+  let decision
+function hardTotals(playerValue, dealerValue) {
+    if (playerValue < 9) {
+      decision ="HIT";
+    }
+    if (playerValue == 9) {
+      if (dealerValue ==2 || dealerValue > 6) {
+        decision ="HIT";
+      }
+      else {
+        decision ="DOUBLE";
+      }
+    }
+    if (playerValue == 10) {
+      if (dealerValue > 9) {
+        decision ="HIT";
+      }
+      else {
+        decision ="DOUBLE";
+      }
+    }
+    if (playerValue == 11) {
+      if (dealerValue == 11) {
+        decision ="HIT";
+  }else {
+        decision ="DOUBLE";
+  }
+    }
+    if (playerValue == 12) {
+      if (dealerValue < 4 || dealerValue > 6) {
+        decision ="HIT";
+      }
+      else {
+        decision ="STAY";
+      }
+    }
+    if (playerValue == 13) {
+      if (dealerValue > 6) {
+        decision ="HIT";
+      }
+      else {
+        decision ="STAY";
+      }
+    }
+    if (playerValue == 14) {
+      if (dealerValue > 6) {
+        decision ="HIT";
+      }
+      else {
+        decision ="STAY";
+      }
+    }
+    if (playerValue == 15) {
+      if (dealerValue > 6) {
+        decision ="HIT";
+      }
+      else {
+        decision ="STAY";
+      }
+    }
+    if (playerValue == 16) {
+      if (dealerValue > 6) {
+        decision ="HIT";
+      }
+      else {
+        decision ="STAY";
+      }
+    }
+    if (playerValue > 16) {
+      decision ="STAY";
+    }
 
+
+}
+function softTotals(playerValue, dealerValue) {
+  if (playerValue == 2) {
+    if (dealerValue < 5 || dealerValue > 6) {
+      decision ="HIT";
+    }
+    else {
+      decision ="DOUBLE";
+    }
+  }
+  if (playerValue == 3) {
+    if (dealerValue < 5 || dealerValue > 6) {
+      decision ="HIT";
+    }
+    else {
+      decision ="DOUBLE";
+    }
+  }
+  if (playerValue == 4) {
+    if (dealerValue < 4 || dealerValue > 6) {
+      decision ="HIT";
+    }
+    else {
+      decision ="DOUBLE";
+    }
+  }
+  if (playerValue == 5) {
+    if (dealerValue < 4 || dealerValue > 6) {
+      decision ="HIT";
+    }
+    else {
+      decision ="DOUBLE";
+    }
+  }
+  if (playerValue == 6) {
+    if (dealerValue < 3 || dealerValue > 6) {
+      decision ="HIT";
+    }
+    else {
+      decision ="DOUBLE";
+    }
+  }
+  if (playerValue == 7) {
+    if (dealerValue < 7) {
+      decision ="DOUBLE";
+    }
+    else if (dealerValue < 9) {
+      decision="STAY";
+    }
+    else {
+      decision ="HIT";
+    }
+  }
+
+  if (playerValue > 7) {
+      decision ="STAY";
+  }
+
+}
+function pairSplitting(playerValue, dealerValue) {
+  if (playerValue == 2) {
+    if (dealerValue < 4 || dealerValue > 7) {
+      decision ="SPLIT";
+    }
+    else {
+      decision ="HIT";
+    }
+  }
+  if (playerValue == 3) {
+    if (dealerValue < 4 || dealerValue > 7) {
+      decision ="SPLIT";
+    }
+    else {
+      decision ="HIT";
+    }
+  }
+  if (playerValue == 4) {
+    if (dealerValue < 5 || dealerValue > 6) {
+      decision ="SPLIT -> DOUBLE";
+    }
+    else {
+      decision ="HIT";
+    }
+  }
+  if (playerValue == 5) {
+    if (dealerValue > 10) {
+      decision ="HIT";
+    }
+    else {
+      decision ="DOUBLE";
+    }
+  }
+  if (playerValue == 6) {
+    if (dealerValue < 3 || dealerValue > 6 {
+      decision ="SPLIT";
+    }
+    else {
+      decision ="HIT";
+    }
+  }
+  if (playerValue == 7) {
+    if (dealerValue > 7 {
+      decision ="SPLIT";
+    }
+    else {
+      decision ="HIT";
+    }
+  }
+
+  if (playerValue == 8) {
+      decision ="SPLIT";
+  }
+  if (playerValue == 9) {
+    if (dealerValue == 7 || dealerValue > 9 {
+      decision ="STAY";
+    }
+    else {
+      decision ="SPLIT";
+    }
+  }
+
+  if (playerValue == 10) {
+      decision ="STAY";
+  }
+  if (playerValue > 11) {
+    decision ="SPLIT";
+  }
+
+
+}
+function lateSurrender(playerValue, dealerValue) {
+  if (playerValue == 15) {
+    if (dealerValue == 10) {
+      decision ="SURR";
+    }
+    else {
+      decision ="DON'T SURR";
+    }
+  }
+  if (playerValue == 16) {
+    if (dealerValue < 9) {
+      decision ="DON'T SURR";
+    }
+    else {
+      decision ="SURR";
+    }
+  }
+  else {
+      decision ="DON'T SURR";
+  }
+
+}
+document.getElementById("bs").innerHTML = "Basic Strategy: "+ decision;
 }
 function getElementTopLeft(id) {
 
