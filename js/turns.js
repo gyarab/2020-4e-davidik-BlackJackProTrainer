@@ -66,7 +66,8 @@ function nextPlayer(i, pre) {
   splitButt = document.getElementById("split").querySelector(".button");
   insuranceButt = document.getElementById("insurance").querySelector(".button");
   doubleButt = document.getElementById("double").querySelector(".button");
-
+  perfectBasicStrategy(game.players[i].hands[0].score,0,0,dT);
+  console.log(game.players[i].hands[0].score);
   if (game.players[i].hands[0].cards[0].getValue() == game.players[i].hands[0].cards[1].getValue()) {
   splitButt.disabled = false;
   } else {

@@ -19,8 +19,22 @@ console.log(deck.length);
 document.getElementById("cl").innerHTML="Cards left: "+deck.length;
 return deck.length;
 }
-function perfectBasicStrategy() {
-  let decision
+function perfectBasicStrategy(playerTotal,aceTrue,splitTrue,dealerTotal) {
+let decision;
+if (aceTrue) {
+if (splitTrue) {
+pairSplitting(playerTotal,dealerTotal);
+playerTotal /= 2;
+}else {
+softTotals(playerTotal,dealerTotal);
+playerTotal -= 11;
+}
+}else if (splitTrue) {
+  playerTotal /= 2;
+pairSplitting(playerTotal,dealerTotal);
+}else {
+  hardTotals(playerTotal,dealerTotal);
+}
 function hardTotals(playerValue, dealerValue) {
     if (playerValue < 9) {
       decision ="HIT";
@@ -245,6 +259,7 @@ function lateSurrender(playerValue, dealerValue) {
   }
 
 }
+console.log(decision);
 document.getElementById("bs").innerHTML = "Basic Strategy: "+ decision;
 }
 function getElementTopLeft(id) {

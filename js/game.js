@@ -7,5 +7,4 @@ deck.shuffle();
 deck.shuffle();
 var table = document.getElementById("table");
 let game = new Table();
-
 //game.showPlayersCards();

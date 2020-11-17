@@ -9,12 +9,22 @@ function getSizes() {
   toPx = document.documentElement.clientWidth / 100;
   toPx2 = document.documentElement.clientHeight / 100;
 }
+let dT; //dealer TOTAL
 function dealerDeal(c) {
   getSizes();
   var next = game.dealer.count * 3.7
   game.dealer.draw();
   var count = game.dealer.count - 1;
   game.showDealerCard(count);
+  if (game.dealer.count == 1) {
+dT = game.dealer.cards[count].value;
+if ( dT == "A") {
+  dT = 11;
+}
+else if (dT == "K" || dT == "Q" || dT == "J") {
+  dT = 10;
+}
+  }
   //
   cardCount(game.dealer.cards[count].value);
   cardLeft();
@@ -172,6 +182,8 @@ function playerDraw(id, num,double) {
             clearInterval(int);
           }else {
             nextPlayer(n, -1);
+            perfectBasicStrategy(game.players[id].hands[0].score,0,0,dT);
+            console.log(game.players[id].hands[0].score);
             clearInterval(int);
           }
 
@@ -194,6 +206,8 @@ function playerDraw(id, num,double) {
             clearInterval(int);
           }else {
             nextPlayer(n, -1);
+            perfectBasicStrategy(game.players[id].hands[0].score,0,0,dT);
+            console.log(game.players[id].hands[0].score);
             clearInterval(int);
           }
         }
