@@ -89,7 +89,6 @@ else if (dT == "K" || dT == "Q" || dT == "J") {
             }
           }
           console.log(game.playersCount);
-          console.log(game.players[game.playersCount-1]);
           game.dealer.getScore();
           clearInterval(id);
         }
@@ -182,7 +181,15 @@ function playerDraw(id, num,double) {
             clearInterval(int);
           }else {
             nextPlayer(n, -1);
-            perfectBasicStrategy(game.players[id].hands[0].score,0,0,dT);
+            //
+              if (game.players[id].hands[0].cards[0].value == "ACE"||game.players[id].hands[0].cards[1].value == "ACE"||game.players[id].hands[0].cards[2].value == "ACE") {
+perfectBasicStrategy(game.players[id].hands[0].score,true,false,dT,game.players[id].hands[0].count);
+              }
+
+            else {
+              perfectBasicStrategy(game.players[id].hands[0].score,0,0,dT,game.players[id].hands[0].count);
+            }
+            //
             console.log(game.players[id].hands[0].score);
             clearInterval(int);
           }
@@ -195,6 +202,7 @@ function playerDraw(id, num,double) {
         elem.style.left = (pos * toVw) + "vw";
       }
     } else {
+
       if (pos2 >= end2) {
         game.players[id].hands[0].getScore((id + 1), 0, (game.players[id].hands[0].count - 1));
         if (game.players[id].hands[0].score > 20) {
@@ -206,7 +214,15 @@ function playerDraw(id, num,double) {
             clearInterval(int);
           }else {
             nextPlayer(n, -1);
-            perfectBasicStrategy(game.players[id].hands[0].score,0,0,dT);
+//
+if (game.players[id].hands[0].cards[0].value == "ACE"||game.players[id].hands[0].cards[1].value == "ACE"||game.players[id].hands[0].cards[2].value == "ACE") {
+perfectBasicStrategy(game.players[id].hands[0].score,true,false,dT,game.players[id].hands[0].count);
+}
+
+else {
+perfectBasicStrategy(game.players[id].hands[0].score,0,0,dT,game.players[id].hands[0].count);
+}
+//
             console.log(game.players[id].hands[0].score);
             clearInterval(int);
           }
@@ -383,6 +399,7 @@ function split(id, num) {
         player.hands[1].score = 0;
         player.hands[0].getScore(num, 0, 0);
         player.hands[1].getSplitScore(num, 0, 0);
+        perfectBasicStrategy(game.players[id].hands[1].score,false,false,dT,game.players[id].hands[1].count,true);
       clearInterval(int);
     } else {
 
@@ -411,6 +428,10 @@ function playerDrawSplit(id, num, handCount,double) {
   var cardId = player.hands[0].cards[0].suit + player.hands[0].cards[0].value;
   player.draw(handCount);
   game.showPlayerCard(id, count, handCount, num);
+  //
+  cardCount(game.players[id].hands[handCount].cards[count].value);
+  cardLeft();
+  //
   let elem = document.getElementById("dealerCard");
   let cor = getElementTopLeft("deck");
   let pos = cor.left - toPx * 16;

@@ -66,7 +66,33 @@ function nextPlayer(i, pre) {
   splitButt = document.getElementById("split").querySelector(".button");
   insuranceButt = document.getElementById("insurance").querySelector(".button");
   doubleButt = document.getElementById("double").querySelector(".button");
-  perfectBasicStrategy(game.players[i].hands[0].score,0,0,dT);
+  //
+  let playerHand = game.players[i].hands[0];
+  console.log(playerHand.cards[1].value);
+  console.log(playerHand.cards[0].value);
+    if (playerHand.cards[0].value == "A" || playerHand.cards[1].value == "A") {
+  if (playerHand.cards[0].value == playerHand.cards[1].value) {
+
+      perfectBasicStrategy(playerHand.score,true,true,dT,playerHand.count);
+  }else {
+
+      perfectBasicStrategy(playerHand.score,true,false,dT,playerHand.count);
+  }
+  }else if (playerHand.cards[0].value == playerHand.cards[1].value) {
+
+      perfectBasicStrategy(playerHand.score,false,true,dT,playerHand.count);
+  }else {
+
+      perfectBasicStrategy(playerHand.score,false,false,dT,playerHand.count);
+  }
+  if (playerHand.cards[0].value == "J" ||playerHand.cards[0].value == "Q" || playerHand.cards[0].value == "K"|| playerHand.cards[0].value == 10) {
+    console.log("YO");
+    if (playerHand.cards[1].value == "J" ||playerHand.cards[1].value == "Q" || playerHand.cards[1].value == "K"|| playerHand.cards[1].value == 10) {
+      perfectBasicStrategy(playerHand.score,false,true,dT,playerHand.count);
+    }
+  }
+
+  //
   console.log(game.players[i].hands[0].score);
   if (game.players[i].hands[0].cards[0].getValue() == game.players[i].hands[0].cards[1].getValue()) {
   splitButt.disabled = false;
@@ -100,6 +126,17 @@ function nextSplit(i, pre, count) {
     hitButt = document.getElementById("hit").querySelector(".button");
     stayButt = document.getElementById("stay").querySelector(".button");
     doubleButt = document.getElementById("double").querySelector(".button");
+
+    let playerHand = game.players[i].hands[count];
+
+
+    if (game.players[i].hands[count].cards[0].value == "ACE"||game.players[i].hands[count].cards[1].value == "ACE") {
+perfectBasicStrategy(game.players[i].hands[count].score,true,false,dT,game.players[i].hands[count].count);
+    }
+
+  else {
+    perfectBasicStrategy(game.players[i].hands[0].score,0,0,dT,game.players[i].hands[0].count);
+  }
 if (pre==1) {
 staySplit(i,(i+1),count);
 }
