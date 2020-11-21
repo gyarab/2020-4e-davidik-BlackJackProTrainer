@@ -115,28 +115,37 @@ function nextPlayer(i, pre) {
 
 function nextSplit(i, pre, count) {
   buttons.innerHTML = "";
-  buttons.innerHTML +=
-    '<p id="hit"><button class="button" onclick="playerDrawSplit(' + i + ',' +
-    (i + 1) + ',' + count + ')">HIT</button></p>';
-  buttons.innerHTML +=
-    '<p id="stay"><button class="button" onclick="staySplit(' + (i) + ',' + (i + 1) + ',' +
-    (count) + ')">STAY</button></p>';
-  buttons.innerHTML +=
-    '<p id="double"><button class="button" onclick="double(' + i+ ',' + 1+ ',' + count + ')">DOUBLE</button></p>';
-    hitButt = document.getElementById("hit").querySelector(".button");
-    stayButt = document.getElementById("stay").querySelector(".button");
-    doubleButt = document.getElementById("double").querySelector(".button");
-
+  if (pre == 4) {
+    buttons.innerHTML +=
+      '<p id="hit"><button class="button" onclick="playerDrawSplit(' + i + ',' +
+      (i + 1) + ',' + count + ',' + 2 + ')">HIT</button></p>';
+    buttons.innerHTML +=
+      '<p id="stay"><button class="button" onclick="staySplit(' + (i) + ',' + (i + 1) + ',' +
+      (count) + ')">STAY</button></p>';
+      hitButt = document.getElementById("hit").querySelector(".button");
+      stayButt = document.getElementById("stay").querySelector(".button");
+  }else {
+    buttons.innerHTML +=
+      '<p id="hit"><button class="button" onclick="playerDrawSplit(' + i + ',' +
+      (i + 1) + ',' + count + ')">HIT</button></p>';
+    buttons.innerHTML +=
+      '<p id="stay"><button class="button" onclick="staySplit(' + (i) + ',' + (i + 1) + ',' +
+      (count) + ')">STAY</button></p>';
+    buttons.innerHTML +=
+      '<p id="double"><button class="button" onclick="double(' + i+ ',' + 1+ ',' + count + ')">DOUBLE</button></p>';
+      hitButt = document.getElementById("hit").querySelector(".button");
+      stayButt = document.getElementById("stay").querySelector(".button");
+      doubleButt = document.getElementById("double").querySelector(".button");
+  }
     let playerHand = game.players[i].hands[count];
 
-
-    if (game.players[i].hands[count].cards[0].value == "ACE"||game.players[i].hands[count].cards[1].value == "ACE") {
-perfectBasicStrategy(game.players[i].hands[count].score,true,false,dT,game.players[i].hands[count].count);
+perfectBasicStrategy(playerHand.score,0,0,dT,game.players[i].hands[0].count);
+    if (playerHand.count > 3) {
+      if (playerHand.cards[2].value == "ACE") {
+console.log(playerHand);
+perfectBasicStrategy(playerHand.score,true,false,dT,game.players[i].hands[count].count);
     }
-
-  else {
-    perfectBasicStrategy(game.players[i].hands[0].score,0,0,dT,game.players[i].hands[0].count);
-  }
+          }
 if (pre==1) {
 staySplit(i,(i+1),count);
 }
@@ -144,7 +153,15 @@ if(pre == 2){
   hideBorderScore();
   document.getElementById("s"+(i+1)).style.border = "0.5vw solid grey";
 doubleButt.disabled = false;
-}else if(pre == 0){
+}
+if (pre == 3) {
+staySplit(i,(i+1),count, true);
+}
+if(pre == 4){
+  hideBorderScore();
+  document.getElementById("s"+(i+1)).style.border = "0.5vw solid grey";
+}
+else if(pre == 0){
 doubleButt.disabled = true;
 }
 }

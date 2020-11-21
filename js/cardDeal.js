@@ -354,6 +354,10 @@ function split(id, num) {
   player.addHand(0);
   player.hands[1].cards[0] = player.hands[0].cards[1];
   player.hands[0].cards.pop();
+  let aces;
+  if (player.hands[0].cards[0].value ==  "A") {
+    aces = true;
+  }
   let balance = document.getElementById("b" + player.position);
   //player.bet = 0;
   player.balance -= 20;
@@ -377,7 +381,7 @@ function split(id, num) {
     if (pos >= end) {
       console.log("end: pos= "+pos+ "; end= "+end);
       console.log("end: pos2= "+pos2+ "; end2= "+end2);
-      var hit = document.getElementById("hit");
+    var hit = document.getElementById("hit");
       hit.remove();
       var stay = document.getElementById("stay");
       stay.remove();
@@ -387,6 +391,14 @@ function split(id, num) {
       double.remove();
       var insurance = document.getElementById("insurance");
       insurance.remove();
+      if (aces) {
+        buttons.innerHTML +=
+          '<p id="hit"><button class="button" onclick="playerDrawSplit(' + id + ',' +
+          (num) + ',' + 1 + ',' + 2 + ')">HIT</button></p>';
+        buttons.innerHTML +=
+          '<p id="stay"><button class="button" onclick="staySplit(' + id + ',' +
+          (num) + ',' + 1 + ')">STAY</button></p>';
+      }else {
       buttons.innerHTML +=
         '<p id="hit"><button class="button" onclick="playerDrawSplit(' + id + ',' +
         (num) + ',' + 1 + ')">HIT</button></p>';
@@ -395,6 +407,7 @@ function split(id, num) {
         (num) + ',' + 1 + ')">STAY</button></p>';
       buttons.innerHTML +=
         '<p id="double"><button class="button" onclick="double(' + id + ',' + 1 + ',' + 1 + ')">DOUBLE</button></p>';
+        }
         player.hands[0].score = 0;
         player.hands[1].score = 0;
         player.hands[0].getScore(num, 0, 0);
@@ -416,7 +429,6 @@ function split(id, num) {
 function playerDrawSplit(id, num, handCount,double) {
   hitButt = document.getElementById("hit").querySelector(".button");
   stayButt = document.getElementById("stay").querySelector(".button");
-  doubleButt = document.getElementById("double").querySelector(".button");
   hitButt.disabled = true;
   stayButt.disabled = true;
   doubleButt.disabled = true;
@@ -463,6 +475,9 @@ function playerDrawSplit(id, num, handCount,double) {
             if (double == 1) {
               nextSplit(id, 1, handCount);
               clearInterval(int);
+            }else if (double == 2) {
+              nextSplit(id, 3, handCount);
+              clearInterval(int);
             }else {
               nextSplit(id, 0, handCount);
               clearInterval(int);
@@ -476,6 +491,9 @@ function playerDrawSplit(id, num, handCount,double) {
           }else {
             if (double == 1) {
               nextSplit(id, 1, handCount);
+              clearInterval(int);
+            }else if (double == 2) {
+              nextSplit(id, 3, handCount);
               clearInterval(int);
             }else {
               nextSplit(id, 0, handCount);
@@ -501,6 +519,9 @@ function playerDrawSplit(id, num, handCount,double) {
             if (double == 1) {
               nextSplit(id, 1, handCount);
               clearInterval(int);
+            }else if (double == 2) {
+              nextSplit(id, 3, handCount);
+              clearInterval(int);
             }else {
               nextSplit(id, 0, handCount);
               clearInterval(int);
@@ -514,6 +535,9 @@ function playerDrawSplit(id, num, handCount,double) {
           }else {
             if (double == 1) {
               nextSplit(id, 1, handCount);
+              clearInterval(int);
+            }else if (double == 2) {
+              nextSplit(id, 3, handCount);
               clearInterval(int);
             }else {
               nextSplit(id, 0, handCount);
@@ -564,11 +588,15 @@ function stay(num, pre) {
 
 }
 
-function staySplit(id, num, count) {
+function staySplit(id, num, count, aces) {
   count--;
   if (count == -1) {
     stay(num, 2);
   } else {
-    nextSplit(id, 2, count)
+    if (aces) {
+      nextSplit(id, 4, count);
+    }else {
+      nextSplit(id, 2, count);
+    }
   }
 }

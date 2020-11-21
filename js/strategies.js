@@ -25,8 +25,8 @@ function perfectBasicStrategy(playerTotal, aceTrue, splitTrue, dealerTotal, card
   if (aceTrue) {
     if (playerTotal < 22) {
       if (splitTrue) {
-
-        playerTotal /= 2;
+console.log(playerTotal);
+        playerTotal = 11;
         console.log("SPLIT ACE");
         console.log(playerTotal);
         pairSplitting(playerTotal, dealerTotal);
@@ -263,7 +263,7 @@ function perfectBasicStrategy(playerTotal, aceTrue, splitTrue, dealerTotal, card
     if (playerValue == 10) {
       decision = "STAY";
     }
-    if (playerValue > 11) {
+    if (playerValue == 11) {
       decision = "SPLIT";
     }
 
