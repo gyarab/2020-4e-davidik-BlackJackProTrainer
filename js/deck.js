@@ -33,7 +33,6 @@ class Deck {
       }
     }
     this.length = this.deck.length;
-    console.log(this.length);
     return this.deck;
   }
   shuffle() {

@@ -19,7 +19,6 @@ function hideBorderScore() {
   document.getElementById("ss5").style.border = "";
 }
 function nextPlayer(i, pre) {
-  console.log("i of player: "+i);
   hideBorderScore();
   document.getElementById("s"+(i)).style.border = "0.5vw solid grey";
   i--;
@@ -68,8 +67,6 @@ function nextPlayer(i, pre) {
   doubleButt = document.getElementById("double").querySelector(".button");
   //
   let playerHand = game.players[i].hands[0];
-  console.log(playerHand.cards[1].value);
-  console.log(playerHand.cards[0].value);
     if (playerHand.cards[0].value == "A" || playerHand.cards[1].value == "A") {
   if (playerHand.cards[0].value == playerHand.cards[1].value) {
 
@@ -86,14 +83,11 @@ function nextPlayer(i, pre) {
       perfectBasicStrategy(playerHand.score,false,false,dT,playerHand.count);
   }
   if (playerHand.cards[0].value == "J" ||playerHand.cards[0].value == "Q" || playerHand.cards[0].value == "K"|| playerHand.cards[0].value == 10) {
-    console.log("YO");
     if (playerHand.cards[1].value == "J" ||playerHand.cards[1].value == "Q" || playerHand.cards[1].value == "K"|| playerHand.cards[1].value == 10) {
       perfectBasicStrategy(playerHand.score,false,true,dT,playerHand.count);
     }
   }
 
-  //
-  console.log(game.players[i].hands[0].score);
   if (game.players[i].hands[0].cards[0].getValue() == game.players[i].hands[0].cards[1].getValue()) {
   splitButt.disabled = false;
   } else {
@@ -141,8 +135,7 @@ function nextSplit(i, pre, count) {
 
 perfectBasicStrategy(playerHand.score,0,0,dT,game.players[i].hands[0].count);
     if (playerHand.count > 3) {
-      if (playerHand.cards[2].value == "ACE") {
-console.log(playerHand);
+      if (playerHand.cards[1].value == "ACE") {
 perfectBasicStrategy(playerHand.score,true,false,dT,game.players[i].hands[count].count);
     }
           }
@@ -174,8 +167,16 @@ function nextTurn(x) {
      game.removeHands();
      game.dealHands(2);
     buttons.innerHTML = "";
-    buttons.innerHTML +=
-      '<p><button id="start" class="button" onclick="StartGame(1)">Start Game</button></p>';
+    if (deck.length < 40) {
+
+      document.getElementById("cl").innerHTML="Need Shuffle";
+      buttons.innerHTML +=
+        '<p><button id="start" class="button" onclick="StartGame(1)">Shuffle Cards</button></p>';
+    }else {
+      buttons.innerHTML +=
+        '<p><button id="start" class="button" onclick="StartGame(1)">Start Game</button></p>';
+    }
+
   }
 
 }

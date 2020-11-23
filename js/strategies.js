@@ -15,8 +15,7 @@ function cardCount(value) {
 }
 
 function cardLeft() {
-  console.log(deck.length);
-  document.getElementById("cl").innerHTML = "Cards left: " + deck.length;
+  document.getElementById("cl").innerHTML = "Cards left: " + deck.length +"("+(40+(game.playersCount*2)+1)+")";
   return deck.length;
 }
 
@@ -25,33 +24,22 @@ function perfectBasicStrategy(playerTotal, aceTrue, splitTrue, dealerTotal, card
   if (aceTrue) {
     if (playerTotal < 22) {
       if (splitTrue) {
-console.log(playerTotal);
         playerTotal = 11;
-        console.log("SPLIT ACE");
-        console.log(playerTotal);
         pairSplitting(playerTotal, dealerTotal);
       } else {
         playerTotal -= 11;
-        console.log("ACE");
-        console.log(playerTotal);
         softTotals(playerTotal, dealerTotal);
       }
     }else {
       playerTotal -= 11;
-      console.log("HARD");
-      console.log(playerTotal);
       hardTotals(playerTotal, dealerTotal);
     }
 
   } else if (splitTrue) {
     playerTotal /= 2;
-    console.log("SPLIT");
-    console.log(playerTotal);
     pairSplitting(playerTotal, dealerTotal);
 
   } else {
-    console.log("HARD");
-    console.log(playerTotal);
     hardTotals(playerTotal, dealerTotal);
 
   }
@@ -289,7 +277,6 @@ console.log(playerTotal);
     }
 
   }
-  console.log(decision);
   document.getElementById("bs").innerHTML = "Basic Strategy: " + decision;
 }
 

@@ -95,7 +95,7 @@ class Player {
   showCard(id, idR, idH, first) {
     var deck = document.getElementById("deck");
     if (first) {
-      var cardId = this.hands[idH].cards[id].suit + this.hands[idH].cards[id].value;
+      var cardId = this.hands[idH].cards[id].suit + this.hands[idH].cards[id].value + idR + id;
       deck.innerHTML +=
         "<img id='" + cardId + "' class ='cards r" + idR + "' src=" + this.hands[idH].cards[id].imgurl + ">";
     } else {

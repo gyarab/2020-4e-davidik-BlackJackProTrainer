@@ -88,7 +88,6 @@ else if (dT == "K" || dT == "Q" || dT == "J") {
               nextPlayer(1, 1);
             }
           }
-          console.log(game.playersCount);
           game.dealer.getScore();
           clearInterval(id);
         }
@@ -190,7 +189,6 @@ perfectBasicStrategy(game.players[id].hands[0].score,true,false,dT,game.players[
               perfectBasicStrategy(game.players[id].hands[0].score,0,0,dT,game.players[id].hands[0].count);
             }
             //
-            console.log(game.players[id].hands[0].score);
             clearInterval(int);
           }
 
@@ -223,7 +221,6 @@ else {
 perfectBasicStrategy(game.players[id].hands[0].score,0,0,dT,game.players[id].hands[0].count);
 }
 //
-            console.log(game.players[id].hands[0].score);
             clearInterval(int);
           }
         }
@@ -243,6 +240,21 @@ let cardcycle = 0;
 let countcycle = 0;
 
 function StartGame(nt) {
+  if (deck.length < 40) {
+    cardCounting = 0;
+    cardCount(7);
+    deck = new Deck(6);
+    deck.createDeck(suits, values);
+    deck.shuffle();
+    deck.shuffle();
+    game.dealer.removeDraw();
+    game.removeHands();
+    game.dealHands(2);
+    buttons.innerHTML = "";
+    buttons.innerHTML +=
+      '<p><button id="start" class="button" onclick="StartGame(1)">Start Game</button></p>';
+  }else {
+
   getSizes();
   if (nt == 1) {
     document.getElementById("deck").innerHTML = '<img src="PNG/gray_back.png" alt="">';
@@ -263,23 +275,11 @@ function StartGame(nt) {
   }
   countcycle = cardcycle - 1;
   if (cardcycle == 2) {
-    var cardIdTest = game.players[0].hands[0].cards[0].suit + game.players[0].hands[0].cards[0].value;
-var element = document.getElementById( cardIdTest + "placed");
 
-if(typeof(element) != 'undefined' && element != null){
   dealerDeal();
   cycle = 0;
   cardcycle = 0;
   countcycle = 0;
-} else{
-  cycle = 0;
-  cardcycle = 0;
-  countcycle = 0;
-  game.removeHands();
-  game.dealHands(2);
- buttons.innerHTML = "";
- StartGame(1);
-}
 
   } else {
     player = game.players[cycle]
@@ -290,7 +290,7 @@ if(typeof(element) != 'undefined' && element != null){
       player.bet += 20;
       balance.innerHTML = player.balance;
     }
-    var cardId = player.hands[0].cards[cardcycle].suit + player.hands[0].cards[cardcycle].value;
+    var cardId = player.hands[0].cards[cardcycle].suit + player.hands[0].cards[cardcycle].value+player.position+cardcycle;
     //
     document.getElementById("cl").innerHTML="Waiting...";
     cardCount(player.hands[0].cards[cardcycle].value);
@@ -338,6 +338,7 @@ if(typeof(element) != 'undefined' && element != null){
     }
   }
 }
+}
 
 function split(id, num) {
   hideBorderScore();
@@ -363,24 +364,30 @@ function split(id, num) {
   player.balance -= 20;
   player.betSplit += 20;
   balance.innerHTML = player.balance;
-  var cardId = player.hands[1].cards[0].suit + player.hands[1].cards[0].value;
-  var cardId2 = player.hands[0].cards[0].suit + player.hands[0].cards[0].value;
+  var cardId = player.hands[1].cards[0].suit + player.hands[1].cards[0].value + num + 1;
+  var cardId2 = player.hands[0].cards[0].suit + player.hands[0].cards[0].value + num + 0;
   let elem = document.getElementById(cardId + "placed");
   let cor = elem.getBoundingClientRect();
   let pos = cor.left - toPx * 18;
   let pos2 = cor.top;
+  pos = Math.round(pos*100)/100;
+  pos2 = Math.round(pos2*100)/100;
   let cor2 = document.getElementById(cardId2 + "placed");
   let clientRect = cor2.getBoundingClientRect();
   end = clientRect.left - toPx * 10;;
   end2 = clientRect.top;
-  var ratio = Math.abs(end - pos) / Math.abs(end2 - pos2);
+  end = Math.round(end*100)/100;
+  end2 = Math.round(end2*100)/100;
+  var ratio = Math.round((Math.abs(end - pos) / Math.abs(end2 - pos2))*100)/100;
+  if (isFinite(ratio)) {
+  }else {
+    ratio = Math.round((Math.abs(end - pos) / 1 )*100)/100;
+  }
   var int = setInterval(frame, 0.5);
   countcycle++;
 
   function frame() {
     if (pos >= end) {
-      console.log("end: pos= "+pos+ "; end= "+end);
-      console.log("end: pos2= "+pos2+ "; end2= "+end2);
     var hit = document.getElementById("hit");
       hit.remove();
       var stay = document.getElementById("stay");
@@ -415,9 +422,6 @@ function split(id, num) {
         perfectBasicStrategy(game.players[id].hands[1].score,false,false,dT,game.players[id].hands[1].count,true);
       clearInterval(int);
     } else {
-
-        console.log("fr: pos= "+pos+ "; end= "+end);
-        console.log("fr: pos2= "+pos2+ "; end2= "+end2);
       pos2 -= 1;
       pos = pos + ratio;
       elem.style.top = (pos2 * toVw) + "vw";
@@ -436,8 +440,8 @@ function playerDrawSplit(id, num, handCount,double) {
   let n = num;
   let player = game.players[id];
   let count = player.hands[handCount].count - 1;
-  var cardId2 = player.hands[1].cards[0].suit + player.hands[1].cards[0].value;
-  var cardId = player.hands[0].cards[0].suit + player.hands[0].cards[0].value;
+  var cardId2 = player.hands[1].cards[0].suit + player.hands[1].cards[0].value+num + 1;
+  var cardId = player.hands[0].cards[0].suit + player.hands[0].cards[0].value+num + 0;
   player.draw(handCount);
   game.showPlayerCard(id, count, handCount, num);
   //
@@ -591,6 +595,13 @@ function stay(num, pre) {
 function staySplit(id, num, count, aces) {
   count--;
   if (count == -1) {
+    let player = game.players[id];
+    var cardId2 = player.hands[1].cards[0].suit + player.hands[1].cards[0].value + num + 1;
+    var cardId = player.hands[0].cards[0].suit + player.hands[0].cards[0].value + num + 0;
+    var del2 = document.getElementById(cardId2 + "placed");
+    var del = document.getElementById(cardId + "placed");
+    del2.id ="placed";
+    del.id ="placed";
     stay(num, 2);
   } else {
     if (aces) {
