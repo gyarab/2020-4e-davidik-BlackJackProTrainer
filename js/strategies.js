@@ -1,16 +1,24 @@
 let cardCounting = 0;
-
+let trueCount = 0;
+let betting = 0;
 function cardCount(value) {
   if (value == "A") {
-    cardCounting++;
-  } else if (value == "K" || value == "Q" || value == "J") {
-    cardCounting++;
-  } else if (value < 7) {
     cardCounting--;
-  } else if (value == 10) {
+  } else if (value == "K" || value == "Q" || value == "J") {
+    cardCounting--;
+  } else if (value < 7) {
     cardCounting++;
+  } else if (value == 10) {
+    cardCounting--;
   } else {}
+  trueCount = Math.round(cardCounting/(deck.length/52));
+  betting = trueCount*20 -20;
+  if (betting<20) {
+betting = 20;
+  }
   document.getElementById("cc").innerHTML = "Card count: " + cardCounting;
+  document.getElementById("tr").innerHTML = "True count: " + trueCount;
+  document.getElementById("b").innerHTML = "Bet: " + betting;
   return value;
 }
 

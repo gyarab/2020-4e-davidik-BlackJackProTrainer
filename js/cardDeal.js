@@ -238,7 +238,22 @@ perfectBasicStrategy(game.players[id].hands[0].score,0,0,dT,game.players[id].han
 let cycle = 0;
 let cardcycle = 0;
 let countcycle = 0;
-
+function makeBet(p) {
+  player = game.players[p];
+  console.log(player);
+    let balance = document.getElementById("b" + player.position);
+  player.balance -= 20;
+  player.bet += 20;
+  balance.innerHTML = player.balance;
+  buttons.innerHTML = "";
+  if (p==game.playersCount-1) {
+    buttons.innerHTML +=
+      '<p><button id="start" class="button" onclick="StartGame(0)">Deal Cards</button></p>';
+  }else {
+    buttons.innerHTML +=
+      '<p><button id="start" class="button" onclick="makeBet(' + (p+1) + ')">Next Bet</button></p>';
+  }
+}
 function StartGame(nt) {
   if (deck.length < 40) {
     cardCounting = 0;
@@ -285,10 +300,7 @@ function StartGame(nt) {
     player = game.players[cycle]
     player.showCard(cardcycle, player.position, 0, true)
     if (cardcycle == 1) {
-      let balance = document.getElementById("b" + player.position);
-      player.balance -= 20;
-      player.bet += 20;
-      balance.innerHTML = player.balance;
+
     }
     var cardId = player.hands[0].cards[cardcycle].suit + player.hands[0].cards[cardcycle].value+player.position+cardcycle;
     //

@@ -14,7 +14,7 @@ class Table {
           }
         }
         if (uniq) {
-          this.players.push(new Player(id, 1000));
+          this.players.push(new Player(id, 10000));
           this.playersCount++;
         }
       }
@@ -33,7 +33,7 @@ class Table {
           }
         }
         if (uniq) {
-          this.players.push(new Player(i, 1000));
+          this.players.push(new Player(i, 10000));
           this.playersCount++;
 
         }
