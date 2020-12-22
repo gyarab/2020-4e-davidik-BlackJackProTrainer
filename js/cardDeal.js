@@ -238,21 +238,43 @@ perfectBasicStrategy(game.players[id].hands[0].score,0,0,dT,game.players[id].han
 let cycle = 0;
 let cardcycle = 0;
 let countcycle = 0;
+function setBet(p) {
+player = game.players[p];
+let balance = document.getElementById("b" + player.position);
+var slideCol = document.getElementById("myRange");
+bal = slideCol.value*20;
+player.balance -= bal;
+player.bet += bal;
+balance.innerHTML = player.balance;
+buttons.innerHTML = "";
+
+if (p==game.playersCount-1) {
+  buttons.innerHTML +=
+    '<p><button id="start" class="button" onclick="StartGame(0)">Deal Cards</button></p>';
+}else {
+  buttons.innerHTML +=
+    '<p><button id="start" class="button" onclick="makeBet(' + (p+1) + ')">Next Bet</button></p>';
+}
+}
 function makeBet(p) {
+  var bal=20;
   player = game.players[p];
-  console.log(player);
-    let balance = document.getElementById("b" + player.position);
-  player.balance -= 20;
-  player.bet += 20;
-  balance.innerHTML = player.balance;
   buttons.innerHTML = "";
-  if (p==game.playersCount-1) {
-    buttons.innerHTML +=
-      '<p><button id="start" class="button" onclick="StartGame(0)">Deal Cards</button></p>';
-  }else {
-    buttons.innerHTML +=
-      '<p><button id="start" class="button" onclick="makeBet(' + (p+1) + ')">Next Bet</button></p>';
-  }
+  buttons.innerHTML +=
+    '<p><button id="setBet" class="button" onclick="setBet(' + p  + ',' + bal + ')">Set Bet</button></p>';
+buttons.innerHTML+='<div class="slidecontainer" id="slider">';
+buttons.innerHTML+='<input type="range" min="1" max="500" value="1" class="slider" id="myRange">';
+buttons.innerHTML+='<div id="bet">';
+buttons.innerHTML+='<div class="betValue" id="bv">Value: <span id="f" style="font-weight:bold;color:red"></span> </div></div></div>';
+var slideCol = document.getElementById("myRange");
+var y = document.getElementById("f");
+y.innerHTML = slideCol.value;
+slideCol.oninput = function() {
+    y.innerHTML = this.value*20;
+    bal=this.value*20;
+}
+y.innerHTML = 20;
+bal = 20;
 }
 function StartGame(nt) {
   if (deck.length < 40) {
