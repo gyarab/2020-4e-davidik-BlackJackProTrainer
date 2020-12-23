@@ -293,6 +293,11 @@ body {
   cursor: pointer;
 }
 #bv{
-  margin: -2vw 30vw;
-  color: green;
+  margin: -6vw 70vw;
+color: yellow;
+font-family: 'Helvetica Neue', sans-serif;
+font-size: 1.18vw;
+font-weight: bold;
+background: black;
+width: 15%;
 }

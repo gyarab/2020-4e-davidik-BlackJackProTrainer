@@ -215,7 +215,7 @@ function win() {
     }}
 
     let balance = document.getElementById("b" + player.position);
-    balance.innerHTML = player.balance;
+    balance.innerHTML = (player.id+1)+": "+player.balance;
     player.bet = 0;
     player.betSplit = 0;
   }
@@ -228,7 +228,7 @@ function players(x) {
     p.setPosition(pp + 1)
     pp++;
     let balance = document.getElementById("b" + p.position);
-    balance.innerHTML = p.balance;
+    balance.innerHTML = (p.id+1)+": "+ p.balance;
   }
   game.dealHands(2);
   buttons.innerHTML = "";
@@ -248,5 +248,5 @@ function double(id,pre,handCount) {
     player.betSplit += 20;
     playerDrawSplit(id,id+1,handCount,1);
   }
-  balance.innerHTML = player.balance;
+  balance.innerHTML = (id+1)+": "+player.balance;
 }

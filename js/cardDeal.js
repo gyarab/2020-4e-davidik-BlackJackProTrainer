@@ -245,7 +245,7 @@ var slideCol = document.getElementById("myRange");
 bal = slideCol.value*20;
 player.balance -= bal;
 player.bet += bal;
-balance.innerHTML = player.balance;
+balance.innerHTML =(p+1)+": "+player.balance;
 buttons.innerHTML = "";
 
 if (p==game.playersCount-1) {
@@ -256,24 +256,52 @@ if (p==game.playersCount-1) {
     '<p><button id="start" class="button" onclick="makeBet(' + (p+1) + ')">Next Bet</button></p>';
 }
 }
+function plusBet(p,bal) {
+  player = game.players[p];
+  let balance = document.getElementById("b" + player.position);
+  var slideCol = document.getElementById("myRange");
+bal=(slideCol.value*20+20)/20;
+
+  slideCol.value = bal;
+  bv=document.getElementById("bv");
+      bv.innerHTML =  (p+1)+" Player Bet: "+slideCol.value*20;
+      bal=slideCol.value*20;
+
+}
+function minusBet(p,bal) {
+  player = game.players[p];
+  let balance = document.getElementById("b" + player.position);
+  var slideCol = document.getElementById("myRange");
+  slideCol.value -= 1;
+  bal = slideCol.value*20;
+  bv=document.getElementById("bv");
+      bv.innerHTML =  (p+1)+" Player Bet: "+slideCol.value*20;
+      bal=this.value*20;
+
+}
 function makeBet(p) {
   var bal=20;
   player = game.players[p];
   buttons.innerHTML = "";
   buttons.innerHTML +=
     '<p><button id="setBet" class="button" onclick="setBet(' + p  + ',' + bal + ')">Set Bet</button></p>';
+    buttons.innerHTML +=
+    '<p><button id="plusBet" class="button" onclick="plusBet(' + p  + ',' + bal + ')">+ 20</button></p>';
+    buttons.innerHTML +=
+    '<p><button id="minusBet" class="button" onclick="minusBet(' + p  + ',' + bal + ')">- 20</button></p>';
 buttons.innerHTML+='<div class="slidecontainer" id="slider">';
 buttons.innerHTML+='<input type="range" min="1" max="500" value="1" class="slider" id="myRange">';
 buttons.innerHTML+='<div id="bet">';
-buttons.innerHTML+='<div class="betValue" id="bv">Value: <span id="f" style="font-weight:bold;color:red"></span> </div></div></div>';
+buttons.innerHTML+='<div class="betValue" id="bv"> <span id="f"></span> </div></div></div>';
 var slideCol = document.getElementById("myRange");
 var y = document.getElementById("f");
-y.innerHTML = slideCol.value;
+document.getElementById("bv").innerHTML = (p+1)+" Player Bet: "+bal;
+y.innerHTML = (p+1)+" Player Bet: "+slideCol.value;
 slideCol.oninput = function() {
-    y.innerHTML = this.value*20;
+    bv.innerHTML =  (p+1)+" Player Bet: "+this.value*20;
     bal=this.value*20;
 }
-y.innerHTML = 20;
+y.innerHTML = (p+1)+" Player Bet: "+20;
 bal = 20;
 }
 function StartGame(nt) {
@@ -304,7 +332,10 @@ function StartGame(nt) {
       }
 
     }
-  }
+    console.log(cycle);
+    makeBet(0);
+  }else {
+
   buttons.innerHTML = "";
   if (cycle == game.playersCount) {
     cycle = 0;
@@ -373,7 +404,7 @@ function StartGame(nt) {
   }
 }
 }
-
+}
 function split(id, num) {
   hideBorderScore();
   document.getElementById("ss"+num).style.visibility = 'visible';
@@ -397,7 +428,7 @@ function split(id, num) {
   //player.bet = 0;
   player.balance -= 20;
   player.betSplit += 20;
-  balance.innerHTML = player.balance;
+  balance.innerHTML = (num)+": "+player.balance;
   var cardId = player.hands[1].cards[0].suit + player.hands[1].cards[0].value + num + 1;
   var cardId2 = player.hands[0].cards[0].suit + player.hands[0].cards[0].value + num + 0;
   let elem = document.getElementById(cardId + "placed");
@@ -463,6 +494,7 @@ function split(id, num) {
     }
   }
 }
+
 
 function playerDrawSplit(id, num, handCount,double) {
   hitButt = document.getElementById("hit").querySelector(".button");
