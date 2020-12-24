@@ -306,3 +306,13 @@ function getElementTopLeft(id) {
   };
 
 }
+function insurance(id) {
+  let balance = document.getElementById("b" + player.position);
+player = game.players[id];
+bal = player.bet/2;
+player.insuranceBet += bal;
+player.balance -= bal;
+balance.innerHTML =(id+1)+": "+player.balance;
+stay((id+1),0);
+player.insurance = true;
+}

@@ -332,7 +332,6 @@ function StartGame(nt) {
       }
 
     }
-    console.log(cycle);
     makeBet(0);
   }else {
 

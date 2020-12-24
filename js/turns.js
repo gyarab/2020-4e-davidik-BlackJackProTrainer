@@ -59,12 +59,17 @@ function nextPlayer(i, pre) {
   buttons.innerHTML +=
     '<p id="double"><button class="button" onclick="double(' + i+ ',' + 0 + ')">DOUBLE</button></p>';
   buttons.innerHTML +=
-    '<p id="insurance"><button class="button" onclick="">INSURANCE</button></p>';
+    '<p id="insurance"><button class="button" onclick="insurance(' + i + ')">INSURANCE</button></p>';
   hitButt = document.getElementById("hit").querySelector(".button");
   stayButt = document.getElementById("stay").querySelector(".button");
   splitButt = document.getElementById("split").querySelector(".button");
   insuranceButt = document.getElementById("insurance").querySelector(".button");
   doubleButt = document.getElementById("double").querySelector(".button");
+  if (game.dealer.cards[0].value == "A") {
+    insuranceButt.disabled = false;
+  }else {
+    insuranceButt.disabled = true;
+  }
   //
   let playerHand = game.players[i].hands[0];
     if (playerHand.cards[0].value == "A" || playerHand.cards[1].value == "A") {
@@ -95,7 +100,6 @@ function nextPlayer(i, pre) {
   }
   if (pre == -1) {
     splitButt.disabled = true;
-    insuranceButt.disabled = true;
     doubleButt.disabled = true;
   }
   if (game.players[i].hands[0].score == 21&& game.players[i].hands[0].count == 2) {
@@ -184,6 +188,13 @@ function nextTurn(x) {
 function win() {
   for (var player of game.players) {
     let ring = document.getElementById("r" + player.position);
+    if (player.insurance == true) {
+player.insurance = false;
+if (game.dealer.cards[1].value == 10 ||game.dealer.cards[1].value == "J"||game.dealer.cards[1].value =="Q"||game.dealer.cards[1].value == "K" ) {
+player.balance += player.insuranceBet * 3;
+}
+    }
+
     if (player.hands[0].score == 21 && player.hands[0].count == 2) {
       player.balance += player.bet * 1.5;
       ring.innerHTML = "B";
@@ -217,6 +228,7 @@ function win() {
     let balance = document.getElementById("b" + player.position);
     balance.innerHTML = (player.id+1)+": "+player.balance;
     player.bet = 0;
+    player.insuranceBet = 0;
     player.betSplit = 0;
   }
 }
