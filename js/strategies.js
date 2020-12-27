@@ -92,39 +92,39 @@ function perfectBasicStrategy(playerTotal, aceTrue, splitTrue, dealerTotal, card
       if (dealerValue < 4 || dealerValue > 6) {
         decision = "HIT";
       } else {
-        decision = "STAY";
+        decision = "STAND";
       }
     }
     if (playerValue == 13) {
       if (dealerValue > 6) {
         decision = "HIT";
       } else {
-        decision = "STAY";
+        decision = "STAND";
       }
     }
     if (playerValue == 14) {
       if (dealerValue > 6) {
         decision = "HIT";
       } else {
-        decision = "STAY";
+        decision = "STAND";
       }
     }
     if (playerValue == 15) {
       if (dealerValue > 6) {
         decision = "HIT";
       } else {
-        decision = "STAY";
+        decision = "STAND";
       }
     }
     if (playerValue == 16) {
       if (dealerValue > 6) {
         decision = "HIT";
       } else {
-        decision = "STAY";
+        decision = "STAND";
       }
     }
     if (playerValue > 16) {
-      decision = "STAY";
+      decision = "STAND";
     }
 
 
@@ -185,17 +185,17 @@ function perfectBasicStrategy(playerTotal, aceTrue, splitTrue, dealerTotal, card
       if (dealerValue < 7) {
         decision = "DOUBLE";
         if (cards > 2) {
-          decision = "STAY";
+          decision = "STAND";
         }
       } else if (dealerValue < 9) {
-        decision = "STAY";
+        decision = "STAND";
       } else {
         decision = "HIT";
       }
     }
 
     if (playerValue > 7) {
-      decision = "STAY";
+      decision = "STAND";
     }
 
   }
@@ -250,14 +250,14 @@ function perfectBasicStrategy(playerTotal, aceTrue, splitTrue, dealerTotal, card
     }
     if (playerValue == 9) {
       if (dealerValue == 7 || dealerValue > 9) {
-        decision = "STAY";
+        decision = "STAND";
       } else {
         decision = "SPLIT";
       }
     }
 
     if (playerValue == 10) {
-      decision = "STAY";
+      decision = "STAND";
     }
     if (playerValue == 11) {
       decision = "SPLIT";

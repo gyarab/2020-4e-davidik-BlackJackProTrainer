@@ -1,5 +1,5 @@
 const suits = ["H", "D", "C", "S"];
-const values = [10,10,10,"A", "A", "A", "A", "A", "A"];
+const values = [2, 3, 4, 5, 6, 7, 10, 10, 10, "J", "Q", "K", "A"];
 let deck = new Deck(6);
 let discardDeck = [];
 deck.createDeck(suits, values);

@@ -283,6 +283,7 @@ function makeBet(p) {
   var bal=20;
   player = game.players[p];
   buttons.innerHTML = "";
+  if (player.balance>=20) {
   buttons.innerHTML +=
     '<p><button id="setBet" class="button" onclick="setBet(' + p  + ',' + bal + ')">Set Bet</button></p>';
     buttons.innerHTML +=
@@ -290,9 +291,19 @@ function makeBet(p) {
     buttons.innerHTML +=
     '<p><button id="minusBet" class="button" onclick="minusBet(' + p  + ',' + bal + ')">- 20</button></p>';
 buttons.innerHTML+='<div class="slidecontainer" id="slider">';
-buttons.innerHTML+='<input type="range" min="1" max="500" value="1" class="slider" id="myRange">';
+  buttons.innerHTML+='<input type="range" min="1" max='+ (player.balance/20) +' value="1" class="slider" id="myRange">';
 buttons.innerHTML+='<div id="bet">';
 buttons.innerHTML+='<div class="betValue" id="bv"> <span id="f"></span> </div></div></div>';
+}else {
+  if (p==game.playersCount-1) {
+    buttons.innerHTML +=
+      '<p><button id="start" class="button" onclick="StartGame(0)">'+(p+1)+' player Game Over</button></p>';
+  }else {
+    buttons.innerHTML +=
+      '<p><button id="start" class="button" onclick="makeBet(' + (p+1) + ')">'+(p+1)+' player Game Over</button></p>';
+  }
+  //game.removePlayer(p);
+}
 var slideCol = document.getElementById("myRange");
 var y = document.getElementById("f");
 document.getElementById("bv").innerHTML = (p+1)+" Player Bet: "+bal;
@@ -425,8 +436,10 @@ function split(id, num) {
   }
   let balance = document.getElementById("b" + player.position);
   //player.bet = 0;
-  player.balance -= 20;
-  player.betSplit += 20;
+  console.log(player.bet);
+  player.balance -= player.bet;
+  player.betSplit +=  player.bet;
+  console.log(player.betSplit);
   balance.innerHTML = (num)+": "+player.balance;
   var cardId = player.hands[1].cards[0].suit + player.hands[1].cards[0].value + num + 1;
   var cardId2 = player.hands[0].cards[0].suit + player.hands[0].cards[0].value + num + 0;
@@ -468,14 +481,14 @@ function split(id, num) {
           (num) + ',' + 1 + ',' + 2 + ')">HIT</button></p>';
         buttons.innerHTML +=
           '<p id="stay"><button class="button" onclick="staySplit(' + id + ',' +
-          (num) + ',' + 1 + ')">STAY</button></p>';
+          (num) + ',' + 1 + ')">STAND</button></p>';
       }else {
       buttons.innerHTML +=
         '<p id="hit"><button class="button" onclick="playerDrawSplit(' + id + ',' +
         (num) + ',' + 1 + ')">HIT</button></p>';
       buttons.innerHTML +=
         '<p id="stay"><button class="button" onclick="staySplit(' + id + ',' +
-        (num) + ',' + 1 + ')">STAY</button></p>';
+        (num) + ',' + 1 + ')">STAND</button></p>';
       buttons.innerHTML +=
         '<p id="double"><button class="button" onclick="double(' + id + ',' + 1 + ',' + 1 + ')">DOUBLE</button></p>';
         }

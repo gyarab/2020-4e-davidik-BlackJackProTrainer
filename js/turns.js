@@ -52,7 +52,7 @@ function nextPlayer(i, pre) {
     (i + 1) + ')">HIT</button></p>';
   buttons.innerHTML +=
     '<p id="stay"><button class="button" onclick="stay(' + (i + 1) + ',' +
-    (0) + ')">STAY</button></p>';
+    (0) + ')">STAND</button></p>';
   buttons.innerHTML +=
     '<p id="split"><button class="button" onclick="split(' + i + ',' +
     (i + 1) + ')">SPLIT</button></p>';
@@ -119,7 +119,7 @@ function nextSplit(i, pre, count) {
       (i + 1) + ',' + count + ',' + 2 + ')">HIT</button></p>';
     buttons.innerHTML +=
       '<p id="stay"><button class="button" onclick="staySplit(' + (i) + ',' + (i + 1) + ',' +
-      (count) + ')">STAY</button></p>';
+      (count) + ')">STAND</button></p>';
       hitButt = document.getElementById("hit").querySelector(".button");
       stayButt = document.getElementById("stay").querySelector(".button");
   }else {
@@ -128,7 +128,7 @@ function nextSplit(i, pre, count) {
       (i + 1) + ',' + count + ')">HIT</button></p>';
     buttons.innerHTML +=
       '<p id="stay"><button class="button" onclick="staySplit(' + (i) + ',' + (i + 1) + ',' +
-      (count) + ')">STAY</button></p>';
+      (count) + ')">STAND</button></p>';
     buttons.innerHTML +=
       '<p id="double"><button class="button" onclick="double(' + i+ ',' + 1+ ',' + count + ')">DOUBLE</button></p>';
       hitButt = document.getElementById("hit").querySelector(".button");
@@ -227,6 +227,7 @@ player.balance += player.insuranceBet * 3;
 
     let balance = document.getElementById("b" + player.position);
     balance.innerHTML = (player.id+1)+": "+player.balance;
+    console.log((player.id +1)+" Player - bet: "+player.bet+" split bet: " +player.betSplit);
     player.bet = 0;
     player.insuranceBet = 0;
     player.betSplit = 0;
@@ -250,15 +251,23 @@ function players(x) {
 }
 
 function double(id,pre,handCount) {
+  console.log("handCount" + handCount);
   player = game.players[id];
   let balance = document.getElementById("b" + player.position);
-  player.balance -= 20;
+  player.balance -= player.bet;
   if (pre == 0) {
-    player.bet += 20;
+    player.bet += player.bet;
     playerDraw(id,id+1,1);
   }else {
-    player.betSplit += 20;
-    playerDrawSplit(id,id+1,handCount,1);
+    if (handCount==1) {
+
+      player.betSplit += player.bet;
+      playerDrawSplit(id,id+1,handCount,1);
+    }else {
+
+      player.bet += player.bet;
+      playerDrawSplit(id,id+1,handCount,1);
+    }
   }
   balance.innerHTML = (id+1)+": "+player.balance;
 }
