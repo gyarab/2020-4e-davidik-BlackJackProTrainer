@@ -51,7 +51,9 @@ function perfectBasicStrategy(playerTotal, aceTrue, splitTrue, dealerTotal, card
     hardTotals(playerTotal, dealerTotal);
 
   }
-
+if (dealerTotal == 11) {
+takeInsurance(trueCount);
+}
   function hardTotals(playerValue, dealerValue) {
     if (playerValue == 4 && split == true) {
       decision = "DOUBLE";
@@ -126,6 +128,14 @@ function perfectBasicStrategy(playerTotal, aceTrue, splitTrue, dealerTotal, card
     if (playerValue > 16) {
       decision = "STAND";
     }
+    if (trueCount >= 1) {
+      if (playerValue == 16) {
+  if (dealerValue ==10) {
+decision ="STAND";
+  }
+      }
+    }
+
 
 
   }
@@ -285,7 +295,13 @@ function perfectBasicStrategy(playerTotal, aceTrue, splitTrue, dealerTotal, card
     }
 
   }
-  document.getElementById("bs").innerHTML = "Basic Strategy: " + decision;
+  let deviaton = "";
+  function takeInsurance(tc){
+    if (tc >= 3) {
+deviaton = "+ TAKE INSURANCE";
+    }
+  }
+  document.getElementById("bs").innerHTML = "Basic Strategy: " + decision + deviaton;
 }
 
 function getElementTopLeft(id) {
@@ -306,6 +322,7 @@ function getElementTopLeft(id) {
   };
 
 }
+
 function insurance(id) {
   let balance = document.getElementById("b" + player.position);
 player = game.players[id];
@@ -313,6 +330,8 @@ bal = player.bet/2;
 player.insuranceBet += bal;
 player.balance -= bal;
 balance.innerHTML =(id+1)+": "+player.balance;
-stay((id+1),0);
+//stay((id+1),0);
 player.insurance = true;
+insuranceButt.disabled = true;
 }
+function surrender (){}

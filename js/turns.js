@@ -5,6 +5,7 @@ let stayButt;
 let splitButt;
 let insuranceButt;
 let doubleButt;
+let surrenderButt;
 
 function hideBorderScore() {
   document.getElementById("s1").style.border = "";
@@ -46,7 +47,10 @@ function nextPlayer(i, pre) {
     double.remove();
     var insurance = document.getElementById("insurance");
     insurance.remove();
+    var surrender = document.getElementById("surrender");
+    surrender.remove();
   }
+  console.log("?");
   buttons.innerHTML +=
     '<p id="hit"><button class="button" onclick="playerDraw(' + i + ',' +
     (i + 1) + ')">HIT</button></p>';
@@ -60,13 +64,21 @@ function nextPlayer(i, pre) {
     '<p id="double"><button class="button" onclick="double(' + i+ ',' + 0 + ')">DOUBLE</button></p>';
   buttons.innerHTML +=
     '<p id="insurance"><button class="button" onclick="insurance(' + i + ')">INSURANCE</button></p>';
+    buttons.innerHTML +=
+      '<p id="surrender"><button class="button" onclick="surrender()">SURRENDER</button></p>';
   hitButt = document.getElementById("hit").querySelector(".button");
   stayButt = document.getElementById("stay").querySelector(".button");
   splitButt = document.getElementById("split").querySelector(".button");
   insuranceButt = document.getElementById("insurance").querySelector(".button");
   doubleButt = document.getElementById("double").querySelector(".button");
   if (game.dealer.cards[0].value == "A") {
-    insuranceButt.disabled = false;
+    if (game.players[i].insurance == true) {
+
+        insuranceButt.disabled = true;
+    }else {
+
+      insuranceButt.disabled = false;
+    }
   }else {
     insuranceButt.disabled = true;
   }
