@@ -55,6 +55,7 @@ class Player {
     this.position = -1;
     this.insuranceBet = 0;
     this.insurance = false;
+    this.surrender = false;
   }
   setPosition(id) {
     this.position = id;

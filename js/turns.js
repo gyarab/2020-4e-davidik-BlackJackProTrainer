@@ -65,12 +65,13 @@ function nextPlayer(i, pre) {
   buttons.innerHTML +=
     '<p id="insurance"><button class="button" onclick="insurance(' + i + ')">INSURANCE</button></p>';
     buttons.innerHTML +=
-      '<p id="surrender"><button class="button" onclick="surrender()">SURRENDER</button></p>';
+      '<p id="surrender"><button class="button" onclick="surrender(' + i + ')">SURRENDER</button></p>';
   hitButt = document.getElementById("hit").querySelector(".button");
   stayButt = document.getElementById("stay").querySelector(".button");
   splitButt = document.getElementById("split").querySelector(".button");
   insuranceButt = document.getElementById("insurance").querySelector(".button");
   doubleButt = document.getElementById("double").querySelector(".button");
+  surrenderButt = document.getElementById("surrender").querySelector(".button");
   if (game.dealer.cards[0].value == "A") {
     if (game.players[i].insurance == true) {
 
@@ -119,6 +120,7 @@ function nextPlayer(i, pre) {
   splitButt.remove();
   insuranceButt.remove();
   doubleButt.remove();
+  surrenderButt.remove();
   hitButt.innerHTML = "BLACKJACK!"
 }
 }
@@ -236,10 +238,11 @@ player.balance += player.insuranceBet * 3;
     }else {
       ring.innerHTML += "-L";
     }}
-
+if (player.surrender == true) {
+ring.innerHTML = "S";
+}
     let balance = document.getElementById("b" + player.position);
     balance.innerHTML = (player.id+1)+": "+player.balance;
-    console.log((player.id +1)+" Player - bet: "+player.bet+" split bet: " +player.betSplit);
     player.bet = 0;
     player.insuranceBet = 0;
     player.betSplit = 0;

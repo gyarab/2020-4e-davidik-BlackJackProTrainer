@@ -145,7 +145,7 @@ function playerDraw(id, num,double) {
   splitButt.disabled = true;
   insuranceButt.disabled = true;
   doubleButt.disabled = true;
-    surrenderButt.disabled = true;
+  surrenderButt.disabled = true;
   let n = num;
   let count = game.players[id].hands[0].count;
   game.players[id].draw(0);

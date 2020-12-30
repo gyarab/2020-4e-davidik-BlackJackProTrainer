@@ -334,4 +334,13 @@ balance.innerHTML =(id+1)+": "+player.balance;
 player.insurance = true;
 insuranceButt.disabled = true;
 }
-function surrender (){}
+function surrender (id){
+  let balance = document.getElementById("b" + player.position);
+player = game.players[id];
+bal = player.bet;
+player.bet = 0;
+player.balance += bal/2;
+balance.innerHTML =(id+1)+": "+player.balance;
+player.surrender = true;
+stay((id+1),0);
+}
