@@ -151,10 +151,10 @@ function nextSplit(i, pre, count) {
   }
     let playerHand = game.players[i].hands[count];
 
-perfectBasicStrategy(playerHand.score,0,0,dT,game.players[i].hands[0].count);
+perfectBasicStrategy(playerHand.score,0,0,dT,game.players[i].hands[0].count,true);
     if (playerHand.count > 3) {
       if (playerHand.cards[1].value == "ACE") {
-perfectBasicStrategy(playerHand.score,true,false,dT,game.players[i].hands[count].count);
+perfectBasicStrategy(playerHand.score,true,false,dT,game.players[i].hands[count].count,true);
     }
           }
 if (pre==1) {

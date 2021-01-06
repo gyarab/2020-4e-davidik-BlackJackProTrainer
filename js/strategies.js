@@ -1,6 +1,8 @@
 let cardCounting = 0;
 let trueCount = 0;
 let betting = 0;
+let surrBoolean = true;
+let autoPlayBoolean = false;
 function cardCount(value) {
   if (value == "A") {
     cardCounting--;
@@ -28,6 +30,8 @@ function cardLeft() {
 }
 
 function perfectBasicStrategy(playerTotal, aceTrue, splitTrue, dealerTotal, cards, split) {
+  console.log(surrBoolean);
+  console.log(autoPlayBoolean);
   let decision;
   if (aceTrue) {
     if (playerTotal < 22) {
@@ -49,15 +53,24 @@ function perfectBasicStrategy(playerTotal, aceTrue, splitTrue, dealerTotal, card
 
   } else {
     hardTotals(playerTotal, dealerTotal);
-
+  }
+  if (surrBoolean == true) {
+lateSurrender(playerTotal, dealerTotal);
   }
 if (dealerTotal == 11) {
 takeInsurance(trueCount);
 }
   function hardTotals(playerValue, dealerValue) {
+
     if (playerValue == 4 && split == true) {
-      decision = "DOUBLE";
-    } else if (playerValue < 9) {
+      console.log("hardtot4");
+       if (dealerValue == 5 || dealerValue == 6) {
+        decision = "DOUBLE";
+      }else {
+        decision = "HIT";
+      }
+    }
+    else if (playerValue < 9) {
       decision = "HIT";
     }
     if (playerValue == 9) {
@@ -230,7 +243,7 @@ decision ="STAND";
       if (dealerValue < 5 || dealerValue > 6) {
         decision = "HIT";
       } else {
-      decision = "SPLIT -> DOUBLE";
+      decision = "SPLIT";
       }
     }
     if (playerValue == 5) {
@@ -281,17 +294,17 @@ decision ="STAND";
       if (dealerValue == 10) {
         decision = "SURR";
       } else {
-        decision = "DON'T SURR";
+      //  decision = "DON'T SURR";
       }
     }
     if (playerValue == 16) {
       if (dealerValue < 9) {
-        decision = "DON'T SURR";
+      //  decision = "DON'T SURR";
       } else {
         decision = "SURR";
       }
     } else {
-      decision = "DON'T SURR";
+      //decision = "DON'T SURR";
     }
 
   }
@@ -302,6 +315,23 @@ deviaton = "+ TAKE INSURANCE";
     }
   }
   document.getElementById("bs").innerHTML = "Basic Strategy: " + decision + deviaton;
+  // autoplay
+  if (autoPlayBoolean == true) {
+    if (decision == "HIT") {
+
+    } else if (decision == "STAND") {
+
+    } else if (decision == "SPLIT") {
+
+    }else if (decision == "DOUBLE") {
+
+    }else if (decision == "SURR") {
+
+    }
+    if (deviaton == "+ TAKE INSURANCE") {
+
+    }
+  }
 }
 
 function getElementTopLeft(id) {
@@ -343,4 +373,24 @@ player.balance += bal/2;
 balance.innerHTML =(id+1)+": "+player.balance;
 player.surrender = true;
 stay((id+1),0);
+}
+function allowSurr() {
+butt = document.getElementById("allowSurr");
+if (butt.innerHTML == "on") {
+  surrBoolean = false;
+  butt.innerHTML = "off";
+}else {
+  surrBoolean = true;
+  butt.innerHTML = "on";
+}
+}
+function autoPlay() {
+  butt = document.getElementById("autoPlay");
+  if (butt.innerHTML == "on") {
+    autoPlayBoolean = false;
+    butt.innerHTML = "off";
+  }else {
+    autoPlayBoolean = true;
+    butt.innerHTML = "on";
+  }
 }

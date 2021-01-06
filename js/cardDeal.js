@@ -252,9 +252,17 @@ buttons.innerHTML = "";
 if (p==game.playersCount-1) {
   buttons.innerHTML +=
     '<p><button id="start" class="button" onclick="StartGame(0)">Deal Cards</button></p>';
+    // autoplay
+    if (autoPlayBoolean == true) {
+      StartGame(0);
+    }
 }else {
   buttons.innerHTML +=
     '<p><button id="start" class="button" onclick="makeBet(' + (p+1) + ')">Next Bet</button></p>';
+    // autoplay
+    if (autoPlayBoolean == true) {
+      makeBet((p+1));
+    }
 }
 }
 function plusBet(p,bal) {
@@ -315,6 +323,10 @@ slideCol.oninput = function() {
 }
 y.innerHTML = (p+1)+" Player Bet: "+20;
 bal = 20;
+//autoplay
+if (autoPlayBoolean == true) {
+setBet( p , bal );
+}
 }
 function StartGame(nt) {
   if (deck.length < 40) {
@@ -476,6 +488,8 @@ function split(id, num) {
       double.remove();
       var insurance = document.getElementById("insurance");
       insurance.remove();
+      var sur = document.getElementById("surrender");
+      sur.remove();
       if (aces) {
         buttons.innerHTML +=
           '<p id="hit"><button class="button" onclick="playerDrawSplit(' + id + ',' +
