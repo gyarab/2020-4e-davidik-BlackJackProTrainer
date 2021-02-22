@@ -1,22 +1,23 @@
+//Třída karta
 class Card {
   constructor(suit, value, imgurl) {
     this.suit = suit;
     this.value = value;
     this.imgurl = imgurl;
   }
-  getValue(){
+  getValue() {
     let cardValue;
-    if ( this.value == "A") {
+    if (this.value == "A") {
       cardValue = 11;
-    }
-    else if (this.value == "K" || this.value == "Q" || this.value == "J") {
+    } else if (this.value == "K" || this.value == "Q" || this.value == "J") {
       cardValue = 10;
-    }else {
+    } else {
       cardValue = this.value
     }
     return cardValue;
   }
 }
+//Třída balíček
 class Deck {
   constructor(size) {
     this.size = size
@@ -35,6 +36,7 @@ class Deck {
     this.length = this.deck.length;
     return this.deck;
   }
+  //zamíchání karet
   shuffle() {
     let counter = this.deck.length,
       temp, i;
@@ -46,6 +48,7 @@ class Deck {
     }
     return this.deck;
   }
+  //rozdání
   deal(x) {
     let hand = [];
     while (hand.length < x) {
@@ -54,11 +57,13 @@ class Deck {
     }
     return hand;
   }
+  //líznutí karty
   draw() {
     let draw = this.deck.pop();
-    this.length --;
+    this.length--;
     return draw;
   }
+  //obrázek balíčku
   showDeck() {
     for (var card of this.deck) {
       table.innerHTML +=

@@ -1,8 +1,11 @@
+//Variables pro strategie
 let cardCounting = 0;
 let trueCount = 0;
 let betting = 0;
 let surrBoolean = true;
-let autoPlayBoolean = false;
+let autoBetBoolean = false;
+let deviaton = "";
+//strategie card counting
 function cardCount(value) {
   if (value == "A") {
     cardCounting--;
@@ -13,25 +16,24 @@ function cardCount(value) {
   } else if (value == 10) {
     cardCounting--;
   } else {}
-  trueCount = Math.round(cardCounting/(deck.length/52));
-  betting = trueCount*20 -20;
-  if (betting<20) {
-betting = 20;
+  // přepočet na truecount
+  trueCount = Math.round(cardCounting / (deck.length / 52));
+  betting = trueCount * 20 - 20;
+  if (betting < 20) {
+    betting = 20;
   }
   document.getElementById("cc").innerHTML = "Card count: " + cardCounting;
   document.getElementById("tr").innerHTML = "True count: " + trueCount;
   document.getElementById("b").innerHTML = "Bet: " + betting;
   return value;
 }
-
+//vrátí kolik zbývá karet
 function cardLeft() {
-  document.getElementById("cl").innerHTML = "Cards left: " + deck.length +"("+(40+(game.playersCount*2)+1)+")";
+  document.getElementById("cl").innerHTML = "Cards left: " + deck.length + "(" + (40 + (game.playersCount * 2) + 1) + ")";
   return deck.length;
 }
-
-function perfectBasicStrategy(playerTotal, aceTrue, splitTrue, dealerTotal, cards, split) {
-  console.log(surrBoolean);
-  console.log(autoPlayBoolean);
+//tabulka nejlepších tahů
+function perfectBasicStrategy(id, playerTotal, aceTrue, splitTrue, dealerTotal, cards, split) {
   let decision;
   if (aceTrue) {
     if (playerTotal < 22) {
@@ -42,7 +44,7 @@ function perfectBasicStrategy(playerTotal, aceTrue, splitTrue, dealerTotal, card
         playerTotal -= 11;
         softTotals(playerTotal, dealerTotal);
       }
-    }else {
+    } else {
       playerTotal -= 11;
       hardTotals(playerTotal, dealerTotal);
     }
@@ -55,22 +57,21 @@ function perfectBasicStrategy(playerTotal, aceTrue, splitTrue, dealerTotal, card
     hardTotals(playerTotal, dealerTotal);
   }
   if (surrBoolean == true) {
-lateSurrender(playerTotal, dealerTotal);
+    lateSurrender(playerTotal, dealerTotal);
   }
-if (dealerTotal == 11) {
-takeInsurance(trueCount);
-}
+  if (dealerTotal == 11) {
+    takeInsurance(trueCount);
+  }
+  //default
   function hardTotals(playerValue, dealerValue) {
 
     if (playerValue == 4 && split == true) {
-      console.log("hardtot4");
-       if (dealerValue == 5 || dealerValue == 6) {
+      if (dealerValue == 5 || dealerValue == 6) {
         decision = "DOUBLE";
-      }else {
+      } else {
         decision = "HIT";
       }
-    }
-    else if (playerValue < 9) {
+    } else if (playerValue < 9) {
       decision = "HIT";
     }
     if (playerValue == 9) {
@@ -143,16 +144,16 @@ takeInsurance(trueCount);
     }
     if (trueCount >= 1) {
       if (playerValue == 16) {
-  if (dealerValue ==10) {
-decision ="STAND";
-  }
+        if (dealerValue == 10) {
+          decision = "STAND";
+        }
       }
     }
 
 
 
   }
-
+  //pokud má hráč eso
   function softTotals(playerValue, dealerValue) {
     if (playerValue == 2) {
       if (dealerValue < 5 || dealerValue > 6) {
@@ -222,7 +223,7 @@ decision ="STAND";
     }
 
   }
-
+  //Pokud hráč splituje
   function pairSplitting(playerValue, dealerValue) {
     if (playerValue == 2) {
       if (dealerValue < 4 || dealerValue > 7) {
@@ -234,16 +235,16 @@ decision ="STAND";
     }
     if (playerValue == 3) {
       if (dealerValue < 4 || dealerValue > 7) {
-          decision = "HIT";
+        decision = "HIT";
       } else {
-  decision = "SPLIT";
+        decision = "SPLIT";
       }
     }
     if (playerValue == 4) {
       if (dealerValue < 5 || dealerValue > 6) {
         decision = "HIT";
       } else {
-      decision = "SPLIT";
+        decision = "SPLIT";
       }
     }
     if (playerValue == 5) {
@@ -294,12 +295,12 @@ decision ="STAND";
       if (dealerValue == 10) {
         decision = "SURR";
       } else {
-      //  decision = "DON'T SURR";
+        //  decision = "DON'T SURR";
       }
     }
     if (playerValue == 16) {
       if (dealerValue < 9) {
-      //  decision = "DON'T SURR";
+        //  decision = "DON'T SURR";
       } else {
         decision = "SURR";
       }
@@ -308,30 +309,15 @@ decision ="STAND";
     }
 
   }
-  let deviaton = "";
-  function takeInsurance(tc){
+  deviaton = "";
+
+  function takeInsurance(tc) {
     if (tc >= 3) {
-deviaton = "+ TAKE INSURANCE";
+      deviaton = "+ TAKE INSURANCE";
     }
   }
   document.getElementById("bs").innerHTML = "Basic Strategy: " + decision + deviaton;
-  // autoplay
-  if (autoPlayBoolean == true) {
-    if (decision == "HIT") {
-
-    } else if (decision == "STAND") {
-
-    } else if (decision == "SPLIT") {
-
-    }else if (decision == "DOUBLE") {
-
-    }else if (decision == "SURR") {
-
-    }
-    if (deviaton == "+ TAKE INSURANCE") {
-
-    }
-  }
+  return decision;
 }
 
 function getElementTopLeft(id) {
@@ -352,45 +338,69 @@ function getElementTopLeft(id) {
   };
 
 }
-
+//funkce pro insurance
 function insurance(id) {
   let balance = document.getElementById("b" + player.position);
-player = game.players[id];
-bal = player.bet/2;
-player.insuranceBet += bal;
-player.balance -= bal;
-balance.innerHTML =(id+1)+": "+player.balance;
-//stay((id+1),0);
-player.insurance = true;
-insuranceButt.disabled = true;
+  player = game.players[id];
+  bal = player.bet / 2;
+  player.insuranceBet += bal;
+  player.balance -= bal;
+  balance.innerHTML = (id + 1) + ": " + player.balance;
+  //stay((id+1),0);
+  player.insurance = true;
+  insuranceButt.disabled = true;
 }
-function surrender (id){
+//funkce pro surrender
+function surrender(id) {
   let balance = document.getElementById("b" + player.position);
-player = game.players[id];
-bal = player.bet;
-player.bet = 0;
-player.balance += bal/2;
-balance.innerHTML =(id+1)+": "+player.balance;
-player.surrender = true;
-stay((id+1),0);
+  player = game.players[id];
+  bal = player.bet;
+  player.bet = 0;
+  player.balance += bal / 2;
+  balance.innerHTML = (id + 1) + ": " + player.balance;
+  player.surrender = true;
+  stay((id + 1), 0);
 }
+//povolí surrender
 function allowSurr() {
-butt = document.getElementById("allowSurr");
-if (butt.innerHTML == "on") {
-  surrBoolean = false;
-  butt.innerHTML = "off";
-}else {
-  surrBoolean = true;
-  butt.innerHTML = "on";
-}
-}
-function autoPlay() {
-  butt = document.getElementById("autoPlay");
+  butt = document.getElementById("allowSurr");
   if (butt.innerHTML == "on") {
-    autoPlayBoolean = false;
+    surrBoolean = false;
     butt.innerHTML = "off";
-  }else {
-    autoPlayBoolean = true;
+  } else {
+    surrBoolean = true;
     butt.innerHTML = "on";
   }
+}
+//povolí autosázku
+function autoBet() {
+  butt = document.getElementById("autoBet");
+  if (butt.innerHTML == "on") {
+    autoBetBoolean = false;
+    butt.innerHTML = "off";
+  } else {
+    autoBetBoolean = true;
+    butt.innerHTML = "on";
+  }
+}
+// funkce pro double
+function double(id, pre, handCount) {
+  player = game.players[id];
+  let balance = document.getElementById("b" + player.position);
+  player.balance -= player.bet;
+  if (pre == 0) {
+    player.bet += player.bet;
+    playerDraw(id, id + 1, 1);
+  } else {
+    if (handCount == 1) {
+
+      player.betSplit += player.bet;
+      playerDrawSplit(id, id + 1, handCount, 1);
+    } else {
+
+      player.bet += player.bet;
+      playerDrawSplit(id, id + 1, handCount, 1);
+    }
+  }
+  balance.innerHTML = (id + 1) + ": " + player.balance;
 }

@@ -1,5 +1,7 @@
+//Třída ruka
 class Hand {
   constructor(x) {
+    // ruka má svoje karty
     this.cards = deck.deal(x);
     this.count = 2;
     this.score = 0;
@@ -9,44 +11,48 @@ class Hand {
     this.cards.push(deck.draw());
     this.count++;
   }
-  getScore(idP,idH,idC) {
+  //funkce pro získání momentálního skóre hráče
+  getScore(idP, idH, idC) {
     let len = this.cards.length;
     let toScore = this.cards[idC].value;
     if (toScore == "A") {
       toScore = 11;
-      this.ace ++;
+      this.ace++;
     } else if (toScore == "K" || toScore == "Q" || toScore == "J") {
       toScore = 10;
     }
     this.score += toScore;
-    if (this.score > 21 && this.ace >0) {
-    this.ace --;
-    this.score -= 10;
+    if (this.score > 21 && this.ace > 0) {
+      this.ace--;
+      this.score -= 10;
     }
-document.getElementById('s'+idP).innerHTML = this.score;
-return this.score;
+    document.getElementById('s' + idP).innerHTML = this.score;
+    return this.score;
   }
-  getSplitScore(idP,idH,idC) {
+  //funkce pro získání momentálního skóre hráče po splitu
+  getSplitScore(idP, idH, idC) {
     let len = this.cards.length;
     let toScore = this.cards[idC].value;
     if (toScore == "A") {
       toScore = 11;
-      this.ace ++;
+      this.ace++;
     } else if (toScore == "K" || toScore == "Q" || toScore == "J") {
       toScore = 10;
     }
     this.score += toScore;
-    if (this.score > 21 && this.ace >0) {
-    this.ace --;
-    this.score -= 10;
+    if (this.score > 21 && this.ace > 0) {
+      this.ace--;
+      this.score -= 10;
     }
-document.getElementById('ss'+idP).innerHTML = this.score;
-return this.score;
+    document.getElementById('ss' + idP).innerHTML = this.score;
+    return this.score;
   }
 }
+//třída hráč
 class Player {
   constructor(id, balance) {
     this.id = id;
+    //hráč má svoje ruce
     this.hands = [];
     this.handCount = 0;
     this.balance = balance;
@@ -63,13 +69,14 @@ class Player {
   }
   addHand(x) {
     this.hands.push(new Hand(x));
-    this.handCount++ ;
+    this.handCount++;
     return this.hands;
   }
   draw(id) {
     this.hands[id].draw();
     return this.hands;
   }
+  //funkce pro odstranění ruk
   removeHands() {
     this.handCount = 0;
     for (let hand of this.hands) {
@@ -95,6 +102,7 @@ class Player {
       }
     }
   }
+  //ukaže kartu
   showCard(id, idR, idH, first) {
     var deck = document.getElementById("deck");
     if (first) {
@@ -109,8 +117,10 @@ class Player {
     return this.cards;
   }
 }
+// třída dealer
 class Dealer {
   constructor() {
+    //dealer nemá ruce, pouze karty(v podstatě má jednu ruku, ale tu není třeba definovat)
     this.cards = [];
     this.count = 0;
     this.score = 0;
@@ -121,17 +131,17 @@ class Dealer {
     let toScore = this.cards[len - 1].value;
     if (toScore == "A") {
       toScore = 11;
-      this.ace ++;
+      this.ace++;
     } else if (toScore == "K" || toScore == "Q" || toScore == "J") {
       toScore = 10;
     }
     this.score += toScore;
-    if (this.score > 21 && this.ace >0) {
-    this.ace --;
-    this.score -= 10;
+    if (this.score > 21 && this.ace > 0) {
+      this.ace--;
+      this.score -= 10;
     }
     document.getElementById("s6").innerHTML = this.score;
-return this.score;
+    return this.score;
   }
   draw() {
     this.cards.push(deck.draw());
@@ -139,6 +149,7 @@ return this.score;
 
     return this.cards;
   }
+  //obecná funkce pro odstranění karet
   removeDraw() {
     let x = this.cards.length;
     for (var i = 0; i < x; i++) {
@@ -155,6 +166,7 @@ return this.score;
     }
     return this.cards;
   }
+  //ukáže kartu
   showCard(id) {
     var deck = document.getElementById("deck");
     deck.innerHTML +=

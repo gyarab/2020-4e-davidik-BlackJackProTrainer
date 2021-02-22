@@ -7,4 +7,4 @@ deck.shuffle();
 deck.shuffle();
 var table = document.getElementById("table");
 let game = new Table();
-//game.showPlayersCards();
+//Nastavení hry --> zde lze upravit jak bude vypadat balíček
