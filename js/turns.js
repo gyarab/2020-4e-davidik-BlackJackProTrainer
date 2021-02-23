@@ -243,6 +243,7 @@ function win() {
     }
     if (player.surrender == true) {
       ring.innerHTML = "S";
+      player.surrender = false;
     }
     let balance = document.getElementById("b" + player.position);
     player.surrender = false;
