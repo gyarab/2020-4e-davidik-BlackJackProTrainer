@@ -245,6 +245,7 @@ function win() {
       ring.innerHTML = "S";
     }
     let balance = document.getElementById("b" + player.position);
+    player.surrender = false;
     balance.innerHTML = (player.id + 1) + ": " + player.balance;
     player.bet = 0;
     player.insuranceBet = 0;
